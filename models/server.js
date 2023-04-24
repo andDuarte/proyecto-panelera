@@ -1,13 +1,14 @@
 import express from 'express';
 import { connection } from '../database/connection.js';
 import cors from 'cors'
+import { routerStore } from '../routes/store.js';
 
 class Server {
     constructor(){
         this.app = express();
         this.connect();
         this.middlewares();
-        // this.routes()
+        this.routes();
     }
 
     async connect() {
@@ -15,12 +16,12 @@ class Server {
     }
 
     middlewares() {
-        this.app.use(express.json);
+        this.app.use(express.json());
         this.app.use(cors());
     }
 
     routes() {
-        // routes
+        this.app.use('/bodega', routerStore );
     }
 
     listen() {
