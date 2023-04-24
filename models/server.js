@@ -1,7 +1,10 @@
 import express from 'express';
 import { connection } from '../database/connection.js';
 import cors from 'cors'
+
+// routes
 import { routerStore } from '../routes/store.js';
+import { routerInventory } from '../routes/inventory.js';
 
 class Server {
     constructor(){
@@ -22,6 +25,7 @@ class Server {
 
     routes() {
         this.app.use('/bodega', routerStore );
+        this.app.use('/inventario', routerInventory );
     }
 
     listen() {
