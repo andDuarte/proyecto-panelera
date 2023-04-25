@@ -5,6 +5,7 @@ import cors from 'cors'
 // routes
 import { routerStore } from '../routes/store.js';
 import { routerInventory } from '../routes/inventory.js';
+import{routerUsers} from '../routes/users.js'
 
 class Server {
     constructor(){
@@ -26,6 +27,7 @@ class Server {
     routes() {
         this.app.use('/bodega', routerStore );
         this.app.use('/inventario', routerInventory );
+        this.app.use('/users', routerUsers );
     }
 
     listen() {
