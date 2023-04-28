@@ -1,18 +1,22 @@
 import { Router } from "express";
 
-import { usersHttp } from "../controllers/users.js";
+import { userHttp } from "../controllers/users.js";
 
 
-const routerUsers= Router()
+const routerUser = Router();
 
-routerUsers.get('/',[] ,usersHttp.usersGet )
+routerUser.get('/', [], userHttp.userGet );
 
-routerUsers.get('/:id',[], usersHttp.usersGetQuery)
+// routerUser.get('/:id', [], userHttp )
 
-routerUsers.post('/',[],usersHttp.usersPost)
+routerUser.post('/', [], userHttp.userPost );
 
-routerUsers.put('/:id',[], usersHttp.usersPut)
+routerUser.put('/:id', [], userHttp.userPut );
 
-routerUsers.put('/state/:id',[], usersHttp.usersState )
+routerUser.put('/activar/:id', [], userHttp.userActivate );
 
-export {routerUsers}
+routerUser.put('/desactivar/:id', [], userHttp.userDeactivate );
+
+export{
+    routerUser
+}

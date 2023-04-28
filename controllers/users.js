@@ -1,67 +1,55 @@
-import {usersModel} from '../models/users.js'
+import { userModel } from '../models/users.js';
 
-const usersHttp={
-    usersGet: async(req,res) =>{
-        const users = await usersModel.find()
-        res.json ({users:users})
+const userHttp = {
+    userGet: async(req, res) => {
+        const user = await userModel.find();
+
+        return res.json ({users: user});
     },
 
-    usersGetQuery: async(req,res)=>{
-        const {id}=req.params
-        if (!id) {
-            res.json({msj:'id es incorrecto'})
-        }
-        const users=await usersModel.find({_id:id})
-        res.json({users:users})
-    },
-    usersPost: async(req,res)=>{
-        const{name,identification,email,password,user_type,eps}= req.body;
+    userPost: async(req, res) => {
+        const{name, identification, email, password, typeUser, eps} = req.body;
 
-        const users= new usersModel({name:name, identification:identification, email:email , password:password, user_type:user_type, eps:eps })
+        const user = new userModel({name: name, identification: identification, email: email, password: password, typeUser: typeUser, eps: eps});
     
-        users.save()
+        await user.save();
 
-        res.json({msj:'usuario creado'})
+        return res.json({msj:'usuario creado'});
     },
-    usersPut: async (req,res)=>{
-        const {id}=req.params;
-        const { name,identification,email,password,user_type,eps } = req.body
 
-        const users = await usersModel.findByIdAndUpdate(id,{name,identification,email,password,user_type,eps})
-        await users.save()
-        res.json({msj: "usuario actualizado"})
-    },
-    
-    usersState: async (req,res)=>{
-        console.log('lk')
-        const { id } = req.params
-        const { state } = req.body
+    userPut: async(req, res) => {
+        const { id } = req.params;
+        const {name, password, typeUser, eps} = req.body;
 
-        let users = null
-        try {
-            if (state == "inactivo") {
-                console.log(id)
-                users = await usersModel.findByIdAndUpdate(id, { state:0 })
+        const user = await userModel.findByIdAndUpdate(id, {name: name, password: password, typeUser: typeUser, eps: eps});
+
+        await user.save();
         
-            }else{
-                console.log('lk2')
-                console.log(id)
-                users = await usersModel.findByIdAndUpdate(id,{ state:1 })
-            }
-            if(users){
-                await users.save();
-                res.json({msj:`el estado del usuario es: ${state}` })
-            }
-    
-            return res.send('Michael es una lk') //agregar un else
-    
-        } catch (error) {
-         console.log(error)   
-        }
+        return res.json({msj: "usuario actualizado"});
+    },
 
- 
-    }
+    userActivate: async(req, res) => {
+        const { id } = req.params;
+
+        const user = await userModel.findByIdAndUpdate(id, {state: 1});
+
+        await user.save();
+
+        return res.json({msj: 'usuario activo'});
+    },
+
+    userDeactivate: async(req, res) => {
+        const { id } = req.params;
+
+        const user = await userModel.findByIdAndUpdate(id, {state: 0});
+
+        await user.save();
+
+        return res.json({msj: 'usuario desactivado'});
+    },
 }
 
 
-export {usersHttp}
+export{
+    userHttp
+}

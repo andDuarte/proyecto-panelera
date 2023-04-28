@@ -1,11 +1,11 @@
 import express from 'express';
 import { connection } from '../database/connection.js';
-import cors from 'cors'
+import cors from 'cors';
 
 // routes
 import { routerStore } from '../routes/store.js';
 import { routerInventory } from '../routes/inventory.js';
-import{routerUsers} from '../routes/users.js'
+import{ routerUser } from '../routes/users.js';
 
 class Server {
     constructor(){
@@ -27,7 +27,7 @@ class Server {
     routes() {
         this.app.use('/bodega', routerStore );
         this.app.use('/inventario', routerInventory );
-        this.app.use('/users', routerUsers );
+        this.app.use('/usuario', routerUser );
     }
 
     listen() {
