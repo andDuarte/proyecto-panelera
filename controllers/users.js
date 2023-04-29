@@ -1,5 +1,6 @@
 import { userModel } from '../models/users.js';
 import { createToken } from '../middlewares/validate-jwt.js'
+
 // bcryptjs
 import bcryptjs from 'bcryptjs';
 const salt = bcryptjs.genSaltSync(10);

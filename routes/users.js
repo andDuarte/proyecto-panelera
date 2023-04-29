@@ -6,6 +6,8 @@ import { check } from 'express-validator';
 
 import { validate } from '../middlewares/validate-fields.js';
 
+import { validateToken } from '../middlewares/validate-jwt.js';
+
 const routerUser = Router();
 
 routerUser.get('/', [], userHttp.userGet );
@@ -21,11 +23,23 @@ routerUser.post('/', [
     validate
 ], userHttp.userPost );
 
-routerUser.put('/:id', [], userHttp.userPut );
+routerUser.put('/:id', [
+    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
+], userHttp.userPut );
 
-routerUser.put('/activar/:id', [], userHttp.userActivate );
+routerUser.put('/activar/:id', [
+    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
+], userHttp.userActivate );
 
-routerUser.put('/desactivar/:id', [], userHttp.userDeactivate );
+routerUser.put('/desactivar/:id', [
+    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
+], userHttp.userDeactivate );
 
 routerUser.post('/login', [], userHttp.userLogin );
 

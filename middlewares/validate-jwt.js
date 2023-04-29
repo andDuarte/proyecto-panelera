@@ -11,10 +11,12 @@ async function createToken(payload) {
     }
 };
 
-const validateToken = (token) => {
-    // jwt.verify(token, privatekey, function(err, decode){
-    // console.log(decode)
-    // })
+const validateToken = async(token, { req }) => {
+    jwt.verify(token, 'shhhhh', function(err, decode){
+        if(err) {
+            throw new Error('token no valido');
+        }
+    });
 };
 
 export{
