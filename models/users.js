@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     password: {type: String, require: true},
     typeUser: {type: String, default:"usuario"},
     eps: {type:String, require:true},
-    state: {type:Number, default: 0}
+    state: {type:Number, default: 1}
 });
 
 

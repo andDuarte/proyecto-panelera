@@ -27,6 +27,8 @@ routerUser.put('/activar/:id', [], userHttp.userActivate );
 
 routerUser.put('/desactivar/:id', [], userHttp.userDeactivate );
 
+routerUser.post('/login', [], userHttp.userLogin );
+
 export{
     routerUser
 }
