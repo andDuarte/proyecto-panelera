@@ -21,7 +21,7 @@ const userHttp = {
     },
 
     userPost: async(req, res) => {
-        const{name, identification, email, password, typeUser, eps} = req.body;
+        const{name, email, password, typeUser} = req.body;
 
         // bcryptjs
         const hash = bcryptjs.hashSync(password, salt);        
@@ -32,7 +32,7 @@ const userHttp = {
         //     });
         // });
 
-        const user = new userModel({name: name, identification: identification, email: email, password: hash, typeUser: typeUser, eps: eps});
+        const user = new userModel({name: name, email: email, password: hash, typeUser: typeUser});
     
         await user.save();
 
@@ -41,7 +41,7 @@ const userHttp = {
 
     userPut: async(req, res) => {
         const { id } = req.params;
-        const {name, password, typeUser, eps} = req.body;
+        const {name, password, typeUser} = req.body;
 
         // bscryptjs
         const hash = bcryptjs.hashSync(password, salt);
@@ -52,7 +52,7 @@ const userHttp = {
         //     });
         // });
 
-        const user = await userModel.findByIdAndUpdate(id, {name: name, password: hash, typeUser: typeUser, eps: eps});
+        const user = await userModel.findByIdAndUpdate(id, {name: name, password: hash, typeUser: typeUser});
 
         await user.save();
         
@@ -84,7 +84,7 @@ const userHttp = {
 
         const user = await userModel.find({email: email});
 
-        console.log(user);
+        // console.log(user);
 
         if(!user){
             return res.json({msj: 'email no existe en la base de datos'});
@@ -110,8 +110,7 @@ const userHttp = {
                 email: email,
                 password: password,
             });
-            console.log(token);
-            return res.send(token);
+            return res.json({token: token});
         }
 
         return res.json({msj: 'password incorrecta'});

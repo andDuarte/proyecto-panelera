@@ -18,11 +18,9 @@ routerUser.get('/', [], userHttp.userGet );
 
 routerUser.post('/', [
     check('name', 'body nombre es necesario').trim().notEmpty(),
-    check('identification', 'body identificacion es necesario').trim().notEmpty(),
     check('email', 'body email es necesario').trim().notEmpty(),
     check('email').custom(userValidate.userEmail),
     check('password', 'body password es necesaria').trim().notEmpty(),
-    check('eps', 'body eps es necesario').trim().notEmpty(),
     validate
 ], userHttp.userPost );
 
