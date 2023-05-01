@@ -16,6 +16,14 @@ const userValidate = {
             throw new Error('body email ya existe en la base de datos');
         }
     },
+
+    userState: async(email) => {
+        const user = await userModel.find({email: email});
+
+        if(user[0].state == 0) {
+            throw new Error('usuario desactivado del sistema');
+        }
+    },
 }
 
 export{

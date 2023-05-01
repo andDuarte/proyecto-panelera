@@ -50,6 +50,7 @@ routerUser.put('/desactivar/:id', [
 
 routerUser.post('/login', [
     check('email', 'body email es necesario').trim().notEmpty(),
+    check('email').custom(userValidate.userState),
     check('password', 'body password es necesaria').trim().notEmpty(),
     validate
 ], userHttp.userLogin );
