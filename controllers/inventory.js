@@ -16,20 +16,20 @@ const inventoryHttp = {
     },
 
     inventoryPost: async(req, res) => {
-        const { name, category, quantity, store } = req.body;
+        const { name, category, quantity, store, mark } = req.body;
 
-        const inventory = new inventoryModel({name: name, category: category, quantity: quantity, store: store});
+        const inventory = new inventoryModel({name: name, category: category, quantity: quantity, store: store, mark: mark});
 
-        inventory.save();
+        await inventory.save();
 
         res.json({msj: 'elemento creado en inventario'});
     },
 
     inventoryPut: async(req, res) => {
         const { id } = req.params;
-        const { name, category, quantity, store } = req.body;
+        const { name, category, quantity, store, mark } = req.body;
 
-        const inventory = await inventoryModel.findByIdAndUpdate(id, {name: name, category: category, quantity: quantity, store: store});
+        const inventory = await inventoryModel.findByIdAndUpdate(id, {name: name, category: category, quantity: quantity, store: store, mark: mark});
         
         await inventory.save();
 

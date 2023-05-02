@@ -24,6 +24,8 @@ routerInventory.post('/', [
     check('store', 'body bodega es necesaria').trim().notEmpty(),
     check('store', 'body bodega no es valida').isMongoId(),
     check('store').custom(storeValidate.storeId),
+    check('mark', 'body marca es necesaria').trim().notEmpty(),
+    check('mark', 'body marca no es valida').isMongoId(),
     check('token', 'header token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
