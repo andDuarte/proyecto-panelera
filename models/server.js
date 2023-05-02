@@ -9,6 +9,7 @@ import { routerInventory } from '../routes/inventory.js';
 import { routerUser } from '../routes/users.js';
 import { routerAllotment } from '../routes/allotment.js';
 import { routerMark } from '../routes/mark.js';
+import { routerPhase } from '../routes/phase.js';
 
 class Server {
     constructor(){
@@ -33,6 +34,7 @@ class Server {
         this.app.use('/usuario', routerUser );
         this.app.use('/lote', routerAllotment );
         this.app.use('/marca', routerMark );
+        this.app.use('/etapa', routerPhase );
     }
 
     listen() {

@@ -8,6 +8,7 @@ import { validateToken } from '../middlewares/validate-jwt.js';
 
 import { inventoryValidate } from '../helpers/inventory.js';
 import { storeValidate } from '../helpers/store.js';
+import { markValidate } from '../helpers/mark.js';
 
 const routerInventory = Router();
 
@@ -26,6 +27,7 @@ routerInventory.post('/', [
     check('store').custom(storeValidate.storeId),
     check('mark', 'body marca es necesaria').trim().notEmpty(),
     check('mark', 'body marca no es valida').isMongoId(),
+    check('mark').custom(markValidate.markId),
     check('token', 'header token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
@@ -36,6 +38,8 @@ routerInventory.put('/:id', [
     check('token').custom(validateToken),
     // check('store', 'body store no es valida').isMongoId(),
     // check('store').custom(storeValidate.storeId),
+    // check('mark', 'body mark no valida').isMongoId(),
+    // check('mark').custom(markValidate.markId),
     check('id', 'params id no es valido').isMongoId(),
     check('id').custom(inventoryValidate.inventoryId),
     validate
