@@ -10,6 +10,7 @@ import { routerUser } from '../routes/users.js';
 import { routerAllotment } from '../routes/allotment.js';
 import { routerMark } from '../routes/mark.js';
 import { routerPhase } from '../routes/phase.js';
+import { routerPeople } from '../routes/people.js';
 
 class Server {
     constructor(){
@@ -31,10 +32,12 @@ class Server {
     routes() {
         this.app.use('/bodega', routerStore );
         this.app.use('/inventario', routerInventory );
+        
         this.app.use('/usuario', routerUser );
         this.app.use('/lote', routerAllotment );
         this.app.use('/marca', routerMark );
         this.app.use('/etapa', routerPhase );
+        this.app.use('/persona', routerPeople );
     }
 
     listen() {
