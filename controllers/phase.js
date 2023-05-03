@@ -19,6 +19,17 @@ const phaseHttp = {
 
     phasePut: async(req, res) => {
         const { id } = req.params;
+        const { name, process } = req.body;
+
+        const phase = await phaseModel.findByIdAndUpdate(id, {name: name, process: process});
+
+        await phase.save();
+
+        return res.json({msj: 'etapa actualizada'});
+    },
+
+    phaseProcess: async(req, res) => {
+        const { id } = req.params;
 
         const { process } = req.body;
 
@@ -34,7 +45,7 @@ const phaseHttp = {
 
         await phase.save();
 
-        return res.json({msj: 'etapa actualizada'});
+        return res.json({msj: 'actividad creada en procesos'});
     },
 
     phaseActivate: async(req, res) => {
@@ -55,6 +66,37 @@ const phaseHttp = {
         await phase.save()
 
         return res.json({msj: 'etapa desactivada'});
+    },
+
+    phaseActivity: async(req, res) => {
+        const { id } = req.params;
+
+        const { idActivity } = req.params;
+
+        const { stateActivity } = req.body;
+
+        const phaseId = await phaseModel.find({_id: id});
+
+        const processOld = phaseId[0].process;
+
+        let foundActivity = false
+
+        for(let position = 0; position < processOld.length; position++) {
+            if(processOld[position]._id == idActivity) {
+                processOld[position].stateActivity = stateActivity;
+                foundActivity = true;
+            }
+        }
+
+        if(foundActivity == false) {
+            return res.json({msj: 'params id actividad no existe en la base de datos'});
+        }
+
+        const phase = await phaseModel.findByIdAndUpdate(id, {process: processOld});
+
+        await phase.save();
+        
+        return res.json({msj: 'actividad actualizada de procesos'});
     },
 }
 

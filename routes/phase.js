@@ -10,9 +10,13 @@ routerPhase.post('/', [], phaseHttp.phasePost );
 
 routerPhase.put('/:id', [], phaseHttp.phasePut );
 
+routerPhase.post('/actividad/:id', [], phaseHttp.phaseProcess );
+
 routerPhase.put('/activar/:id', [], phaseHttp.phaseActivate );
 
 routerPhase.put('/desactivar/:id', [], phaseHttp.phaseDesactivate );
+
+routerPhase.put('/:id/actividad/:idActivity', [], phaseHttp.phaseActivity );
 
 export{
     routerPhase
