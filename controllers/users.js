@@ -106,10 +106,11 @@ const userHttp = {
         const validatePassword = bcryptjs.compareSync(password, user[0].password);
 
         if(validatePassword == true){
-            const token = await createToken({
-                email: email,
-                password: password,
+            const { token } = await createToken({
+                _id: user[0]._id,
+                typeUser: user[0].typeUser,
             });
+            
             return res.json({token: token});
         }
 
