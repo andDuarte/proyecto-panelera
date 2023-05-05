@@ -13,9 +13,9 @@ import { userValidate } from '../helpers/users.js';
 const routerUser = Router();
 
 routerUser.get('/', [
-    check('token', 'el token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'el token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], userHttp.userGet );
 
 // routerUser.get('/:id', [], userHttp );
