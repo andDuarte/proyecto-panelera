@@ -10,4 +10,6 @@ const validate = (req, res, next) => {
     next();
 }
 
-export{ validate }
+export{
+    validate
+}

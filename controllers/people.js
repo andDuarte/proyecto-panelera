@@ -8,7 +8,7 @@ const peopleHttp = {
     },
 
     peoplePost: async(req, res) => {
-        const {name, numberIdentification, numberPhone, birthDate, residenceAddress} = req.body;
+        const { name, numberIdentification, numberPhone, birthDate, residenceAddress } = req.body;
 
         const people = new peopleModel({name: name, numberIdentification: numberIdentification, numberPhone: numberPhone, birthDate: birthDate, residenceAddress: residenceAddress});
 

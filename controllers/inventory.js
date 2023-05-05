@@ -4,7 +4,7 @@ const inventoryHttp = {
     inventoryGet: async(req, res) => {
         const inventory = await inventoryModel.find();
 
-        res.json({inventario: inventory});
+        return res.json({inventario: inventory});
     },
 
     inventoryGetQuery: async(req, res) => {
@@ -12,7 +12,7 @@ const inventoryHttp = {
 
         const inventory = await inventoryModel.find({category: new RegExp(category, 'i')});
 
-        res.json({inventario: inventory});
+        return res.json({inventario: inventory});
     },
 
     inventoryPost: async(req, res) => {
@@ -22,7 +22,7 @@ const inventoryHttp = {
 
         await inventory.save();
 
-        res.json({msj: 'elemento creado en inventario'});
+        return res.json({msj: 'elemento creado en inventario'});
     },
 
     inventoryPut: async(req, res) => {
@@ -57,4 +57,6 @@ const inventoryHttp = {
     },
 }
 
-export{ inventoryHttp }
+export{
+    inventoryHttp
+}

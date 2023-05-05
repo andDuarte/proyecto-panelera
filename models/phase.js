@@ -8,9 +8,11 @@ const phaseSchema = new mongoose.Schema({
             stateActivity: {type: String, default: 'por hacer'}
         }
     ],
-    state: {type: Number, default: 1},
+    state: {type: Number, default: 1}
 });
 
-const phaseModel = mongoose.model('phase', phaseSchema);
+const phaseModel = mongoose.model('phase', phaseSchema );
 
-export{ phaseModel }
+export{
+    phaseModel
+}

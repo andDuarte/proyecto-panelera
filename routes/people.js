@@ -12,40 +12,44 @@ import { peopleValidate } from '../helpers/people.js';
 
 const routerPeople = Router();
 
-routerPeople.get('/', [], peopleHttp.peopleGet );
+routerPeople.get('/', [
+    // check('token', 'el token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
+], peopleHttp.peopleGet );
 
 routerPeople.post('/', [
-    check('name', 'body name es necesario').trim().notEmpty(),
-    check('numberIdentification', 'body identification es necesario').trim().notEmpty(),
+    check('name', 'el nombre es necesario').trim().notEmpty(),
+    check('numberIdentification', 'el numero identificacion es necesario').trim().notEmpty(),
     check('numberIdentification').custom(peopleValidate.peopleIdentification),
-    check('numberPhone', 'body number phone es necesario').trim().notEmpty(),
-    check('birthDate', 'body birthDate es necesario').trim().notEmpty(),
-    check('residenceAddress', 'body residenceAddress es necesario').trim().notEmpty(),
-    check('token', 'header token es necesario').trim().notEmpty(),
+    check('numberPhone', 'el numero telefono es necesario').trim().notEmpty(),
+    check('birthDate', 'la fecha nacimiento es necesaria').trim().notEmpty(),
+    check('residenceAddress', 'la direccion residencia es necesaria').trim().notEmpty(),
+    check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peoplePost );
 
 routerPeople.put('/:id', [
-    check('id', 'params id no valido').isMongoId(),
+    check('id', 'el id no es valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peoplePut );
 
 routerPeople.put('/activar/:id', [
-    check('id', 'params id no valido').isMongoId(),
+    check('id', 'el id no es valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peopleActivate );
 
 routerPeople.put('/desactivar/:id', [
-    check('id', 'params id no valido').isMongoId(),
+    check('id', 'el id no es valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peopleDesactivate );

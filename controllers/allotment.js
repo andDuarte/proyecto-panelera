@@ -19,6 +19,7 @@ const allotmentHttp = {
 
     allotmentPut: async(req, res) => {
         const { id } = req.params;
+ 
         const { size, owner } = req.body;
 
         const allotmentId = await allotmentModel.find({_id: id})
@@ -27,7 +28,7 @@ const allotmentHttp = {
         
         historic.push({owner: allotmentId[0].owner, size: allotmentId[0].size});
 
-        const allotment = await allotmentModel.findByIdAndUpdate(id,{size: size, owner: owner, historic: historic});
+        const allotment = await allotmentModel.findByIdAndUpdate(id, {size: size, owner: owner, historic: historic});
 
         return res.json({msj: 'lote actualizado'});
     },
@@ -53,4 +54,6 @@ const allotmentHttp = {
     },
 }
 
-export{ allotmentHttp }
+export{
+    allotmentHttp
+}

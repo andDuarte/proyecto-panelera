@@ -11,8 +11,10 @@ const allotmentSchema = new mongoose.Schema({
             size: {type: String}
         }
     ]
-})
+});
 
 const allotmentModel = mongoose.model('allotment', allotmentSchema );
 
-export{ allotmentModel }
+export{
+    allotmentModel
+}

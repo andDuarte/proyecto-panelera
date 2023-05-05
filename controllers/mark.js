@@ -8,7 +8,7 @@ const markHttp = {
     },
     
     markPost: async(req, res) => {
-        const {name, ownerCompany} = req.body;
+        const { name, ownerCompany } = req.body;
 
         const mark = new markModel({name: name, ownerCompany: ownerCompany});
 
@@ -19,7 +19,7 @@ const markHttp = {
 
     markPut: async(req, res) => {
         const { id } = req.params;
-        const {name, ownerCompany} = req.body;
+        const { name, ownerCompany } = req.body;
 
         const mark = await markModel.findByIdAndUpdate(id, {name: name, ownerCompany: ownerCompany});
 

@@ -5,9 +5,9 @@ const inventoryValidate = {
         const store = await inventoryModel.find({_id: id});
 
         if(store.length == 0) {
-            throw new Error('params id no existe en la base de datos');
+            throw new Error('el id no existe en la base de datos');
         }
-    }
+    },
 }
 
 export{

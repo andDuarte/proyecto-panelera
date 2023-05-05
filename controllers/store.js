@@ -2,17 +2,17 @@ import { storeModel } from '../models/store.js';
 
 const storeHttp = {
     storeGet: async(req, res) => {
-        const store = await storeModel.find()
+        const store = await storeModel.find();
 
-        res.json({bodegas: store});
+        return res.json({bodegas: store});
     },
     
     storeGetQuery: async(req, res) => {
         const { name } = req.query;
 
-        const store = await storeModel.find({ name: new RegExp(name, 'i')});
+        const store = await storeModel.find({name: new RegExp(name, 'i')});
 
-        res.json({bodega: store});
+        return res.json({bodega: store});
     },
     
     storePost: async(req, res) => {
@@ -20,9 +20,9 @@ const storeHttp = {
 
         const store = new storeModel({name: name, farm: farm, size: size});
 
-        await store.save()
+        await store.save();
 
-        res.json({msj: 'bodega creada'});
+        return res.json({msj: 'bodega creada'});
     },
 
     storePut: async(req, res) => {
@@ -51,10 +51,12 @@ const storeHttp = {
 
         const store = await storeModel.findByIdAndUpdate(id, {state: 0});
 
-        await store.save()
+        await store.save();
 
         return res.json({msj: 'bodega desactivada'});
     },
 }
 
-export{ storeHttp }
+export{
+    storeHttp
+}

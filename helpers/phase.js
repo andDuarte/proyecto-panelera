@@ -5,17 +5,16 @@ const phaseValidate = {
         const phase = await phaseModel.find({_id: id});
 
         if(phase.length == 0) {
-            throw new Error('params id no existe en la base de datos');
+            throw new Error('el id no existe en la base de datos');
         }
     },
 
     phaseActivity: async(activity, { req }) => {
         const { id } = req.params;
-        // console.log(activity, req);
 
         const phase = await phaseModel.find({_id: id});
 
-        const process = phase[0].process
+        const process = phase[0].process;
 
         let existActivity = false;
 
@@ -26,7 +25,7 @@ const phaseValidate = {
         }
 
         if(existActivity == false) {
-            throw new Error('params idActivity no existe en process');
+            throw new Error('el id actividad no existe en procesos');
         }
     },
 }

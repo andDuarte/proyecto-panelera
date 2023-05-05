@@ -1,27 +1,19 @@
 import { userModel } from '../models/users.js';
-import { createToken } from '../middlewares/validate-jwt.js'
+import { createToken } from '../middlewares/validate-jwt.js';
 
 // bcryptjs
 import bcryptjs from 'bcryptjs';
 const salt = bcryptjs.genSaltSync(10);
 
-// login
-// bcryptjs
-// bcryptjs.compareSync('input', hash); - true | false
-// bcryptjs.compare('input', hash, function(err, res){
-//  res = true | false
-// })
-
-
 const userHttp = {
     userGet: async(req, res) => {
         const user = await userModel.find();
 
-        return res.json ({users: user});
+        return res.json ({usuarios: user});
     },
 
     userPost: async(req, res) => {
-        const{name, email, password, typeUser} = req.body;
+        const{ name, email, password, typeUser } = req.body;
 
         // bcryptjs
         const hash = bcryptjs.hashSync(password, salt);        
@@ -80,22 +72,20 @@ const userHttp = {
     },
 
     userLogin: async(req, res) => {
-        const {email, password} = req.body;
+        const { email, password } = req.body;
 
         const user = await userModel.find({email: email});
 
-        // console.log(user);
-
-        if(!user){
+        if(!user) {
             return res.json({msj: 'email no existe en la base de datos'});
         }
 
         // bcryptjs.compare(password, user.password, function(err, response){
-        //     if(response == true){
+        //     if(response == true) {
         //         const token = createToken({
         //             email: email,
         //             password: password
-        //         })
+        //         });
 
         //         return res.json({jwt: token});
         //     }
@@ -114,7 +104,7 @@ const userHttp = {
             return res.json({token: token});
         }
 
-        return res.json({msj: 'password incorrecta'});
+        return res.json({msj: 'contraseña incorrecta'});
     },
 }
 

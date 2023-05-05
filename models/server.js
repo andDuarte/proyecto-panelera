@@ -13,7 +13,7 @@ import { routerPhase } from '../routes/phase.js';
 import { routerPeople } from '../routes/people.js';
 
 class Server {
-    constructor(){
+    constructor() {
         this.app = express();
         this.connect();
         this.middlewares();
@@ -41,8 +41,10 @@ class Server {
     }
 
     listen() {
-        this.app.listen('3000',()=>{console.log('server online')});
+        this.app.listen('3000', () => { console.log('server online'); });
     }
 }
 
-export { Server }
+export {
+    Server
+}

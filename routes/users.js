@@ -12,46 +12,50 @@ import { userValidate } from '../helpers/users.js';
 
 const routerUser = Router();
 
-routerUser.get('/', [], userHttp.userGet );
+routerUser.get('/', [
+    check('token', 'el token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
+], userHttp.userGet );
 
-// routerUser.get('/:id', [], userHttp )
+// routerUser.get('/:id', [], userHttp );
 
 routerUser.post('/', [
-    check('name', 'body nombre es necesario').trim().notEmpty(),
-    check('email', 'body email es necesario').trim().notEmpty(),
+    check('name', 'el nombre es necesario').trim().notEmpty(),
+    check('email', 'el email es necesario').trim().notEmpty(),
     check('email').custom(userValidate.userEmail),
-    check('password', 'body password es necesaria').trim().notEmpty(),
+    check('password', 'la contraseña es necesaria').trim().notEmpty(),
     validate
 ], userHttp.userPost );
 
 routerUser.put('/:id', [
-    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
-    check('id', 'body id no valido').isMongoId(),
+    check('id', 'el id no es valido').isMongoId(),
     check('id').custom(userValidate.userId),
     validate
 ], userHttp.userPut );
 
 routerUser.put('/activar/:id', [
-    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
-    check('id', 'body id no es valido').isMongoId(),
+    check('id', 'el id no es valido').isMongoId(),
     check('id').custom(userValidate.userId),
     validate
 ], userHttp.userActivate );
 
 routerUser.put('/desactivar/:id', [
-    check('token', 'header token es necesario').trim().notEmpty(),
+    check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
-    check('id', 'body id no es valido').isMongoId(),
+    check('id', 'el id no es valido').isMongoId(),
     check('id').custom(userValidate.userId),
     validate
 ], userHttp.userDeactivate );
 
 routerUser.post('/login', [
-    check('email', 'body email es necesario').trim().notEmpty(),
+    check('email', 'el email es necesario').trim().notEmpty(),
     check('email').custom(userValidate.userState),
-    check('password', 'body password es necesaria').trim().notEmpty(),
+    check('password', 'la contraseña es necesaria').trim().notEmpty(),
     validate
 ], userHttp.userLogin );
 
