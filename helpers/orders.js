@@ -5,7 +5,7 @@ const orderValidate = {
         const order = await ordersModel.find({_id: id});
 
         if(order.length == 0) {
-            throw new Error('el id no existe en la base de datos');
+            throw new Error('id no existe en la base de datos');
         }
     },
 }

@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     typeUser: {type: String, default: 'usuario'},
-    state: {type: Number, default: 1}
+    state: {type: Number, default: 1},
 });
 
 

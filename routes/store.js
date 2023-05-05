@@ -13,29 +13,31 @@ import { storeValidate } from '../helpers/store.js';
 const routerStore = Router();
 
 routerStore.get('/', [
-    // check('token', 'el token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
+    check('token', 'token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
 ], storeHttp.storeGet );
 
 routerStore.get('/search', [
-    check('name', 'el nombre es necesario').trim().notEmpty(),
+    check('name', 'nombre es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
     validate
 ], storeHttp.storeGetQuery );
 
 routerStore.post('/', [
-    check('name', 'el nombre es necesario').trim().notEmpty(),
-    check('farm', 'la granja es necesaria').trim().notEmpty(),
-    check('size', 'el tamaño es necesario').trim().notEmpty(),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('name', 'nombre es necesario').trim().notEmpty(),
+    check('farm', 'granja es necesaria').trim().notEmpty(),
+    check('size', 'tamaño bodega es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], storeHttp.storePost );
 
 routerStore.put('/:id', [
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
-    check('id', 'el id no es valido').isMongoId(),
+    check('id', 'id no es valido').isMongoId(),
     check('id').custom(storeValidate.storeId),
     validate
 ], storeHttp.storePut );

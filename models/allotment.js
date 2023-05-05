@@ -8,9 +8,9 @@ const allotmentSchema = new mongoose.Schema({
     historic: [
         {
             owner: {type: String},
-            size: {type: String}
-        }
-    ]
+            size: {type: String},
+        },
+    ],
 });
 
 const allotmentModel = mongoose.model('allotment', allotmentSchema );

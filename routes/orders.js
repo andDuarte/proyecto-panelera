@@ -12,28 +12,32 @@ import { orderValidate } from '../helpers/orders.js';
 
 const routerOrders = Router();
 
-routerOrders.get('/', [], ordersHttp.ordersGet );
+routerOrders.get('/', [
+    check('token', 'token no valido').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
+], ordersHttp.ordersGet );
 
 routerOrders.post('/', [
-    check('customerName', 'el nombre es necesario').trim().notEmpty(),
-    check('documentType', 'el tipo de documento es necesario').trim().notEmpty(),
-    check('documentNumber', 'el número de documento es necesario').notEmpty(),
-    check('phoneNumber', 'el número de telefono necesario').trim().notEmpty(),
-    check('email', 'el email es necesario').trim().notEmpty(),
-    check('descriptionOfPanela', 'la descricipción de la panela es necesaria').trim().notEmpty(),
-    check('preferencesOfPanela', 'las preferencias son necesarias').trim().notEmpty(),
-    check('orderStatus', 'elestado es necesario').trim().notEmpty(),
-    check('quantityOfPanela', 'la cantidad en necesaria').notEmpty(),
-    check('address', 'la direciion es necesaria').trim().notEmpty(),
+    check('customerName', 'nombre es necesario').trim().notEmpty(),
+    check('documentType', 'tipo de documento es necesario').trim().notEmpty(),
+    check('documentNumber', 'número de documento es necesario').notEmpty(),
+    check('phoneNumber', 'número de telefono necesario').trim().notEmpty(),
+    check('email', 'email es necesario').trim().notEmpty(),
+    check('descriptionOfPanela', 'descricipción de la panela es necesaria').trim().notEmpty(),
+    check('preferencesOfPanela', 'preferencias panela son necesarias').trim().notEmpty(),
+    check('orderStatus', 'estado pedido es necesario').trim().notEmpty(),
+    check('quantityOfPanela', 'cantidad panela en necesaria').notEmpty(),
+    check('sendAddress', 'direccion envio es necesaria').trim().notEmpty(),
     validate
 ], ordersHttp.ordersPost );
 
 routerOrders.put(
     '/:id', 
     [
-        // check('token', 'el token es necesario').trim().notEmpty(),
-        // check('token').custom(validateToken),
-        check('id', 'el id no es valido').isMongoId(),
+        check('token', 'token es necesario').trim().notEmpty(),
+        check('token').custom(validateToken),
+        check('id', 'id no valido').isMongoId(),
         check('id').custom(orderValidate.orderId),
         validate
     ],
@@ -42,9 +46,9 @@ routerOrders.put(
 routerOrders.put(
     '/activar/:id', 
     [
-        // check('token', 'el token es necesario').trim().notEmpty(),
-        // check('token').custom(validateToken),
-        check('id', 'el id no es valido').isMongoId(),
+        check('token', 'token es necesario').trim().notEmpty(),
+        check('token').custom(validateToken),
+        check('id', 'id no valido').isMongoId(),
         check('id').custom(orderValidate.orderId),
         validate
     ], 
@@ -52,9 +56,9 @@ routerOrders.put(
 
 routerOrders.put(
     '/desactivar/:id', [
-        // check('token', 'el token es necesario').trim().notEmpty(),
-        // check('token').custom(validateToken),
-        check('id', 'el id no es valido').isMongoId(),
+        check('token', 'token es necesario').trim().notEmpty(),
+        check('token').custom(validateToken),
+        check('id', 'id no valido').isMongoId(),
         check('id').custom(orderValidate.orderId),
         validate
     ],

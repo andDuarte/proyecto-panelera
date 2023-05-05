@@ -13,39 +13,39 @@ import { allotmentValidate } from '../helpers/allotment.js';
 const routerAllotment = Router();
 
 routerAllotment.get('/', [
-    // check('token', 'el token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
+    check('token', 'token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
 ], allotmentHttp.allotmentGet );
 
 routerAllotment.post('/', [
-    check('owner', 'el dueño del lote es necesario').trim().notEmpty(),
-    check('size', 'el tamaño del lote es necesario').trim().notEmpty(),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('owner', 'dueño lote es necesario').trim().notEmpty(),
+    check('size', 'tamaño lote es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentPost );
 
 routerAllotment.put('/:id', [
-    check('id', 'el id no es valido').isMongoId(),
+    check('id', 'id no valido').isMongoId(),
     check('id').custom(allotmentValidate.allotmentId),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentPut );
 
 routerAllotment.put('/activar/:id', [
-    check('id', 'el id no es valido').isMongoId(),
+    check('id', 'id no valido').isMongoId(),
     check('id').custom(allotmentValidate.allotmentId),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentActivate );
 
 routerAllotment.put('/desactivar/:id', [
-    check('id', 'el id no es valido').isMongoId(),
+    check('id', 'id no valido').isMongoId(),
     check('id').custom(allotmentValidate.allotmentId),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentDesactivate );

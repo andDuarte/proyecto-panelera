@@ -9,6 +9,8 @@ const billingSchema = new mongoose.Schema({
     state: {type: Number, default: 1},
 });
 
-const billingModel = mongoose.model('billing', billingSchema);
+const billingModel = mongoose.model('billing', billingSchema );
 
-export { billingModel }
+export {
+    billingModel
+}

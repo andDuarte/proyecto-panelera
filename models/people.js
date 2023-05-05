@@ -6,7 +6,7 @@ const peopleSchema = new mongoose.Schema({
     numberPhone: {type: String, required: true},
     birthDate: {type: Date},
     residenceAddress: {type: String},
-    state: {type: Number, default: 1}
+    state: {type: Number, default: 1},
 });
 
 const peopleModel = mongoose.model('people', peopleSchema );

@@ -11,10 +11,12 @@ const ordersSchema = new mongoose.Schema({
     preferencesOfPanela: {type: String, required: true},
     orderStatus: {type: String, default: "proceso"}, //0=proceso 1=entregado = 2=cancelado 3=realizado
     quantityOfPanela: {type: Number, required: true},
-    address: {type: String},
+    sendAddress: {type: String},
     state: {type: Number, default: 1},
 });
 
-const ordersModel = mongoose.model('orders', ordersSchema);
+const ordersModel = mongoose.model('order', ordersSchema );
 
-export { ordersModel }
+export {
+    ordersModel
+}

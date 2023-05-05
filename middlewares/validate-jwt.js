@@ -7,10 +7,8 @@ async function createToken(payload) {
     });
     // 'shhhhh'
 
-    return{
-        token
-    }
-};
+    return{ token }
+}
 
 const validateToken = async(token, { req }) => {
     jwt.verify(token, process.env.PRIVATE_KEY, function(err, decode){
@@ -19,7 +17,7 @@ const validateToken = async(token, { req }) => {
         }
     });
     // 'shhhhh'
-};
+}
 
 export{
     createToken,
