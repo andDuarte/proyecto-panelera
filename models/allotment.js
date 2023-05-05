@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const allotmentSchema = new mongoose.Schema({
+    name : {type : String, required: true},
     owner: {type: String, required: true},
     size: {type: String},
     createdAt: {type: Date, default: Date.now},

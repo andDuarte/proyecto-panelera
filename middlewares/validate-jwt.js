@@ -1,11 +1,11 @@
 import jwt from 'jsonwebtoken';
 
 async function createToken(payload) {
-    const token = jwt.sign(payload, process.env.PRIVATE_KEY, {
+const token = jwt.sign(payload, "shhhhh" , {
         expiresIn: '10h',
         algorithm: 'HS256'
     });
-    // 'shhhhh'
+    // 'process.env.PRIVATE_KEY'
 
     return{
         token
@@ -13,7 +13,7 @@ async function createToken(payload) {
 };
 
 const validateToken = async(token, { req }) => {
-    jwt.verify(token, process.env.PRIVATE_KEY, function(err, decode){
+    jwt.verify(token, "shhhhh", function(err, decode){
         if(err) {
             throw new Error('token no valido');
         }

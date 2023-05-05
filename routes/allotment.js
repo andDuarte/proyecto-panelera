@@ -19,6 +19,7 @@ routerAllotment.get('/', [
 ], allotmentHttp.allotmentGet );
 
 routerAllotment.post('/', [
+    check('name', 'el nom del lote es necesario').trim().notEmpty(),
     check('owner', 'el dueño del lote es necesario').trim().notEmpty(),
     check('size', 'el tamaño del lote es necesario').trim().notEmpty(),
     check('token', 'el token es necesario').trim().notEmpty(),

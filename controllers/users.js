@@ -10,6 +10,7 @@ const userHttp = {
         const user = await userModel.find();
 
         return res.json ({usuarios: user});
+        
     },
 
     userPost: async(req, res) => {
