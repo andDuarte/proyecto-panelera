@@ -7,6 +7,8 @@ const peopleSchema = new mongoose.Schema({
     birthDate: {type: Date},
     residenceAddress: {type: String},
     state: {type: Number, default: 1},
+    medicalInsuranceCompany: {type: String},
+    typeIdentification: {type: String},
 });
 
 const peopleModel = mongoose.model('people', peopleSchema );

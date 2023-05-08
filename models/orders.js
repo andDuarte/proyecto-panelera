@@ -7,7 +7,7 @@ const ordersSchema = new mongoose.Schema({
     documentType: { type: String, required: true },
     email: { type: String, required: true },
     orderDate: { type: Date, default: Date.now },
-    orderStatus: { type: String, default: "proceso" }, //0=proceso 1=entregado 2=cancelado 3=realizado
+    orderStatus: { type: String, default: 'proceso' }, //0=proceso 1=entregado 2=cancelado 3=realizado
     phoneNumber: { type: String, required: true },
     preferencesOfPanela: { type: String, required: true },
     quantityOfPanela: { type: Number, required: true },

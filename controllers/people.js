@@ -12,9 +12,9 @@ const peopleHttp = {
     },
 
     peoplePost: async(req, res) => {
-        const { name, numberIdentification, numberPhone, birthDate, residenceAddress } = req.body;
+        const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
 
-        const people = new peopleModel({name: name, numberIdentification: numberIdentification, numberPhone: numberPhone, birthDate: birthDate, residenceAddress: residenceAddress});
+        const people = new peopleModel({name: name, numberIdentification: numberIdentification, numberPhone: numberPhone, birthDate: birthDate, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
 
         await people.save();
 
@@ -24,9 +24,9 @@ const peopleHttp = {
     peoplePut: async(req, res) => {
         const { id } = req.params;
 
-        const { name, numberPhone, residenceAddress } = req.body;
+        const { name, numberPhone, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
 
-        const people = await peopleModel.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress});
+        const people = await peopleModel.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
 
         await people.save();
 
