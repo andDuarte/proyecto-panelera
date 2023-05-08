@@ -19,6 +19,8 @@ routerOrders.get('/', [
 ], ordersHttp.ordersGet );
 
 routerOrders.post('/', [
+    check('token', 'token no valido').trim().notEmpty(),
+    check('token').custom(validateToken),
     check('customerName', 'nombre es necesario').trim().notEmpty(),
     check('documentType', 'tipo de documento es necesario').trim().notEmpty(),
     check('documentNumber', 'número de documento es necesario').notEmpty(),

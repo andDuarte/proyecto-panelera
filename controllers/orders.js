@@ -16,13 +16,13 @@ const ordersHttp = {
 
         const orders = new ordersModel({
             customerName: customerName,
-            documentType: documentType,
-            documentNumber: documentNumber,
-            phoneNumber: phoneNumber,
-            email: email,
             descriptionOfPanela: descriptionOfPanela,
-            preferencesOfPanela: preferencesOfPanela,
+            documentNumber: documentNumber,
+            documentType: documentType,
+            email: email,
             orderStatus: orderStatus,
+            phoneNumber: phoneNumber,
+            preferencesOfPanela: preferencesOfPanela,
             quantityOfPanela: quantityOfPanela,
             sendAddress: sendAddress
         });
@@ -35,19 +35,19 @@ const ordersHttp = {
     ordersPut: async(req, res) => {
         const { id } = req.params;
 
-        const { customerName, documentType, documentNumber, phoneNumber, email, descriptionOfPanela,  preferencesOfPanela, orderStatus, quantityOfPanela, sendAddress } = req.body;
+        const { orderStatus } = req.body;
 
         const orders = await ordersModel.findByIdAndUpdate(id, {
-            customerName: customerName,
-            documentType: documentType,
-            documentNumber: documentNumber,
-            phoneNumber: phoneNumber,
-            email: email,
-            descriptionOfPanela: descriptionOfPanela,
-            preferencesOfPanela: preferencesOfPanela,
+            // customerName: customerName,
+            // documentType: documentType,
+            // documentNumber: documentNumber,
+            // phoneNumber: phoneNumber,
+            // email: email,
+            // descriptionOfPanela: descriptionOfPanela,
+            // preferencesOfPanela: preferencesOfPanela,
+            // quantityOfPanela: quantityOfPanela,
+            // sendAddress: sendAddress
             orderStatus: orderStatus,
-            quantityOfPanela: quantityOfPanela,
-            sendAddress: sendAddress
         });
 
         await orders.save();
