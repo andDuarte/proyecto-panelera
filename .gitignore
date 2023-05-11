@@ -1,5 +1,7 @@
-#.env
+.env
 
 package-lock.*
+
 node_modules*
+
 postman*
