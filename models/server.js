@@ -44,6 +44,9 @@ class Server {
         this.app.use('/labor', routerWork );
 
         this.app.use('/pedido', routerOrders );
+        this.app.use("/",(req,res)=>{
+            res.send("Hola mundo")
+        })
     }
 
     listen() {
