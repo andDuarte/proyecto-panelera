@@ -4,6 +4,10 @@ const storeHttp = {
     storeGet: async(req, res) => {
         const store = await storeModel.find();
 
+        if(store.length == 0) {
+            return res.json({msg: 'no existen bodegas en la base de datos'});
+        }
+
         return res.json({bodegas: store});
     },
     
@@ -11,6 +15,10 @@ const storeHttp = {
         const { name } = req.query;
 
         const store = await storeModel.find({name: new RegExp(name, 'i')});
+
+        if(store.length == 0) {
+            return res.json({msg: 'no existe bodega en la base de datos'});
+        }
 
         return res.json({bodega: store});
     },
@@ -22,7 +30,7 @@ const storeHttp = {
 
         await store.save();
 
-        return res.json({msj: 'bodega creada'});
+        return res.json({msg: 'bodega creada'});
     },
 
     storePut: async(req, res) => {
@@ -33,7 +41,7 @@ const storeHttp = {
 
         await store.save();
 
-        return res.json({msj: 'bodega actualizada'});
+        return res.json({msg: 'bodega actualizada'});
     },
 
     storeActivate: async(req, res) => {
@@ -43,7 +51,7 @@ const storeHttp = {
 
         await store.save();
 
-        return res.json({msj: 'bodega activada'});
+        return res.json({msg: 'bodega activada'});
     },
 
     storeDesactivate: async(req, res) => {
@@ -53,7 +61,7 @@ const storeHttp = {
 
         await store.save();
 
-        return res.json({msj: 'bodega desactivada'});
+        return res.json({msg: 'bodega desactivada'});
     },
 }
 

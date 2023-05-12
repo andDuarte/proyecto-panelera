@@ -4,29 +4,33 @@ const peopleHttp = {
     peopleGet: async(req, res) => {
         const people = await peopleModel.find();
 
+        if(people.length == 0) {
+            return res.json({msg: 'no existen personas en la base de datos'});
+        }
+
         return res.json({personas: people});
     },
 
     peoplePost: async(req, res) => {
-        const { name, numberIdentification, numberPhone, birthDate, residenceAddress } = req.body;
+        const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
 
-        const people = new peopleModel({name: name, numberIdentification: numberIdentification, numberPhone: numberPhone, birthDate: birthDate, residenceAddress: residenceAddress});
+        const people = new peopleModel({name: name, numberIdentification: numberIdentification, numberPhone: numberPhone, birthDate: birthDate, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
 
         await people.save();
 
-        return res.json({msj: 'persona creada'})
+        return res.json({msg: 'persona creada'})
     },
 
     peoplePut: async(req, res) => {
         const { id } = req.params;
 
-        const { name, numberPhone, residenceAddress } = req.body;
+        const { name, numberPhone, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
 
-        const people = await peopleModel.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress});
+        const people = await peopleModel.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
 
         await people.save();
 
-        return res.json({msj: 'persona actualizada'});
+        return res.json({msg: 'persona actualizada'});
     },
 
     peopleActivate: async(req, res) => {
@@ -36,7 +40,7 @@ const peopleHttp = {
 
         await people.save();
 
-        return res.json({msj: 'persona activada'});
+        return res.json({msg: 'persona activada'});
     },
 
     peopleDesactivate: async(req, res) => {
@@ -46,7 +50,7 @@ const peopleHttp = {
 
         await people.save();
 
-        return res.json({msj: 'persona desactivada'});
+        return res.json({msg: 'persona desactivada'});
     },
 }
 

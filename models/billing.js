@@ -1,18 +1,16 @@
 import mongoose from 'mongoose';
 
-const peopleSchema = new mongoose.Schema({
+const billingSchema = new mongoose.Schema({
     name: {type: String, required: true},
     numberIdentification: {type: String, required: true},
     numberPhone: {type: String, required: true},
     birthDate: {type: Date},
     residenceAddress: {type: String},
     state: {type: Number, default: 1},
-    medicalInsuranceCompany: {type: String},
-    typeIdentification: {type: String},
 });
 
-const peopleModel = mongoose.model('people', peopleSchema );
+const billingModel = mongoose.model('billing', billingSchema );
 
-export{
-    peopleModel
+export {
+    billingModel
 }

@@ -7,10 +7,8 @@ const token = jwt.sign(payload, "shhhhh" , {
     });
     // 'process.env.PRIVATE_KEY'
 
-    return{
-        token
-    }
-};
+    return{ token }
+}
 
 const validateToken = async(token, { req }) => {
     jwt.verify(token, "shhhhh", function(err, decode){
@@ -19,7 +17,7 @@ const validateToken = async(token, { req }) => {
         }
     });
     // 'shhhhh'
-};
+}
 
 export{
     createToken,

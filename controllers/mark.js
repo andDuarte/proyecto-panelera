@@ -4,6 +4,10 @@ const markHttp = {
     markGet: async(req, res) => {
         const mark = await markModel.find();
 
+        if(mark.length == 0) {
+            return res.json({msg: 'no existen marcas en la base de datos'});
+        }
+
         return res.json({marcas: mark});
     },
     
@@ -14,7 +18,7 @@ const markHttp = {
 
         await mark.save();
 
-        return res.json({msj: 'marca creada'});
+        return res.json({msg: 'marca creada'});
     },
 
     markPut: async(req, res) => {
@@ -25,7 +29,7 @@ const markHttp = {
 
         await mark.save();
 
-        return res.json({msj: 'marca actualizada'});
+        return res.json({msg: 'marca actualizada'});
     },
 
     markActivate: async(req, res) => {
@@ -35,7 +39,7 @@ const markHttp = {
 
         await mark.save();
 
-        return res.json({msj: 'marca activada'});
+        return res.json({msg: 'marca activada'});
     },
 
     markDesactivate: async(req, res) => {
@@ -45,7 +49,7 @@ const markHttp = {
 
         await mark.save();
 
-        return res.json({msj: 'marca desactivada'});
+        return res.json({msg: 'marca desactivada'});
     },
 }
 

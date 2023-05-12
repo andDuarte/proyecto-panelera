@@ -5,7 +5,7 @@ const allotmentValidate = {
         const allotment = await allotmentModel.find({_id: id});
 
         if(allotment.length == 0) {
-            throw new Error('el id no existe en la base de datos');
+            throw new Error('id no existe en la base de datos');
         }
     },
 }

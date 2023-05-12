@@ -5,7 +5,7 @@ const phaseValidate = {
         const phase = await phaseModel.find({_id: id});
 
         if(phase.length == 0) {
-            throw new Error('el id no existe en la base de datos');
+            throw new Error('id no existe en la base de datos');
         }
     },
 
@@ -25,7 +25,7 @@ const phaseValidate = {
         }
 
         if(existActivity == false) {
-            throw new Error('el id actividad no existe en procesos');
+            throw new Error('id actividad no existe en procesos');
         }
     },
 }

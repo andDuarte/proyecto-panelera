@@ -9,6 +9,10 @@ const userHttp = {
     userGet: async(req, res) => {
         const user = await userModel.find();
 
+        if(user.length == 0) {
+            return res.json({msg: 'no existen usuarios en la base de datos'});
+        }
+
         return res.json ({usuarios: user});
         
     },
@@ -17,7 +21,7 @@ const userHttp = {
         const{ name, email, password, typeUser } = req.body;
 
         // bcryptjs
-        const hash = bcryptjs.hashSync(password, salt);        
+        const hash = bcryptjs.hashSync(password, salt);
 
         // bcryptjs.getSalt(10, function(err, salt){
         //     bcryptjs.hash(password, salt, function(err, hash){
@@ -29,7 +33,7 @@ const userHttp = {
     
         await user.save();
 
-        return res.json({msj:'usuario creado'});
+        return res.json({msg:'usuario creado'});
     },
 
     userPut: async(req, res) => {
@@ -49,7 +53,7 @@ const userHttp = {
 
         await user.save();
         
-        return res.json({msj: "usuario actualizado"});
+        return res.json({msg: "usuario actualizado"});
     },
 
     userActivate: async(req, res) => {
@@ -59,7 +63,7 @@ const userHttp = {
 
         await user.save();
 
-        return res.json({msj: 'usuario activado'});
+        return res.json({msg: 'usuario activado'});
     },
 
     userDeactivate: async(req, res) => {
@@ -69,7 +73,7 @@ const userHttp = {
 
         await user.save();
 
-        return res.json({msj: 'usuario desactivado'});
+        return res.json({msg: 'usuario desactivado'});
     },
 
     userLogin: async(req, res) => {
@@ -78,7 +82,7 @@ const userHttp = {
         const user = await userModel.find({email: email});
 
         if(!user) {
-            return res.json({msj: 'email no existe en la base de datos'});
+            return res.json({msg: 'email no existe en la base de datos'});
         }
 
         // bcryptjs.compare(password, user.password, function(err, response){
@@ -105,7 +109,7 @@ const userHttp = {
             return res.json({token: token});
         }
 
-        return res.json({msj: 'contraseña incorrecta'});
+        return res.json({msg: 'contraseña incorrecta'});
     },
 }
 

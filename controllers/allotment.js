@@ -4,6 +4,10 @@ const allotmentHttp = {
     allotmentGet: async(req, res) => {
         const allotment = await allotmentModel.find();
 
+        if(allotment.length == 0) {
+            return res.json({msg: 'no existen lotes en la base de datos'});
+        }
+
         return res.json({lotes: allotment});
     },
 
@@ -14,7 +18,7 @@ const allotmentHttp = {
 
         await allotment.save();
 
-        return res.json({msj: 'lote creado'});
+        return res.json({msg: 'lote creado'});
     },
 
     allotmentPut: async(req, res) => {
@@ -22,7 +26,7 @@ const allotmentHttp = {
  
         const { size, name } = req.body;
 
-        const allotmentId = await allotmentModel.find({_id: id})
+        const allotmentId = await allotmentModel.find({_id: id});
 
         const historic = allotmentId[0].historic;
         
@@ -30,7 +34,7 @@ const allotmentHttp = {
 
         const allotment = await allotmentModel.findByIdAndUpdate(id, {size: size, owner: owner,name: name, historic: historic});
 
-        return res.json({msj: 'lote actualizado'});
+        return res.json({msg: 'lote actualizado'});
     },
 
     allotmentActivate: async(req, res) => {
@@ -40,7 +44,7 @@ const allotmentHttp = {
 
         await allotment.save();
 
-        return res.json({msj: 'lote activado'});
+        return res.json({msg: 'lote activado'});
     },
 
     allotmentDesactivate: async(req, res) => {
@@ -50,7 +54,7 @@ const allotmentHttp = {
 
         await allotment.save();
 
-        return res.json({msj: 'lote desactivado'});
+        return res.json({msg: 'lote desactivado'});
     },
 }
 

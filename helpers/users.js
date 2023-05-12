@@ -5,7 +5,7 @@ const userValidate = {
         const user = await userModel.find({_id: id});
 
         if(user.length == 0) {
-            throw new Error('el id no existe en la base de datos');
+            throw new Error('id no existe en la base de datos');
         }
     },
 
@@ -13,7 +13,7 @@ const userValidate = {
         const user = await userModel.find({email: email});
 
         if(user.length != 0){
-            throw new Error('el email ya existe en la base de datos');
+            throw new Error('email ya existe en la base de datos');
         }
     },
 

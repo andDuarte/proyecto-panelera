@@ -11,6 +11,9 @@ import { routerAllotment } from '../routes/allotment.js';
 import { routerMark } from '../routes/mark.js';
 import { routerPhase } from '../routes/phase.js';
 import { routerPeople } from '../routes/people.js';
+import { routerWork } from '../routes/work.js';
+
+import { routerOrders } from '../routes/orders.js';
 
 class Server {
     constructor() {
@@ -38,10 +41,13 @@ class Server {
         this.app.use('/marca', routerMark );
         this.app.use('/etapa', routerPhase );
         this.app.use('/persona', routerPeople );
+        this.app.use('/labor', routerWork );
+
+        this.app.use('/pedido', routerOrders );
     }
 
     listen() {
-        this.app.listen('3000', () => { console.log('server online'); });
+        this.app.listen(process.env.PORT, () => { console.log('server online' + ' ' + process.env.PORT); });
     }
 }
 

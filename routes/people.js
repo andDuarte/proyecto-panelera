@@ -13,33 +13,35 @@ import { peopleValidate } from '../helpers/people.js';
 const routerPeople = Router();
 
 routerPeople.get('/', [
-    // check('token', 'el token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
+    check('token', 'token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
 ], peopleHttp.peopleGet );
 
 routerPeople.post('/', [
-    check('name', 'el nombre es necesario').trim().notEmpty(),
-    check('numberIdentification', 'el numero identificacion es necesario').trim().notEmpty(),
+    check('name', 'nombre es necesario').trim().notEmpty(),
+    check('numberIdentification', 'numero identificacion es necesario').trim().notEmpty(),
+    check('typeIdentification', 'tipo identificacion es necesario').trim().notEmpty(),
     check('numberIdentification').custom(peopleValidate.peopleIdentification),
-    check('numberPhone', 'el numero telefono es necesario').trim().notEmpty(),
-    check('birthDate', 'la fecha nacimiento es necesaria').trim().notEmpty(),
-    check('residenceAddress', 'la direccion residencia es necesaria').trim().notEmpty(),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('numberPhone', 'numero telefono es necesario').trim().notEmpty(),
+    check('birthDate', 'fecha nacimiento es necesaria').trim().notEmpty(),
+    check('medicalInsuranceCompany', 'compañia seguro medico es necesaria').trim().notEmpty(),
+    check('residenceAddress', 'direccion residencia es necesaria').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peoplePost );
 
 routerPeople.put('/:id', [
-    check('id', 'el id no es valido').isMongoId(),
+    check('id', 'id no valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peoplePut );
 
 routerPeople.put('/activar/:id', [
-    check('id', 'el id no es valido').isMongoId(),
+    check('id', 'id no valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
     check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
@@ -47,9 +49,9 @@ routerPeople.put('/activar/:id', [
 ], peopleHttp.peopleActivate );
 
 routerPeople.put('/desactivar/:id', [
-    check('id', 'el id no es valido').isMongoId(),
+    check('id', 'id no valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'el token es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peopleDesactivate );
