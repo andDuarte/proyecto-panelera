@@ -10,10 +10,10 @@ const userHttp = {
         const user = await userModel.find();
 
         if(user.length == 0) {
-            return res.json({msg: 'no existen usuarios en la base de datos'});
+            return res.status(404).json({errors: 'no existen usuarios'});
         }
 
-        return res.json ({usuarios: user});
+        return res.json({usuarios: user});
         
     },
 
@@ -33,7 +33,7 @@ const userHttp = {
     
         await user.save();
 
-        return res.json({msg:'usuario creado'});
+        return res.status(200).json({msg:'usuario creado'});
     },
 
     userPut: async(req, res) => {
@@ -53,7 +53,7 @@ const userHttp = {
 
         await user.save();
         
-        return res.json({msg: "usuario actualizado"});
+        return res.status(201).json({msg: "usuario actualizado"});
     },
 
     userActivate: async(req, res) => {
@@ -63,7 +63,7 @@ const userHttp = {
 
         await user.save();
 
-        return res.json({msg: 'usuario activado'});
+        return res.status(201).json({msg: 'usuario activado'});
     },
 
     userDeactivate: async(req, res) => {
@@ -73,7 +73,7 @@ const userHttp = {
 
         await user.save();
 
-        return res.json({msg: 'usuario desactivado'});
+        return res.status(201).json({msg: 'usuario desactivado'});
     },
 
     userLogin: async(req, res) => {
@@ -82,7 +82,7 @@ const userHttp = {
         const user = await userModel.find({email: email});
 
         if(!user) {
-            return res.json({msg: 'email no existe en la base de datos'});
+            return res.status(404).json({errors: 'email no existe en la base de datos'});
         }
 
         // bcryptjs.compare(password, user.password, function(err, response){
@@ -109,7 +109,7 @@ const userHttp = {
             return res.json({token: token});
         }
 
-        return res.json({msg: 'contraseña incorrecta'});
+        return res.status(404).json({errors: 'contraseña incorrecta'});
     },
 }
 
