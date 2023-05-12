@@ -47,7 +47,7 @@ class Server {
     }
 
     listen() {
-        this.app.listen('3000', () => { console.log('server online'); });
+        this.app.listen(process.env.PORT, () => { console.log('server online' + process.env.PORT); });
     }
 }
 
