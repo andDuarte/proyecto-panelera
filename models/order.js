@@ -1,22 +1,26 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const ordersSchema = new mongoose.Schema({
+const orderSchema = new Schema({
     customerName: { type: String, required: true },
     descriptionOfPanela: { type: String, required: true },
     documentNumber: { type: Number, required: true },
     documentType: { type: String, required: true },
     email: { type: String, required: true },
-    orderDate: { type: Date, default: Date.now },
-    orderStatus: { type: String, default: 'proceso' }, //0=proceso 1=entregado 2=cancelado 3=realizado
+    // orderDate: { type: Date, default: Date.now },
+    orderStatus: { type: String, default: 'proceso' }, //->proceso ->entregado ->cancelado ->realizado
     phoneNumber: { type: String, required: true },
     preferencesOfPanela: { type: String, required: true },
     quantityOfPanela: { type: Number, required: true },
     sendAddress: { type: String },
     state: { type: Number, default: 1 },
+}, {
+    timestamps: true,
+    versionKey: false
 });
 
-const ordersModel = mongoose.model('order', ordersSchema);
+// const orderModel = model('Order', orderSchema);
 
-export {
-    ordersModel
-}
+// export {
+//     orderModel
+// }
+export default model('Order', orderSchema);

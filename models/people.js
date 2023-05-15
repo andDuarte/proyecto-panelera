@@ -1,18 +1,17 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const peopleSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    numberIdentification: {type: String, required: true},
-    numberPhone: {type: String, required: true},
-    birthDate: {type: Date},
-    residenceAddress: {type: String},
-    state: {type: Number, default: 1},
-    medicalInsuranceCompany: {type: String},
-    typeIdentification: {type: String},
+const peopleSchema = new Schema({
+    name: { type: String, required: true },
+    numberIdentification: { type: String, required: true },
+    numberPhone: { type: String, required: true },
+    birthDate: { type: Date },
+    residenceAddress: { type: String },
+    state: { type: Number, default: 1 },
+    medicalInsuranceCompany: { type: String },
+    typeIdentification: { type: String },
+}, {
+    timestamps: true,
+    versionKey: false
 });
 
-const peopleModel = mongoose.model('people', peopleSchema );
-
-export{
-    peopleModel
-}
+export default model('People', peopleSchema);

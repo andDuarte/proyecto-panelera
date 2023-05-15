@@ -19,13 +19,13 @@ routerAllotment.get('/', [
 ], allotmentHttp.allotmentGet );
 
 routerAllotment.post('/', [
-    check('name', 'el nom del lote es necesario').trim().notEmpty(),
-    check('owner', 'el dueño del lote es necesario').trim().notEmpty(),
-    check('size', 'el tamaño del lote es necesario').trim().notEmpty(),
+    // check('name', 'el nom del lote es necesario').trim().notEmpty(),
+    // check('owner', 'el dueño del lote es necesario').trim().notEmpty(),
+    // check('size', 'el tamaño del lote es necesario').trim().notEmpty(),
     check('token', 'el token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
     validate
-], allotmentHttp.allotmentPost );
+], allotmentHttp.createAllotment );
 
 routerAllotment.put('/:id', [
     check('id', 'id no valido').isMongoId(),
@@ -50,6 +50,19 @@ routerAllotment.put('/desactivar/:id', [
     check('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentDesactivate );
+
+routerAllotment.delete(
+    '/:id',
+    [
+        // check('token', 'token es necesario').trim().notEmpty(),
+        // check('token').custom(validateToken),
+        // check('id', 'id no valido').isMongoId(),
+        // check('id').custom(orderValidate.orderId),
+        // validate
+        // authJwt.verifyToken,
+        // authJwt.isModerator
+    ],
+    allotmentHttp.deleteAllotmentById);
 
 export{
     routerAllotment

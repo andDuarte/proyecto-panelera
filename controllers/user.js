@@ -1,4 +1,4 @@
-import { userModel } from '../models/users.js';
+import User from '../models/user.js';
 import { createToken } from '../middlewares/validate-jwt.js';
 
 // bcryptjs
@@ -7,10 +7,10 @@ const salt = bcryptjs.genSaltSync(10);
 
 const userHttp = {
     userGet: async(req, res) => {
-        const user = await userModel.find();
+        const user = await User.find();
 
-        if(user.length == 0) {
-            return res.status(404).json({errors: 'no existen usuarios'});
+        if (user.length == 0) {
+            return res.status(404).json({ msg: 'no existen usuarios en la base de datos' });
         }
 
         return res.json({usuarios: user});
@@ -29,7 +29,7 @@ const userHttp = {
         //     });
         // });
 
-        const user = new userModel({name: name, email: email, password: hash, typeUser: typeUser});
+        const user = new User({name: name, email: email, password: hash, typeUser: typeUser});
     
         await user.save();
 
@@ -49,7 +49,7 @@ const userHttp = {
         //     });
         // });
 
-        const user = await userModel.findByIdAndUpdate(id, {name: name, password: hash, typeUser: typeUser});
+        const user = await User.findByIdAndUpdate(id, {name: name, password: hash, typeUser: typeUser});
 
         await user.save();
         
@@ -59,7 +59,7 @@ const userHttp = {
     userActivate: async(req, res) => {
         const { id } = req.params;
 
-        const user = await userModel.findByIdAndUpdate(id, {state: 1});
+        const user = await User.findByIdAndUpdate(id, {state: 1});
 
         await user.save();
 
@@ -69,7 +69,7 @@ const userHttp = {
     userDeactivate: async(req, res) => {
         const { id } = req.params;
 
-        const user = await userModel.findByIdAndUpdate(id, {state: 0});
+        const user = await User.findByIdAndUpdate(id, {state: 0});
 
         await user.save();
 
@@ -79,7 +79,7 @@ const userHttp = {
     userLogin: async(req, res) => {
         const { email, password } = req.body;
 
-        const user = await userModel.find({email: email});
+        const user = await User.find({email: email});
 
         if(!user) {
             return res.status(404).json({errors: 'email no existe en la base de datos'});

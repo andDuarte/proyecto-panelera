@@ -1,8 +1,8 @@
-import { peopleModel } from '../models/people.js';
+import People from '../models/people.js';
 
 const peopleHttp = {
     peopleGet: async(req, res) => {
-        const people = await peopleModel.find();
+        const people = await People.find();
 
         if(people.length == 0) {
             return res.json({msg: 'no existen personas en la base de datos'});
@@ -12,9 +12,9 @@ const peopleHttp = {
     },
 
     peoplePost: async(req, res) => {
-        const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
+        // const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
 
-        const people = new peopleModel({name: name, numberIdentification: numberIdentification, numberPhone: numberPhone, birthDate: birthDate, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
+        const people = new People(req.body);
 
         await people.save();
 
@@ -26,7 +26,7 @@ const peopleHttp = {
 
         const { name, numberPhone, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
 
-        const people = await peopleModel.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
+        const people = await People.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
 
         await people.save();
 
@@ -36,7 +36,7 @@ const peopleHttp = {
     peopleActivate: async(req, res) => {
         const { id } = req.params;
 
-        const people = await peopleModel.findByIdAndUpdate(id, {state: 1});
+        const people = await People.findByIdAndUpdate(id, {state: 1});
 
         await people.save();
 
@@ -46,7 +46,7 @@ const peopleHttp = {
     peopleDesactivate: async(req, res) => {
         const { id } = req.params;
 
-        const people = await peopleModel.findByIdAndUpdate(id, {state: 0});
+        const people = await People.findByIdAndUpdate(id, {state: 0});
 
         await people.save();
 
