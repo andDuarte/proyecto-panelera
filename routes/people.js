@@ -17,19 +17,19 @@ routerPeople.get('/', [
     check('token').custom(validateToken),
     validate
 ], peopleHttp.peopleGet );
-
+    
 routerPeople.post('/', [
-    // check('name', 'nombre es necesario').trim().notEmpty(),
-    // check('numberIdentification', 'numero identificacion es necesario').trim().notEmpty(),
-    // check('typeIdentification', 'tipo identificacion es necesario').trim().notEmpty(),
-    // check('numberIdentification').custom(peopleValidate.peopleIdentification),
-    // check('numberPhone', 'numero telefono es necesario').trim().notEmpty(),
-    // check('birthDate', 'fecha nacimiento es necesaria').trim().notEmpty(),
-    // check('medicalInsuranceCompany', 'compañia seguro medico es necesaria').trim().notEmpty(),
-    // check('residenceAddress', 'direccion residencia es necesaria').trim().notEmpty(),
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
+    check('name','nombre es necesario').trim().notEmpty(),
+    check('numberIdentification','numero identificacion es necesario').trim().notEmpty(),
+    check('typeDocument','tipo identificacion es necesario').trim().notEmpty(),
+    check('numberIdentification').custom(peopleValidate.peopleIdentification),
+    check('numberPhone','numero telefono es necesario').trim().notEmpty(),
+    check('birthDate','fecha nacimiento es necesaria').trim().notEmpty(),
+    check('medicalInsuranceCompany','compañia seguro medico es necesaria').trim().notEmpty(),
+    check('residenceAddress','direccion residencia es necesaria').trim().notEmpty(),
+    check('token','token es necesario').trim().notEmpty(),
+    check('token').custom(validateToken),
+    validate
 ], peopleHttp.peoplePost );
 
 routerPeople.put('/:id', [

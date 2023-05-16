@@ -17,10 +17,4 @@ const allotmentSchema = new Schema({
     versionKey: false
 });
 
-
-// const allotmentModel = model('allotment', allotmentSchema );
-
-// export{
-//     allotmentModel
-// }
 export default model('Allotment', allotmentSchema);

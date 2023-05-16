@@ -2,6 +2,8 @@ import { Router } from 'express';
 import { ordersHttp } from '../controllers/order.js';
 import { check } from 'express-validator';
 import * as authJwt from '../middlewares/validate-jwt.js';
+import * as verifySingup from "../middlewares/verifySignup.js";
+
 
 // import { validate } from '../middlewares/validate-fields.js';
 // import { validateToken } from '../middlewares/validate-jwt.js';
@@ -48,8 +50,9 @@ routerOrder.put(
         // check('id', 'id no valido').isMongoId(),
         // check('id').custom(orderValidate.orderId),
         // validate
-        authJwt.verifyToken,
-        authJwt.isModerator
+        verifySingup.checkExistedId,
+        // authJwt.verifyToken,
+        // authJwt.isModerator
     ],
     ordersHttp.updateOrderById);
 

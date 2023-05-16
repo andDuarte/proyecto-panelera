@@ -1,8 +1,8 @@
-import { inventoryModel } from '../models/inventory.js';
+import Inventory from '../models/inventory.js';
 
 const inventoryHttp = {
     inventoryGet: async(req, res) => {
-        const inventory = await inventoryModel.find();
+        const inventory = await Inventory.find();
 
         if(inventory.length == 0) {
             return res.json({msg: 'no existe inventario en la base de datos'});
@@ -14,7 +14,7 @@ const inventoryHttp = {
     inventoryGetQuery: async(req, res) => {
         const { category } = req.query;
 
-        const inventory = await inventoryModel.find({category: new RegExp(category, 'i')});
+        const inventory = await Inventory.find({category: new RegExp(category, 'i')});
 
         if(inventory.length == 0) {
             return res.json({msg: 'no existe categoria en el inventario'});
@@ -26,7 +26,7 @@ const inventoryHttp = {
     inventoryPost: async(req, res) => {
         const { name, category, quantity, store, mark } = req.body;
 
-        const inventory = new inventoryModel({name: name, category: category, quantity: quantity, store: store, mark: mark});
+        const inventory = new Inventory({name: name, category: category, quantity: quantity, store: store, mark: mark});
 
         await inventory.save();
 
@@ -37,7 +37,7 @@ const inventoryHttp = {
         const { id } = req.params;
         const { name, category, quantity, store, mark } = req.body;
 
-        const inventory = await inventoryModel.findByIdAndUpdate(id, {name: name, category: category, quantity: quantity, store: store, mark: mark});
+        const inventory = await Inventory.findByIdAndUpdate(id, {name: name, category: category, quantity: quantity, store: store, mark: mark});
         
         await inventory.save();
 
@@ -47,7 +47,7 @@ const inventoryHttp = {
     inventoryActivate: async(req, res) => {
         const { id } = req.params;
 
-        const inventory = await inventoryModel.findByIdAndUpdate(id, {state: 1});
+        const inventory = await Inventory.findByIdAndUpdate(id, {state: 1});
 
         await inventory.save();
 
@@ -57,7 +57,7 @@ const inventoryHttp = {
     inventoryDesactivate: async(req, res) => {
         const { id } = req.params;
 
-        const store = await inventoryModel.findByIdAndUpdate(id, {state: 0});
+        const store = await Inventory.findByIdAndUpdate(id, {state: 0});
 
         await store.save();
 

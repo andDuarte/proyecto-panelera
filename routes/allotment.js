@@ -2,7 +2,7 @@ import { Router } from 'express';
 
 import { allotmentHttp } from '../controllers/allotment.js';
 
-import { check } from 'express-validator';
+import { check, body, header, param, query } from 'express-validator';
 
 import { validate } from '../middlewares/validate-fields.js';
 
@@ -13,25 +13,25 @@ import { allotmentValidate } from '../helpers/allotment.js';
 const routerAllotment = Router();
 
 routerAllotment.get('/', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], allotmentHttp.allotmentGet );
 
 routerAllotment.post('/', [
-    // check('name', 'el nom del lote es necesario').trim().notEmpty(),
-    // check('owner', 'el dueño del lote es necesario').trim().notEmpty(),
-    // check('size', 'el tamaño del lote es necesario').trim().notEmpty(),
-    check('token', 'el token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    body('name', 'nombre del lote es necesario').trim().notEmpty(),
+    body('owner', 'dueño del lote es necesario').trim().notEmpty(),
+    body('size', 'tamaño del lote es necesario').trim().notEmpty(),
+    header('token', 'token es necesario').trim().notEmpty(),
+    header('token').custom(validateToken),
     validate
 ], allotmentHttp.createAllotment );
 
 routerAllotment.put('/:id', [
-    check('id', 'id no valido').isMongoId(),
-    check('id').custom(allotmentValidate.allotmentId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    param('id', 'id no valido').isMongoId(),
+    param('id').custom(allotmentValidate.allotmentId),
+    header('token', 'token es necesario').trim().notEmpty(),
+    header('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentPut );
 

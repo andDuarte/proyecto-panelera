@@ -12,7 +12,7 @@ const peopleHttp = {
     },
 
     peoplePost: async(req, res) => {
-        // const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
+        // const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typeDocument, medicalInsuranceCompany } = req.body;
 
         const people = new People(req.body);
 
@@ -24,9 +24,9 @@ const peopleHttp = {
     peoplePut: async(req, res) => {
         const { id } = req.params;
 
-        const { name, numberPhone, residenceAddress, typeIdentification, medicalInsuranceCompany } = req.body;
+        const { name, numberPhone, residenceAddress, typeDocument, medicalInsuranceCompany } = req.body;
 
-        const people = await People.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeIdentification: typeIdentification, medicalInsuranceCompany: medicalInsuranceCompany});
+        const people = await People.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeDocument: typeDocument, medicalInsuranceCompany: medicalInsuranceCompany});
 
         await people.save();
 

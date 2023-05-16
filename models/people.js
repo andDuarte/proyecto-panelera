@@ -8,7 +8,13 @@ const peopleSchema = new Schema({
     residenceAddress: { type: String },
     state: { type: Number, default: 1 },
     medicalInsuranceCompany: { type: String },
-    typeIdentification: { type: String },
+    // typeIdentification: { type: String },
+
+    typeDocument: [{
+        ref: 'typeDocument',
+        type: Schema.Types.ObjectId
+    }]
+
 }, {
     timestamps: true,
     versionKey: false

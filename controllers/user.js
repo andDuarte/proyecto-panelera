@@ -17,24 +17,24 @@ const userHttp = {
         
     },
 
-    userPost: async(req, res) => {
-        const{ name, email, password, typeUser } = req.body;
+    // userPost: async(req, res) => {
+    //     const{ name, email, password, typeUser } = req.body;
 
-        // bcryptjs
-        const hash = bcryptjs.hashSync(password, salt);
+    //     // bcryptjs
+    //     const hash = bcryptjs.hashSync(password, salt);
 
-        // bcryptjs.getSalt(10, function(err, salt){
-        //     bcryptjs.hash(password, salt, function(err, hash){
-        //         password = hash;
-        //     });
-        // });
+    //     // bcryptjs.getSalt(10, function(err, salt){
+    //     //     bcryptjs.hash(password, salt, function(err, hash){
+    //     //         password = hash;
+    //     //     });
+    //     // });
 
-        const user = new User({name: name, email: email, password: hash, typeUser: typeUser});
+    //     const user = new User({name: name, email: email, password: hash, typeUser: typeUser});
     
-        await user.save();
+    //     await user.save();
 
-        return res.status(200).json({msg:'usuario creado'});
-    },
+    //     return res.status(200).json({msg:'usuario creado'});
+    // },
 
     userPut: async(req, res) => {
         const { id } = req.params;

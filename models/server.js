@@ -20,17 +20,17 @@ class Server {
     constructor() {
         this.app = express();
         this.connect();
-        createRoles(); // verificar su lugar
         this.middlewares();
         this.routes();
     }
 
     async connect() {
         await connection();
+        createRoles(); // verificar su lugar
     }
 
     middlewares() {
-        this.app.use(morgan('dev'));
+        // this.app.use(morgan('dev'));
         this.app.use(express.json());
         this.app.use(cors());
     }

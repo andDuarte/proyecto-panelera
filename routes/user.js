@@ -11,23 +11,23 @@ routerUser.get('/', [
     // check('token', 'el token es necesario').trim().notEmpty(),
     // check('token').custom(validateToken),
     validate,
-    authJwt.verifyToken,
+    // authJwt.verifyToken,
 
 ], userHttp.userGet );
 
 // routerUser.get('/:id', [], userHttp );
 
-routerUser.post('/', [
-    check('name', 'nombre es necesario').trim().notEmpty(),
-    check('email', 'email es necesario').trim().notEmpty(),
-    check('email').custom(userValidate.userEmail),
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    check('password', 'la contraseña es necesaria').trim().notEmpty(),
-    validate,
-    authJwt.verifyToken,
+// routerUser.post('/', [
+//     check('name', 'nombre es necesario').trim().notEmpty(),
+//     check('email', 'email es necesario').trim().notEmpty(),
+//     check('email').custom(userValidate.userEmail),
+//     // check('token', 'token es necesario').trim().notEmpty(),
+//     // check('token').custom(validateToken),
+//     check('password', 'la contraseña es necesaria').trim().notEmpty(),
+//     validate,
+//     authJwt.verifyToken,
 
-], userHttp.userPost );
+// ], userHttp.userPost );
 
 // routerUser.put('/:id', [
 //     check('token', 'token es necesario').trim().notEmpty(),
