@@ -1,0 +1,28 @@
+version: 1.0
+
+runtime: nodejs16
+
+build:
+  commands:
+    # pre-build:
+    build:
+      - npm install
+    # post-build:
+  # env:
+    # - name: 
+      # value:
+
+run:
+  # runtime-version: 16.20.0
+  command: npm start
+  network:
+    port: 8080
+    env: PORT
+  env:
+    - name: MONGODB_LINK
+      value: mongodb+srv://nuevosena23:aprendiz@cluster0.xzmjye6.mongodb.net/test
+    - name: PRIVATE_KEY
+      value: shhhhh
+  # secrets:
+    # - name: 
+    # - value-from: 
