@@ -30,7 +30,7 @@ class Server {
     }
 
     middlewares() {
-        // this.app.use(morgan('dev'));
+        this.app.use(morgan('dev'));
         this.app.use(express.json());
         this.app.use(cors());
     }

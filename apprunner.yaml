@@ -17,7 +17,7 @@ run:
   command: npm start
   network:
     port: 8080
-    env: PORT
+    # env: PORT
   env:
     - name: MONGODB_LINK
       value: mongodb+srv://nuevosena23:aprendiz@cluster0.xzmjye6.mongodb.net/test

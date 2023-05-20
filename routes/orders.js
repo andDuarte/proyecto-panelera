@@ -50,7 +50,7 @@ routerOrder.put(
         // check('id', 'id no valido').isMongoId(),
         // check('id').custom(orderValidate.orderId),
         // validate
-        verifySingup.checkExistedId,
+        // verifySingup.checkExistedId,
         // authJwt.verifyToken,
         // authJwt.isModerator
     ],
