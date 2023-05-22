@@ -2,7 +2,6 @@ import User from '../models/user.js'
 import Role from '../models/Role.js'
 import { createToken } from '../middlewares/validate-jwt.js';
 
-
 const authHttp = {
     singUp: async (req, res) => {
         const { name, email, password, roles } = req.body
