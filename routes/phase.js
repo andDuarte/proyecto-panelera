@@ -13,9 +13,9 @@ import { phaseValidate } from '../helpers/phase.js';
 const routerPhase = Router();
 
 routerPhase.get('/', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], phaseHttp.phaseGet );
 
 routerPhase.post('/', [

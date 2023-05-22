@@ -28,7 +28,7 @@ const authHttp = {
             const savedUser = await newUser.save();
             // console.log(savedUser)
             // console.log(newUser)
-            return res.status(200).json("singup")
+            return res.status(200).json({msg:"singup", msj:"El usuario ha sido creado correctamente"})
         }
 
         return res.status(200).json({msg:"not singup email duplicate"})

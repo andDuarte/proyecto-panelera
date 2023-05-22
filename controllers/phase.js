@@ -1,11 +1,13 @@
 import { phaseModel } from '../models/phase.js';
 
+import People from '../models/people.js'
+
 const phaseHttp = {
     phaseGet: async(req, res) => {
         const phase = await phaseModel.find();
 
         if(phase.length == 0) {
-            return res.json({msg: 'no existen etapas en la base de datos'});
+            return res.json({msg: 'no existen etapas'});
         }
 
         return res.json({etapas: phase});
@@ -14,9 +16,25 @@ const phaseHttp = {
     phasePost: async(req, res) => {
         const { name, process } = req.body;
 
-        if(!process.activity) {
-            return res.json({msg: 'actividad de proseso es necesaria'});
-        }
+        // if(!process.activity) {
+        //     return res.json({msg: 'actividad de proseso es necesaria'});
+        // }
+
+        // if(!process.workers) {
+        //     return res.json({msg: 'trabajadores de proceso es necesario'});
+        // }
+
+        // let foundPeople = null;
+
+        // for(let position = 0; position < process.workers.length; position++) {
+        //     foundPeople = await People.find({_id: process.workers[position]});
+
+        //     if(foundPeople.length == 0) {
+        //         return res.json({msg: 'id no valido'});
+        //     }
+
+        //     foundPeople = null
+        // }
 
         const phase = new phaseModel({name: name, process: process});
 
@@ -27,9 +45,9 @@ const phaseHttp = {
 
     phasePut: async(req, res) => {
         const { id } = req.params;
-        const { name, process } = req.body;
+        // const { name, process } = req.body;
 
-        const phase = await phaseModel.findByIdAndUpdate(id, {name: name, process: process});
+        const phase = await phaseModel.findByIdAndUpdate(id, {name: req.body.name});
 
         await phase.save();
 
@@ -43,6 +61,20 @@ const phaseHttp = {
 
         if(!process.activity) {
             return res.json({msg: 'actividad de proceso necesaria'});
+        }
+
+        if(!process.workers) {
+            return res.json({msg: 'trabajadores es necesario'});
+        }
+
+        let foundPeople = null;
+
+        for(let position = 0; position < process.workers.length; position++) {
+            foundPeople = await People.find({_id: process.workers[position]});
+        
+            if(foundPeople.length == 0) {
+                return res.json({msg: 'id no valido'})
+            }
         }
 
         const phaseId = await phaseModel.find({_id: id});
@@ -96,6 +128,7 @@ const phaseHttp = {
         for(let position = 0; position < processOld.length; position++) {
             if(processOld[position]._id == idActivity) {
                 processOld[position].stateActivity = stateActivity;
+                
                 foundActivity = true;
             }
         }

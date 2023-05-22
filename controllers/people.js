@@ -5,7 +5,7 @@ const peopleHttp = {
         const people = await People.find();
 
         if(people.length == 0) {
-            return res.json({msg: 'no existen personas en la base de datos'});
+            return res.json({msg: 'no existen personas'});
         }
 
         return res.json({personas: people});

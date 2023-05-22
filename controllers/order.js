@@ -47,7 +47,7 @@ const ordersHttp = {
 
     deleteOrderById: async (req, res) => {
         await Order.findByIdAndDelete(req.params.id)
-        return res.status(204).json({ msg: 'Pedido eiminado' });
+        return res.status(204).json({ msg: 'Pedido eliminado' });
     }
 }
 

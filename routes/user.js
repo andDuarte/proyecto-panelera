@@ -29,13 +29,14 @@ routerUser.get('/', [
 
 // ], userHttp.userPost );
 
-// routerUser.put('/:id', [
-//     check('token', 'token es necesario').trim().notEmpty(),
-//     check('token').custom(validateToken),
-//     check('id', ' id no valido').isMongoId(),
-//     check('id').custom(userValidate.userId),
-//     validate
-// ], userHttp.userPut );
+routerUser.put('/:id', [
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // check('id', ' id no valido').isMongoId(),
+    // check('id').custom(userValidate.userId),
+    // validate,
+    authJwt.verifyToken,
+], userHttp.userPut );
 
 routerUser.put('/activar/:id', [
     // check('token', 'token es necesario').trim().notEmpty(),
@@ -62,6 +63,18 @@ routerUser.put('/desactivar/:id', [
 //     check('password', 'contraseña es necesaria').trim().notEmpty(),
 //     validate
 // ], userHttp.userLogin );
+// routerUser.delete(
+//     '/:id',
+//     [
+//         // check('token', 'token es necesario').trim().notEmpty(),
+//         // check('token').custom(validateToken),
+//         // check('id', 'id no valido').isMongoId(),
+//         // check('id').custom(orderValidate.orderId),
+//         // validate
+//         // authJwt.verifyToken,
+//         // authJwt.isModerator
+//     ],
+//     userHttp.deleteUserById);
 
 export{
     routerUser

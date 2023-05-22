@@ -1,23 +1,25 @@
-import TypePay from '../models/typePay.js'
+import TypePay from '../models/typePay.js';
 
 const typePayHttp = {
     typePayGet: async(req, res) => {
         const typePay = await TypePay.find();
 
         if(typePay.length == 0) {
-            return res.json({msg: 'no existen personas en la base de datos'});
+            return res.json({msg: 'no existen tipos de pago'});
         }
 
         return res.json({tipoPago: typePay});
     },
 
     createTypePay: async(req, res)=>{
-        const typePay =new TypePay(req.body)
+        const typePay = new TypePay(req.body);
+        
         await typePay.save();
 
-        return res.json({msg:'tipo de pago hecho'})
+        return res.json({msg:'tipo de pago creado'});
     },
-    TypePayPut: async(req, res) => {
+
+    typePayPut: async(req, res) => {
         const { id } = req.params;
  
         const { name, description, amount, payCategory } = req.body;
@@ -27,9 +29,11 @@ const typePayHttp = {
         const typePay = await TypePay.findByIdAndUpdate(id, {name:name, description:description, amount:amount, payCategory:payCategory});
  
         typePay.save()
-        return res.json({msg: 'typo de pago actulizado'});
+
+        return res.json({msg: 'tipo de pago actulizado'});
     },
-    TypePayActivate: async(req, res) => {
+
+    typePayActivate: async(req, res) => {
         const { id } = req.params;
 
         const typePay = await TypePay.findByIdAndUpdate(id, {state: 1});
@@ -39,7 +43,7 @@ const typePayHttp = {
         return res.json({msg: 'tipo de pago activado'});
     },
 
-    TypePayDesactivate: async(req, res) => {
+    typePayDesactivate: async(req, res) => {
         const { id } = req.params;
 
         const typePay = await TypePay.findByIdAndUpdate(id, {state: 0});
@@ -48,8 +52,8 @@ const typePayHttp = {
 
         return res.json({msg: 'tipo de pago desactivado'});
     },
-
 }
+
 export{
     typePayHttp
 }

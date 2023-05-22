@@ -7,7 +7,7 @@ const costSchema = new Schema({
     costs: { type: String, required: true },
     date: { type: Date, required: true },
     detail: { type: String },
-},{
+}, {
     timestamps: true,
     versionKey: false,
 });
@@ -15,4 +15,4 @@ const costSchema = new Schema({
     //     ref: 'cost',
     //     type: Schema.type.objectId
     // }],
-export default model('Cost', costSchema);
+export default model('Cost', costSchema );

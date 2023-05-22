@@ -14,7 +14,7 @@ import { routerPeople } from '../routes/people.js';
 import { routerPhase } from '../routes/phase.js';
 import { routerStore } from '../routes/store.js';
 import { routerUser } from '../routes/user.js';
-import { routerWork } from '../routes/work.js';
+// import { routerWork } from '../routes/work.js';
 
 class Server {
     constructor() {
@@ -30,7 +30,7 @@ class Server {
     }
 
     middlewares() {
-        // this.app.use(morgan('dev'));
+        this.app.use(morgan('dev'));
         this.app.use(express.json());
         this.app.use(cors());
     }
@@ -40,7 +40,7 @@ class Server {
         this.app.use('/bodega', routerStore );
         this.app.use('/etapa', routerPhase );
         this.app.use('/inventario', routerInventory );
-        this.app.use('/labor', routerWork );
+        // this.app.use('/labor', routerWork );
         this.app.use('/lote', routerAllotment );
         this.app.use('/marca', routerMark );
         this.app.use('/pedido', routerOrder );

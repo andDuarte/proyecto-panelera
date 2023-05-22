@@ -9,7 +9,7 @@ const inventorySchema = new Schema({
     mark: { type: Schema.Types.ObjectId, ref: 'mark' },
 
     category: [{
-        ref: 'category',
+        ref: 'Category',
         type: Schema.Types.ObjectId
     }],
 });

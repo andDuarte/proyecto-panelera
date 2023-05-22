@@ -1,10 +1,11 @@
 import { Schema, model } from 'mongoose';
 
-export const TYPEDCOCUMENT= [ 'Cc', 'Ti', 'Ce', 'Ps', 'Dni', 'Nit', 'Pr', 'Pep', 'Ppt' ]
+export const TYPEDCOCUMENT= [ 'CC', 'TI', 'CE', 'PS', 'DNI', 'NIT', 'PR', 'PEP', 'PPT' ]
 
 const tyDocumentSchema = new Schema({
-  TypeDocument: String
-},{
-    versionKey: false
-})
-export default model('TypeDocument',tyDocumentSchema )
+  typeDocument: String,
+}, {
+    versionKey: false,
+});
+
+export default model('TypeDocument', tyDocumentSchema );

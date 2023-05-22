@@ -1,6 +1,6 @@
 import Role from '../models/Role.js'
 import Category from '../models/category.js';
-// import typeDocument from '../models/typeDocument.js';
+import typeDocument from '../models/typeDocument.js';
 export const createRoles = async () => {
     try {
         // Busca si ya existen documentos
@@ -17,7 +17,7 @@ export const createRoles = async () => {
             new Role({ name: 'admin' }).save()
         ]);
 
-        console.log(values);
+        // console.log(values);
 
     } catch (error) {
         console.error(error);

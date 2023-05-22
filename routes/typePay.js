@@ -8,17 +8,12 @@ import { validate } from '../middlewares/validate-fields.js';
 
 import { validateToken } from '../middlewares/validate-jwt.js';
 
-// import { inventoryValidate } from '../helpers/inventory.js';
-
-import { storeValidate } from '../helpers/store.js';
-
-import { markValidate } from '../helpers/mark.js';
-
+const routerTypePay = Router();
 
 routerTypePay.get('/', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], typePayHttp.typePayGet );
 
 // routerTypePay.get('search',[

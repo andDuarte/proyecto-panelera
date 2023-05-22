@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import Role from '../models/Role.js'
 import { createToken } from '../middlewares/validate-jwt.js';
 
 // bcryptjs
@@ -7,7 +8,8 @@ const salt = bcryptjs.genSaltSync(10);
 
 const userHttp = {
     userGet: async(req, res) => {
-        const user = await User.find();
+        const user = await User.find().populate('roles');
+        // console.log(user[4]);
 
         if (user.length == 0) {
             return res.status(404).json({ msg: 'no existen usuarios en la base de datos' });
@@ -37,23 +39,26 @@ const userHttp = {
     // },
 
     userPut: async(req, res) => {
-        const { id } = req.params;
-        const {name, password, typeUser} = req.body;
-
-        // bscryptjs
-        const hash = bcryptjs.hashSync(password, salt);
-
-        // bcryptjs.getSalt(10, function(err, salt){
-        //     bcryptjs.hash(password, salt, function(err, hash){
-        //         password = hash;
-        //     });
-        // });
-
-        const user = await User.findByIdAndUpdate(id, {name: name, password: hash, typeUser: typeUser});
-
-        await user.save();
+        const { name, email, password, roles } = req.body
         
-        return res.status(201).json({msg: "usuario actualizado"});
+        const editUser = {
+            name,
+            email,
+            password: await User.encryptPassword(password),
+        }
+        
+        if (roles) {
+            const foundRoles = await Role.find({ name: { $in: roles } })
+            editUser.roles = foundRoles.map(role => role._id);
+        } else {
+            // Si no se especifica el rol por defecto es "user"
+            const role = await Role.findOne({ name: "user" })
+            editUser.roles = [role._id];
+        }
+
+        const user = await User.findByIdAndUpdate(req.params.id, editUser);
+        
+        return res.status(200).json({msg: "User update", msj:'El usuario ha sido actualizado correctamente'});
     },
 
     userActivate: async(req, res) => {
@@ -111,6 +116,10 @@ const userHttp = {
 
         return res.status(404).json({errors: 'contraseña incorrecta'});
     },
+    // deleteUserById: async (req, res) => {
+    //     await User.findByIdAndDelete(req.params.id)
+    //     return res.status(204).json({ msg: 'Usuario eliminado' });
+    // }
 }
 
 

@@ -6,6 +6,9 @@ const phaseSchema = new mongoose.Schema({
         {
             activity: {type: String},
             stateActivity: {type: String, default: 'por hacer'},
+            // workers: [
+            //     {type: mongoose.Schema.Types.ObjectId, ref: 'people'},
+            // ],
         },
     ],
     state: {type: Number, default: 1},
