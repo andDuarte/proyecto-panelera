@@ -5,7 +5,7 @@ const workHttp = {
         const work = await workModel.find();
 
         if(work.length == 0) {
-            return res.json({msg: 'no existen labores en la base de datos'});
+            return res.json({msg: 'no existen labores'});
         }
 
         return res.json({labores: work});

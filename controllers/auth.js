@@ -27,10 +27,10 @@ const authHttp = {
             const savedUser = await newUser.save();
             // console.log(savedUser)
             // console.log(newUser)
-            return res.status(200).json({msg:"singup", msj:"El usuario ha sido creado correctamente"})
+            return res.status(200).json({msg:"singup", msj:"usuario creado correctamente"})
         }
 
-        return res.status(200).json({msg:"not singup email duplicate"})
+        return res.status(400).json({msg:"not singup, email duplicate"})
     },
 
     singIn: async (req, res) => {
@@ -48,7 +48,7 @@ const authHttp = {
         })
         console.log(userFound);
 
-        res.json({token: token})
+        res.status(200).json({token: token})
     },
 }
 

@@ -40,12 +40,12 @@ class Server {
         this.app.use('/bodega', routerStore );
         this.app.use('/etapa', routerPhase );
         this.app.use('/inventario', routerInventory );
-        // this.app.use('/labor', routerWork );
         this.app.use('/lote', routerAllotment );
         this.app.use('/marca', routerMark );
         this.app.use('/pedido', routerOrder );
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
+        // this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
             return res.send('hola mundo :)');
         })

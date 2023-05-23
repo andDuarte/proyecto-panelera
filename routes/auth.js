@@ -7,7 +7,8 @@ const routerAuth = Router();
 routerAuth.post('/singup', [
     verifySingup.checkRolesExisted
 ],
-    authHttp.singUp);
+authHttp.singUp);
+
 routerAuth.post('/singin', authHttp.singIn);
 
 export { routerAuth }

@@ -58,7 +58,7 @@ const userHttp = {
 
         const user = await User.findByIdAndUpdate(req.params.id, editUser);
         
-        return res.status(200).json({msg: "User update", msj:'El usuario ha sido actualizado correctamente'});
+        return res.status(200).json({msg: "User update", msj:'usuario actualizado correctamente'});
     },
 
     userActivate: async(req, res) => {
@@ -87,7 +87,7 @@ const userHttp = {
         const user = await User.find({email: email});
 
         if(!user) {
-            return res.status(404).json({errors: 'email no existe en la base de datos'});
+            return res.status(404).json({errors: 'email no existe'});
         }
 
         // bcryptjs.compare(password, user.password, function(err, response){
