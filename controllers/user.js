@@ -12,7 +12,7 @@ const userHttp = {
         // console.log(user[4]);
 
         if (user.length == 0) {
-            return res.status(404).json({ msg: 'no existen usuarios en la base de datos' });
+            return res.status(404).json({ msg: 'no existen usuarios' });
         }
 
         return res.json({usuarios: user});
@@ -50,6 +50,11 @@ const userHttp = {
         if (roles) {
             const foundRoles = await Role.find({ name: { $in: roles } })
             editUser.roles = foundRoles.map(role => role._id);
+            if (editUser.roles.length == 0) {
+                // Si no se especifica el rol por defecto es "user"
+                const role = await Role.findOne({ name: "user" })
+                editUser.roles = [role._id];
+            }
         } else {
             // Si no se especifica el rol por defecto es "user"
             const role = await Role.findOne({ name: "user" })
@@ -58,7 +63,7 @@ const userHttp = {
 
         const user = await User.findByIdAndUpdate(req.params.id, editUser);
         
-        return res.status(200).json({msg: "User update", msj:'El usuario ha sido actualizado correctamente'});
+        return res.status(200).json({msg: "User update", msj:'usuario actualizado correctamente'});
     },
 
     userActivate: async(req, res) => {
@@ -87,7 +92,7 @@ const userHttp = {
         const user = await User.find({email: email});
 
         if(!user) {
-            return res.status(404).json({errors: 'email no existe en la base de datos'});
+            return res.status(404).json({errors: 'email no existe'});
         }
 
         // bcryptjs.compare(password, user.password, function(err, response){

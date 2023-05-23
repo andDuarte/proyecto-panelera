@@ -1,8 +1,8 @@
-import Cost from '../models/cost.js';
+import CostInventory from '../models/costInven.js';
 
 const costHttp = {
     costGet: async (req, res) => {
-        const cost = await Cost.find();
+        const cost = await CostInventory.find();
         if (cost.length == 0) {
             return res.status(404).json({ msg: 'no existe costo en la base de datos' });
         }
@@ -11,7 +11,7 @@ const costHttp = {
 
     
     createCost: async (req, res) => {
-        const newCost = new Cost(req.body);
+        const newCost = new CostInventory(req.body);
 
         await newCost.save();
 
@@ -19,7 +19,7 @@ const costHttp = {
     },
 
     updateCostById: async (req, res) => {
-        const updateCost = await Cost.findByIdAndUpdate(req.params.id, {
+        const updateCost = await CostInventory.findByIdAndUpdate(req.params.id, {
             orderStatus: req.body.orderStatus
         }, {
             new: true
@@ -29,7 +29,7 @@ const costHttp = {
     },
 
     updateCostActivate: async (req, res) => {
-        const cost = await Cost.findByIdAndUpdate(req.params.id, { state: 1 });
+        const cost = await CostInventory.findByIdAndUpdate(req.params.id, { state: 1 });
 
         // await cost.save();
 
@@ -37,7 +37,7 @@ const costHttp = {
     },
 
     updateCostDesactivate: async (req, res) => {
-        const costs = await Cost.findByIdAndUpdate(req.params.id, { state: 0 });
+        const costs = await CostInventory.findByIdAndUpdate(req.params.id, { state: 0 });
 
         // await costs.save();
 
@@ -45,7 +45,7 @@ const costHttp = {
     },
 
     deleteCostById: async (req, res) => {
-        await Cost.findByIdAndDelete(req.params.id)
+        await CostInventory.findByIdAndDelete(req.params.id)
         return res.status(204).json({ msg: 'Costo eiminado' });
     }
 

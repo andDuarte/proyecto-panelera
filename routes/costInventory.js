@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {costHttp} from '../controllers/cost.js';
+import { costInventoryHttp } from '../controllers/costInven.js';
 import { check } from 'express-validator';
 import * as authJwt from '../middlewares/validate-jwt.js';
 import * as verifySingup from "../middlewares/verifySignup.js";
@@ -7,7 +7,7 @@ import * as verifySingup from "../middlewares/verifySignup.js";
 
 // import { validate } from '../middlewares/validate-fields.js';
 // import { validateToken } from '../middlewares/validate-jwt.js';
-import { costValidate } from '../helpers/cost.js';
+import { costInventoryValidate } from '../helpers/costInventory.js';
 
 const routerCost = Router();
 

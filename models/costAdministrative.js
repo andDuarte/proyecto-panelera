@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-const costSchema = new Schema({
+const costAdministrativeSchema = new Schema({
     name: { type: String, required: true },
     code: { type: String, required: true },
     quantity: { type: Number, default: 1, required: true },
@@ -15,4 +15,4 @@ const costSchema = new Schema({
     //     ref: 'cost',
     //     type: Schema.type.objectId
     // }],
-export default model('Cost', costSchema );
+export default model('Cost', costAdministrativeSchema );

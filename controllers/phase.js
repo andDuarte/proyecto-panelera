@@ -16,26 +16,6 @@ const phaseHttp = {
     phasePost: async(req, res) => {
         const { name, process } = req.body;
 
-        // if(!process.activity) {
-        //     return res.json({msg: 'actividad de proseso es necesaria'});
-        // }
-
-        // if(!process.workers) {
-        //     return res.json({msg: 'trabajadores de proceso es necesario'});
-        // }
-
-        // let foundPeople = null;
-
-        // for(let position = 0; position < process.workers.length; position++) {
-        //     foundPeople = await People.find({_id: process.workers[position]});
-
-        //     if(foundPeople.length == 0) {
-        //         return res.json({msg: 'id no valido'});
-        //     }
-
-        //     foundPeople = null
-        // }
-
         const phase = new phaseModel({name: name, process: process});
 
         await phase.save();
@@ -49,7 +29,7 @@ const phaseHttp = {
 
         const phase = await phaseModel.findByIdAndUpdate(id, {name: req.body.name});
 
-        await phase.save();
+        // await phase.save();
 
         return res.json({msg: 'etapa actualizada'});
     },
@@ -63,20 +43,19 @@ const phaseHttp = {
             return res.json({msg: 'actividad de proceso necesaria'});
         }
 
-        if(!process.workers) {
-            return res.json({msg: 'trabajadores es necesario'});
-        }
+        // if(!process.workers) {
+        //     return res.json({msg: 'trabajadores es necesario'});
+        // }
 
-        let foundPeople = null;
+        // let foundPeople = null;
 
-        for(let position = 0; position < process.workers.length; position++) {
-            foundPeople = await People.find({_id: process.workers[position]});
+        // for(let position = 0; position < process.workers.length; position++) {
+        //     foundPeople = await People.find({_id: process.workers[position]});
         
-            if(foundPeople.length == 0) {
-                return res.json({msg: 'id no valido'})
-            }
-        }
-
+        //     if(foundPeople.length == 0) {
+        //         return res.json({msg: 'id no valido'})
+        //     }
+        // }
         const phaseId = await phaseModel.find({_id: id});
 
         const processOld = phaseId[0].process;

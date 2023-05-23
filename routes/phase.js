@@ -20,9 +20,9 @@ routerPhase.get('/', [
 
 routerPhase.post('/', [
     check('name', 'nombre es necesario').trim().notEmpty(),
-    check('process', 'proceso es necesario').trim().notEmpty(),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    check('process').custom(phaseValidate.phaseProcess),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], phaseHttp.phasePost );
 

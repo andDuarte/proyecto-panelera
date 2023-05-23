@@ -5,7 +5,7 @@ const phaseSchema = new mongoose.Schema({
     process: [
         {
             activity: {type: String},
-            stateActivity: {type: String, default: 'por hacer'},
+            stateActivity: {type: String, default: 'por hacer'}, //realizada, por hacer, iniciada, terminada
             // workers: [
             //     {type: mongoose.Schema.Types.ObjectId, ref: 'people'},
             // ],
