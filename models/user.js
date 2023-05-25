@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema({
+    // delete name
     name: { type: String },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },

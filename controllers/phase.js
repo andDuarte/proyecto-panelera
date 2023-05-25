@@ -113,14 +113,14 @@ const phaseHttp = {
         }
 
         if(foundActivity == false) {
-            return res.json({msg: 'id actividad no existe en la base de datos'});
+            return res.json({msg: 'id actividad no existe'});
         }
 
         const phase = await phaseModel.findByIdAndUpdate(id, {process: processOld});
 
         await phase.save();
         
-        return res.json({msg: 'actividad actualizada en procesos'});
+        return res.json({msg: 'actividad actualizada'});
     },
 }
 

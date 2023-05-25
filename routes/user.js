@@ -10,7 +10,7 @@ const routerUser = Router();
 routerUser.get('/', [
     // check('token', 'el token es necesario').trim().notEmpty(),
     // check('token').custom(validateToken),
-    validate,
+    // validate,
     // authJwt.verifyToken,
 
 ], userHttp.userGet );
