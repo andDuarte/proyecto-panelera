@@ -10,6 +10,8 @@ import { validateToken } from '../middlewares/validate-jwt.js';
 
 import { phaseValidate } from '../helpers/phase.js';
 
+import { allotmentValidate } from '../helpers/allotment.js';
+
 const routerPhase = Router();
 
 routerPhase.get('/', [
@@ -21,6 +23,8 @@ routerPhase.get('/', [
 routerPhase.post('/', [
     check('name', 'nombre es necesario').trim().notEmpty(),
     check('process').custom(phaseValidate.phaseProcess),
+    check('allotment').trim().notEmpty(),
+    check('allotment').custom(allotmentValidate.allotmentId),
     // check('token', 'token es necesario').trim().notEmpty(),
     // check('token').custom(validateToken),
     validate
@@ -34,12 +38,13 @@ routerPhase.put('/:id', [
     validate
 ], phaseHttp.phasePut );
 
+// agregar actividad
 routerPhase.post('/actividad/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(phaseValidate.phaseId),
-    check('process', 'proceso es necesario').trim().notEmpty(),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    check('process').custom(phaseValidate.phaseProcess),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], phaseHttp.phaseProcess );
 
@@ -59,14 +64,15 @@ routerPhase.put('/desactivar/:id', [
     validate
 ], phaseHttp.phaseDesactivate );
 
+// actualizar actividad
 routerPhase.put('/:id/actividad/:idActivity', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(phaseValidate.phaseId),
     check('idActivity', 'id actividad no valido').isMongoId(),
     check('idActivity').custom(phaseValidate.phaseActivity),
     check('stateActivity', 'estado actividad es necesario').trim().notEmpty(),
-    check('token', 'token es necesario'),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario'),
+    // check('token').custom(validateToken),
     validate
 ], phaseHttp.phaseActivity );
 

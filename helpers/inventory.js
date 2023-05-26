@@ -5,7 +5,7 @@ const inventoryValidate = {
         const store = await Inventory.find({_id: id});
 
         if(store.length == 0) {
-            throw new Error('id no existe en la base de datos');
+            throw new Error('id no existe');
         }
     },
 }

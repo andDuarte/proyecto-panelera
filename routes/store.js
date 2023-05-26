@@ -10,12 +10,14 @@ import { validateToken } from '../middlewares/validate-jwt.js';
 
 import { storeValidate } from '../helpers/store.js';
 
+import { farmValidate } from '../helpers/farm.js';
+
 const routerStore = Router();
 
 routerStore.get('/', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], storeHttp.storeGet );
 
 routerStore.get('/search', [
@@ -28,6 +30,7 @@ routerStore.get('/search', [
 routerStore.post('/', [
     check('name', 'nombre es necesario').trim().notEmpty(),
     check('farm', 'granja es necesaria').trim().notEmpty(),
+    check('farm').custom(farmValidate.farmId),
     check('size', 'tamaño bodega es necesario').trim().notEmpty(),
     check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),

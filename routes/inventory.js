@@ -17,9 +17,9 @@ import { markValidate } from '../helpers/mark.js';
 const routerInventory = Router();
 
 routerInventory.get('/', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], inventoryHttp.inventoryGet );
 
 routerInventory.get('/search', [
@@ -31,7 +31,6 @@ routerInventory.get('/search', [
 
 routerInventory.post('/', [
     check('name', 'nombre del elemento es necesario').trim().notEmpty(),
-    check('category', 'categoria es necesaria').trim().notEmpty(),
     check('store', 'bodega es necesaria').trim().notEmpty(),
     check('store', 'bodega no valida').isMongoId(),
     check('store').custom(storeValidate.storeId),
@@ -46,10 +45,10 @@ routerInventory.post('/', [
 routerInventory.put('/:id', [
     check('token', 'token es necesario').trim().notEmpty(),
     check('token').custom(validateToken),
-    check('store', 'bodega es necesaria').trim().notEmpty(),
+    // check('store', 'bodega es necesaria').trim().notEmpty(),
     check('store', 'bodega no valida').isMongoId(),
     check('store').custom(storeValidate.storeId),
-    check('mark', 'marca es necesaria').trim().notEmpty(),
+    // check('mark', 'marca es necesaria').trim().notEmpty(),
     check('mark', 'marca no valida').isMongoId(),
     check('mark').custom(markValidate.markId),
     check('id', 'id no valido').isMongoId(),

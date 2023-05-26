@@ -1,9 +1,10 @@
+// no usar
 import { Schema, model } from 'mongoose';
 
-export const TYPEDCOCUMENT= [ 'CC', 'TI', 'CE', 'PS', 'DNI', 'NIT', 'PR', 'PEP', 'PPT' ]
+export const TYPEDOCUMENT = [ 'CC', 'TI', 'PA' ]
 
 const tyDocumentSchema = new Schema({
-  typeDocument: String,
+  name: String,
 }, {
     versionKey: false,
 });

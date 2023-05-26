@@ -5,12 +5,17 @@ const phaseSchema = new mongoose.Schema({
     process: [
         {
             activity: {type: String},
-            stateActivity: {type: String, default: 'por hacer'}, //realizada, por hacer, iniciada, terminada
-            // workers: [
-            //     {type: mongoose.Schema.Types.ObjectId, ref: 'people'},
-            // ],
+            stateActivity: {type: String, default: 'por hacer'}, //realizada, por hacer, en proceso
+            workers: [
+                {type: mongoose.Schema.Types.ObjectId, ref: 'People'},
+            ],
+            elements: [
+                {type: mongoose.Schema.Types.ObjectId, ref: 'Inventory'},
+            ],
+            state: {type: Number, default: 1},
         },
     ],
+    allotment: {type: mongoose.Schema.Types.ObjectId, ref: 'Allotment'},
     state: {type: Number, default: 1},
 });
 

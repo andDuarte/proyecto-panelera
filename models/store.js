@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const storeSchema = new mongoose.Schema({
     name: {type: String, required: true},
-    farm: {type: String},
-    // farm: {type: mongoose.Schema.Types.ObjectId, ref: ''},
+    // farm: {type: String},
+    farm: {type: mongoose.Schema.Types.ObjectId, ref: 'Farm'},
     size: {type: String},
     state: {type: Number, default: 1},
 });

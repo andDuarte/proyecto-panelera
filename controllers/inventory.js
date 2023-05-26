@@ -1,14 +1,16 @@
 import Inventory from '../models/inventory.js';
 
+import Category from '../models/category.js';
+
 const inventoryHttp = {
     inventoryGet: async(req, res) => {
         const inventory = await Inventory.find();
 
         if(inventory.length == 0) {
-            return res.json({msg: 'no existe inventario en la base de datos'});
+            return res.status(400).json({msg: 'no existe inventario'});
         }
 
-        return res.json({inventario: inventory});
+        return res.status(200).json({inventario: inventory});
     },
 
     inventoryGetQuery: async(req, res) => {
@@ -17,31 +19,60 @@ const inventoryHttp = {
         const inventory = await Inventory.find({category: new RegExp(category, 'i')});
 
         if(inventory.length == 0) {
-            return res.json({msg: 'no existe categoria en el inventario'});
+            return res.status(400).json({msg: 'no existe categoria en el inventario'});
         }
 
-        return res.json({inventario: inventory});
+        return res.status(200).json({inventario: inventory});
     },
 
     inventoryPost: async(req, res) => {
         const { name, category, quantity, store, mark } = req.body;
 
-        const inventory = new Inventory({name: name, category: category, quantity: quantity, store: store, mark: mark});
+        const categoryLast = []
+
+        for(let position = 0; position < category.length; position++) {
+            const categoryTemp = await Category.find({name: category[position]});
+            
+            if(categoryTemp.length > 0) {
+                categoryLast.push(categoryLast._id);
+            }
+        }
+
+        console.log(categoryLast);
+
+        const inventory = new Inventory({name: name, category: categoryLast, quantity: quantity, store: store, mark: mark});
 
         await inventory.save();
 
-        return res.json({msg: 'elemento creado en inventario'});
+        return res.status(200).json({msg: 'elemento creado en inventario'});
     },
 
     inventoryPut: async(req, res) => {
         const { id } = req.params;
+
         const { name, category, quantity, store, mark } = req.body;
 
-        const inventory = await Inventory.findByIdAndUpdate(id, {name: name, category: category, quantity: quantity, store: store, mark: mark});
-        
-        await inventory.save();
+        const categoryTemp = await Inventory.find({_id: id});
 
-        return res.json({msg: 'elemento actualizado en inventario'});
+        let categoryLast = categoryTemp.category;
+
+        for(let position = 0; position < category.length; position++) {
+            let temp = await category.find({name: category[position]});
+
+            if(temp.length > 0) {
+                if(!categoryLast.includes(temp[0]._id)) {
+                    categoryLast.push(temp[0]._id);
+                }
+            }
+        }
+
+        console.log(categoryLast);
+
+        const inventory = await Inventory.findByIdAndUpdate(id, {name: name, category: categoryLast, quantity: quantity, store: store, mark: mark});
+        
+        // await inventory.save();
+
+        return res.status(201).json({msg: 'elemento actualizado en inventario'});
     },
 
     inventoryActivate: async(req, res) => {
@@ -49,9 +80,9 @@ const inventoryHttp = {
 
         const inventory = await Inventory.findByIdAndUpdate(id, {state: 1});
 
-        await inventory.save();
+        // await inventory.save();
 
-        return res.json({msg: 'elemento activado en inventario'});
+        return res.status(201).json({msg: 'elemento activado en inventario'});
     },
 
     inventoryDesactivate: async(req, res) => {
@@ -59,9 +90,9 @@ const inventoryHttp = {
 
         const store = await Inventory.findByIdAndUpdate(id, {state: 0});
 
-        await store.save();
+        // await store.save();
 
-        return res.json({msg: 'elemento desactivado en inventario'});
+        return res.status(201).json({msg: 'elemento desactivado en inventario'});
     },
 }
 

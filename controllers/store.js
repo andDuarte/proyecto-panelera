@@ -5,10 +5,10 @@ const storeHttp = {
         const store = await storeModel.find();
 
         if(store.length == 0) {
-            return res.json({msg: 'no existen bodegas en la base de datos'});
+            return res.status(400).json({msg: 'no existen bodegas'});
         }
 
-        return res.json({bodegas: store});
+        return res.status(200).json({bodegas: store});
     },
     
     storeGetQuery: async(req, res) => {
@@ -17,10 +17,10 @@ const storeHttp = {
         const store = await storeModel.find({name: new RegExp(name, 'i')});
 
         if(store.length == 0) {
-            return res.json({msg: 'no existe bodega en la base de datos'});
+            return res.status(400).json({msg: 'no existe bodega'});
         }
 
-        return res.json({bodega: store});
+        return res.status(200).json({bodega: store});
     },
     
     storePost: async(req, res) => {
@@ -30,18 +30,18 @@ const storeHttp = {
 
         await store.save();
 
-        return res.json({msg: 'bodega creada'});
+        return res.status(200).json({msg: 'bodega creada'});
     },
 
     storePut: async(req, res) => {
         const { id } = req.params;
-        const { name, farm, size } = req.body;
+        const { name, size } = req.body;
 
-        const store = await storeModel.findByIdAndUpdate(id, {name: name, farm: farm, size: size});
+        const store = await storeModel.findByIdAndUpdate(id, {name: name, size: size});
 
-        await store.save();
+        // await store.save();
 
-        return res.json({msg: 'bodega actualizada'});
+        return res.status(201).json({msg: 'bodega actualizada'});
     },
 
     storeActivate: async(req, res) => {
@@ -49,9 +49,9 @@ const storeHttp = {
 
         const store = await storeModel.findByIdAndUpdate(id, {state: 1});
 
-        await store.save();
+        // await store.save();
 
-        return res.json({msg: 'bodega activada'});
+        return res.status(201).json({msg: 'bodega activada'});
     },
 
     storeDesactivate: async(req, res) => {
@@ -59,9 +59,9 @@ const storeHttp = {
 
         const store = await storeModel.findByIdAndUpdate(id, {state: 0});
 
-        await store.save();
+        // await store.save();
 
-        return res.json({msg: 'bodega desactivada'});
+        return res.status(201).json({msg: 'bodega desactivada'});
     },
 }
 

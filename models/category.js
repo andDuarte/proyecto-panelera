@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose'
 export const CATEGORY = ['Maquinaria', 'Herramientas', 'Insumos']
 
 const categorySchema = new Schema({
-    category: String
+    name: String
 }, {
     versionKey: false
 })

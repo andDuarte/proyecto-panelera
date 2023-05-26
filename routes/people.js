@@ -13,9 +13,9 @@ import { peopleValidate } from '../helpers/people.js';
 const routerPeople = Router();
 
 routerPeople.get('/', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], peopleHttp.peopleGet );
     
 routerPeople.post('/', [
@@ -27,8 +27,9 @@ routerPeople.post('/', [
     check('birthDate','fecha nacimiento es necesaria').trim().notEmpty(),
     check('medicalInsuranceCompany','compañia seguro medico es necesaria').trim().notEmpty(),
     check('residenceAddress','direccion residencia es necesaria').trim().notEmpty(),
-    check('token','token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    check('typePeople').trim().notEmpty(),
+    // check('token','token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], peopleHttp.peoplePost );
 

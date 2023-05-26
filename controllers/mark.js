@@ -5,10 +5,10 @@ const markHttp = {
         const mark = await markModel.find();
 
         if(mark.length == 0) {
-            return res.json({msg: 'no existen marcas en la base de datos'});
+            return res.status(400).json({msg: 'no existen marcas'});
         }
 
-        return res.json({marcas: mark});
+        return res.status(200).json({marcas: mark});
     },
     
     markPost: async(req, res) => {
@@ -18,18 +18,19 @@ const markHttp = {
 
         await mark.save();
 
-        return res.json({msg: 'marca creada'});
+        return res.status(200).json({msg: 'marca creada'});
     },
 
     markPut: async(req, res) => {
         const { id } = req.params;
+
         const { name, ownerCompany } = req.body;
 
         const mark = await markModel.findByIdAndUpdate(id, {name: name, ownerCompany: ownerCompany});
 
-        await mark.save();
+        // await mark.save();
 
-        return res.json({msg: 'marca actualizada'});
+        return res.status(201).json({msg: 'marca actualizada'});
     },
 
     markActivate: async(req, res) => {
@@ -39,7 +40,7 @@ const markHttp = {
 
         await mark.save();
 
-        return res.json({msg: 'marca activada'});
+        return res.status(201).json({msg: 'marca activada'});
     },
 
     markDesactivate: async(req, res) => {
@@ -47,9 +48,9 @@ const markHttp = {
 
         const mark = await markModel.findByIdAndUpdate(id, {state: 0});
 
-        await mark.save();
+        // await mark.save();
 
-        return res.json({msg: 'marca desactivada'});
+        return res.status(201).json({msg: 'marca desactivada'});
     },
 }
 

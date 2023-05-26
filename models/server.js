@@ -1,6 +1,6 @@
 import express from 'express';
 import { connection } from '../database/connection.js';
-import { createRoles } from '../libs/initialSeptup.js';
+import { createRoles, createCategory } from '../libs/initialSeptup.js';
 import cors from 'cors';
 import morgan from 'morgan'
 
@@ -14,6 +14,7 @@ import { routerPeople } from '../routes/people.js';
 import { routerPhase } from '../routes/phase.js';
 import { routerStore } from '../routes/store.js';
 import { routerUser } from '../routes/user.js';
+import { routerFarm } from '../routes/farm.js';
 // import { routerWork } from '../routes/work.js';
 
 class Server {
@@ -27,6 +28,7 @@ class Server {
     async connect() {
         await connection();
         createRoles(); // verificar su lugar
+        createCategory()
     }
 
     middlewares() {
@@ -45,6 +47,7 @@ class Server {
         this.app.use('/pedido', routerOrder );
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
+        this.app.use('/granja', routerFarm )
         // this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
             return res.send('hola mundo :)');

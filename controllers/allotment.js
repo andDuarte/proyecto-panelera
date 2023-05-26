@@ -6,10 +6,10 @@ const allotmentHttp = {
         const allotment = await Allotment.find();
 
         if(allotment.length == 0) {
-            return res.json({msg: 'no existen lotes en la base de datos'});
+            return res.status(400).json({msg: 'no existen lotes'});
         }
 
-        return res.json({lotes: allotment});
+        return res.status(200).json({lotes: allotment});
     },
 
     createAllotment: async (req, res) =>{
@@ -18,7 +18,7 @@ const allotmentHttp = {
 
         await allotment.save();
 
-        return res.json({msg: 'lote creado'});
+        return res.status(200).json({msg: 'lote creado'});
 
     },
 
@@ -46,8 +46,9 @@ const allotmentHttp = {
 
         const allotment = await Allotment.findByIdAndUpdate(id, {size: size, owner: owner,name: name, historic: historic});
  
-        allotment.save()
-        return res.json({msg: 'lote actualizado'});
+        // allotment.save();
+
+        return res.status(201).json({msg: 'lote actualizado'});
     },
 
     allotmentActivate: async(req, res) => {
@@ -55,9 +56,9 @@ const allotmentHttp = {
 
         const allotment = await Allotment.findByIdAndUpdate(id, {state: 1});
 
-        await allotment.save();
+        // await allotment.save();
 
-        return res.json({msg: 'lote activado'});
+        return res.status(201).json({msg: 'lote activado'});
     },
 
     allotmentDesactivate: async(req, res) => {
@@ -65,14 +66,15 @@ const allotmentHttp = {
 
         const allotment = await Allotment.findByIdAndUpdate(id, {state: 0});
 
-        await allotment.save();
+        // await allotment.save();
 
-        return res.json({msg: 'lote desactivado'});
+        return res.status(201).json({msg: 'lote desactivado'});
     },
     
-    deleteAllotmentById: async (req, res) => {
-        await Allotment.findByIdAndDelete(req.params.id)
-        return res.status(204).json({ msg: 'Pedido eiminado' });
+    deleteAllotmentById: async(req, res) => {
+        await Allotment.findByIdAndDelete(req.params.id);
+
+        return res.status(204).json({msg: 'Pedido eiminado'});
     },
 }
 

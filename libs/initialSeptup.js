@@ -1,10 +1,11 @@
 import Role from '../models/Role.js'
 import Category from '../models/category.js';
 import typeDocument from '../models/typeDocument.js';
+
 export const createRoles = async () => {
     try {
         // Busca si ya existen documentos
-        const count = await Role.estimatedDocumentCount()
+        const count = await Role.estimatedDocumentCount();
 
         // Si el contador de roles es > 0 retorna
         if (count > 0) return;
@@ -38,10 +39,6 @@ export const createRoles = async () => {
 //             // Esto lo que hace es ejecutar todas las promesas al mismo tiempo, gana rendimiento en el server
 //             new Role({ name: 'CC' }).save(),
 //             new Role({ name: 'TI' }).save(),
-//             new Role({ name: 'CE' }).save(),
-//             new Role({ name: 'PS' }).save(),
-//             new Role({ name: 'DNI' }).save(),
-//             new Role({ name: 'TI' }).save(),
 //         ]);
 
 //         console.log(values);
@@ -55,7 +52,7 @@ export const createRoles = async () => {
 export const createCategory = async () => {
     try {
         // Busca si ya existen documentos
-        const count = await Category.estimatedDocumentCount()
+        const count = await Category.estimatedDocumentCount();
 
         // Si el contador de roles es > 0 retorna
         if (count > 0) return;
@@ -68,7 +65,7 @@ export const createCategory = async () => {
             new Category({ name: 'Insumos' }).save(),
         ]);
 
-        console.log(values);
+        // console.log(values);
 
     } catch (error) {
         console.error(error);

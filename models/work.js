@@ -1,3 +1,4 @@
+// no usar
 import mongoose from 'mongoose';
 
 const workSchema = new mongoose.Schema({

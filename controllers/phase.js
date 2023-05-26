@@ -1,16 +1,16 @@
 import { phaseModel } from '../models/phase.js';
 
-import People from '../models/people.js'
+// import People from '../models/people.js'
 
 const phaseHttp = {
     phaseGet: async(req, res) => {
         const phase = await phaseModel.find();
 
         if(phase.length == 0) {
-            return res.json({msg: 'no existen etapas'});
+            return res.status(404).json({msg: 'no existen etapas'});
         }
 
-        return res.json({etapas: phase});
+        return res.status(200).json({etapas: phase});
     },
 
     phasePost: async(req, res) => {
@@ -20,7 +20,7 @@ const phaseHttp = {
 
         await phase.save();
 
-        return res.json({msg: 'etapa creada'});
+        return res.status(200).json({msg: 'etapa creada'});
     },
 
     phasePut: async(req, res) => {
@@ -31,7 +31,7 @@ const phaseHttp = {
 
         // await phase.save();
 
-        return res.json({msg: 'etapa actualizada'});
+        return res.status(201).json({msg: 'etapa actualizada'});
     },
 
     phaseProcess: async(req, res) => {
@@ -39,23 +39,10 @@ const phaseHttp = {
 
         const { process } = req.body;
 
-        if(!process.activity) {
-            return res.json({msg: 'actividad de proceso necesaria'});
+        if(process.length == 0) {
+            res.status(400).json({msg: 'proceso es necesario'});
         }
 
-        // if(!process.workers) {
-        //     return res.json({msg: 'trabajadores es necesario'});
-        // }
-
-        // let foundPeople = null;
-
-        // for(let position = 0; position < process.workers.length; position++) {
-        //     foundPeople = await People.find({_id: process.workers[position]});
-        
-        //     if(foundPeople.length == 0) {
-        //         return res.json({msg: 'id no valido'})
-        //     }
-        // }
         const phaseId = await phaseModel.find({_id: id});
 
         const processOld = phaseId[0].process;
@@ -66,9 +53,9 @@ const phaseHttp = {
 
         const phase = await phaseModel.findByIdAndUpdate(id, {process: processOld});
 
-        await phase.save();
+        // await phase.save();
 
-        return res.json({msg: 'actividad creada en procesos'});
+        return res.status(200).json({msg: 'actividad creada en procesos'});
     },
 
     phaseActivate: async(req, res) => {
@@ -76,9 +63,9 @@ const phaseHttp = {
 
         const phase = await phaseModel.findByIdAndUpdate(id, {state: 1});
 
-        await phase.save();
+        // await phase.save();
 
-        return res.json({msg: 'etapa activada'});
+        return res.status(201).json({msg: 'etapa activada'});
     },
 
     phaseDesactivate: async(req, res) => {
@@ -86,15 +73,13 @@ const phaseHttp = {
 
         const phase = await phaseModel.findByIdAndUpdate(id, {state: 0});
 
-        await phase.save()
+        // await phase.save()
 
-        return res.json({msg: 'etapa desactivada'});
+        return res.status(201).json({msg: 'etapa desactivada'});
     },
 
     phaseActivity: async(req, res) => {
-        const { id } = req.params;
-
-        const { idActivity } = req.params;
+        const { id, idActivity } = req.params;
 
         const { stateActivity } = req.body;
 
@@ -113,14 +98,14 @@ const phaseHttp = {
         }
 
         if(foundActivity == false) {
-            return res.json({msg: 'id actividad no existe'});
+            return res.status(400).json({msg: 'id actividad no existe'});
         }
 
         const phase = await phaseModel.findByIdAndUpdate(id, {process: processOld});
 
-        await phase.save();
+        // await phase.save();
         
-        return res.json({msg: 'actividad actualizada'});
+        return res.status(201).json({msg: 'actividad actualizada'});
     },
 }
 

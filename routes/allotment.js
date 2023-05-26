@@ -10,6 +10,10 @@ import { validateToken } from '../middlewares/validate-jwt.js';
 
 import { allotmentValidate } from '../helpers/allotment.js';
 
+import { farmValidate } from '../helpers/farm.js';
+
+import { peopleValidate } from '../helpers/people.js';
+
 const routerAllotment = Router();
 
 routerAllotment.get('/', [
@@ -19,9 +23,12 @@ routerAllotment.get('/', [
 ], allotmentHttp.allotmentGet );
 
 routerAllotment.post('/', [
-    body('name', 'nombre del lote es necesario').trim().notEmpty(),
-    body('owner', 'dueño del lote es necesario').trim().notEmpty(),
-    body('size', 'tamaño del lote es necesario').trim().notEmpty(),
+    body('name', 'nombre lote es necesario').trim().notEmpty(),
+    body('owner', 'dueño lote es necesario').trim().notEmpty(),
+    body('owner').custom(peopleValidate.peopleId),
+    body('size', 'tamaño lote es necesario').trim().notEmpty(),
+    body('farm', 'granja es necesaria').trim().notEmpty(),
+    body('farm').custom(farmValidate.farmId),
     header('token', 'token es necesario').trim().notEmpty(),
     header('token').custom(validateToken),
     validate
@@ -30,6 +37,7 @@ routerAllotment.post('/', [
 routerAllotment.put('/:id', [
     param('id', 'id no valido').isMongoId(),
     param('id').custom(allotmentValidate.allotmentId),
+    body('owner').custom(allotmentValidate.allotmentOwner),
     header('token', 'token es necesario').trim().notEmpty(),
     header('token').custom(validateToken),
     validate

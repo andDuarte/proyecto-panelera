@@ -5,7 +5,7 @@ const peopleValidate = {
         const people = await People.find({_id: id});
 
         if(people.length == 0) {
-            throw new Error('id no existe en la base de datos');
+            throw new Error('id no existe');
         }
     },
     
@@ -13,7 +13,7 @@ const peopleValidate = {
         const people = await People.find({numberIdentification: numberIdentification});
 
         if(people.length !== 0) {
-            throw new Error('numero identificacion ya existe en la base de datos');
+            throw new Error('numero identificacion ya existe');
         }
     },
 }

@@ -8,8 +8,8 @@ const peopleSchema = new Schema({
     residenceAddress: { type: String },
     state: { type: Number, default: 1 },
     medicalInsuranceCompany: { type: String },
-    typeDocument : { type: String },
-    // typePeople: String,
+    typeDocument : { type: String }, // CC - cedula ciudadania / TI - tarjeta identidad / PA - pasaporte
+    typePeople: String, // customer - owner - worker
     // typeDocument: [{
     //     ref: 'typeDocument',
     //     type: Schema.Types.ObjectId

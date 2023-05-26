@@ -13,9 +13,9 @@ import { markValidate } from '../helpers/mark.js';
 const routerMark = Router();
 
 routerMark.get('/', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
-    validate
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // validate
 ], markHttp.markGet );
 
 routerMark.post('/', [

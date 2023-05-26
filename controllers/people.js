@@ -5,32 +5,32 @@ const peopleHttp = {
         const people = await People.find();
 
         if(people.length == 0) {
-            return res.json({msg: 'no existen personas'});
+            return res.status(400).json({msg: 'no existen personas'});
         }
 
-        return res.json({personas: people});
+        return res.status(200).json({personas: people});
     },
 
     peoplePost: async(req, res) => {
-        // const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typeDocument, medicalInsuranceCompany } = req.body;
+        // const { name, numberIdentification, numberPhone, birthDate, residenceAddress, typePeople, typeDocument, medicalInsuranceCompany } = req.body;
 
         const people = new People(req.body);
 
         await people.save();
 
-        return res.json({msg: 'persona creada'})
+        return res.status(200).json({msg: 'persona creada'})
     },
 
     peoplePut: async(req, res) => {
         const { id } = req.params;
 
-        const { name, numberPhone, residenceAddress, typeDocument, medicalInsuranceCompany } = req.body;
+        const { name, numberPhone, residenceAddress, typeDocument, medicalInsuranceCompany, typePeople } = req.body;
 
-        const people = await People.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeDocument: typeDocument, medicalInsuranceCompany: medicalInsuranceCompany});
+        const people = await People.findByIdAndUpdate(id, {name: name, numberPhone: numberPhone, residenceAddress: residenceAddress, typeDocument: typeDocument, medicalInsuranceCompany: medicalInsuranceCompany, typePeople: typePeople});
 
-        await people.save();
+        // await people.save();
 
-        return res.json({msg: 'persona actualizada'});
+        return res.status(201).json({msg: 'persona actualizada'});
     },
 
     peopleActivate: async(req, res) => {
@@ -38,9 +38,9 @@ const peopleHttp = {
 
         const people = await People.findByIdAndUpdate(id, {state: 1});
 
-        await people.save();
+        // await people.save();
 
-        return res.json({msg: 'persona activada'});
+        return res.status(201).json({msg: 'persona activada'});
     },
 
     peopleDesactivate: async(req, res) => {
@@ -48,9 +48,9 @@ const peopleHttp = {
 
         const people = await People.findByIdAndUpdate(id, {state: 0});
 
-        await people.save();
+        // await people.save();
 
-        return res.json({msg: 'persona desactivada'});
+        return res.status(201).json({msg: 'persona desactivada'});
     },
 }
 
