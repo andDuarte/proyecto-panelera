@@ -4,6 +4,7 @@ import { check } from 'express-validator';
 import { validate } from '../middlewares/validate-fields.js';
 import { userValidate } from '../helpers/user.js';
 import * as authJwt from '../middlewares/validate-jwt.js';
+import * as validateId from "../middlewares/validateId.js";
 
 const routerUser = Router();
 
@@ -36,25 +37,20 @@ routerUser.put('/:id', [
     // check('id').custom(userValidate.userId),
     // validate,
     authJwt.verifyToken,
+    authJwt.isAuthorised,
+    validateId.checkId,
 ], userHttp.userPut );
 
 routerUser.put('/activar/:id', [
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    check('id', 'id no es valido').isMongoId(),
-    check('id').custom(userValidate.userId),
-    validate,
     authJwt.verifyToken,
-
+    authJwt.isAuthorised,
+    validateId.checkId,
 ], userHttp.userActivate );
 
 routerUser.put('/desactivar/:id', [
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    check('id', 'id no es valido').isMongoId(),
-    check('id').custom(userValidate.userId),
-    validate,
     authJwt.verifyToken,
+    authJwt.isAuthorised,
+    validateId.checkId,
 ], userHttp.userDeactivate );
 
 // routerUser.post('/login', [

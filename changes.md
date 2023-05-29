@@ -1,0 +1,2 @@
+- [x] Ahora solo los **usuarios** _activos_ pueden loguearse
+- [x] Ahora valido los **ids**, verificando sin son o no **validos** y de igual manera su **existencia** en la bd

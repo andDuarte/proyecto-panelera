@@ -50,7 +50,7 @@ class Server {
         this.app.use('/granja', routerFarm )
         // this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
-            return res.send('hola mundo :)');
+            return res.status(400).send('hola mundo :)');
         })
     }
 

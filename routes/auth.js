@@ -4,10 +4,12 @@ import * as verifySingup from "../middlewares/verifySignup.js";
 
 const routerAuth = Router();
 
-routerAuth.post('/singup', [
-    verifySingup.checkRolesExisted
-],
-authHttp.singUp);
+routerAuth.post(
+    '/singup',
+    [
+        verifySingup.checkRolesExisted
+    ],
+    authHttp.singUp);
 
 routerAuth.post('/singin', authHttp.singIn);
 
