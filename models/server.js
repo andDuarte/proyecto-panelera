@@ -32,7 +32,7 @@ class Server {
     }
 
     middlewares() {
-        this.app.use(morgan('dev'));
+        this.app.use(morgan('short'));
         this.app.use(express.json());
         this.app.use(cors());
     }
@@ -47,10 +47,11 @@ class Server {
         this.app.use('/pedido', routerOrder );
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
-        this.app.use('/granja', routerFarm )
+        this.app.use('/granja', routerFarm );
+        // this.app.use('/costo', routerCost);
         // this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
-            return res.status(400).send('hola mundo :)');
+            return res.status(200).send('hola mundo :)');
         })
     }
 

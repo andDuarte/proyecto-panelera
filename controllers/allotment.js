@@ -1,5 +1,5 @@
-// import { Allotment } from '../models/allotment.js';
 import Allotment from '../models/allotment.js';
+// import { Allotment } from '../models/allotment.js';
 
 const allotmentHttp = {
     allotmentGet: async(req, res) => {
@@ -36,15 +36,15 @@ const allotmentHttp = {
     allotmentPut: async(req, res) => {
         const { id } = req.params;
  
-        const { size, name, owner } = req.body;
+        const { size, name, farm } = req.body;
 
         const allotmentId = await Allotment.find({_id: id});
 
         const historic = allotmentId[0].historic;
-        
-        historic.push({owner: allotmentId[0].owner, size: allotmentId[0].size});
 
-        const allotment = await Allotment.findByIdAndUpdate(id, {size: size, owner: owner,name: name, historic: historic});
+        historic.push({name: allotmentId[0].name, size: allotmentId[0].size, farm: allotmentId[0].farm});
+
+        const allotment = await Allotment.findByIdAndUpdate(id, {size: size, owner: owner,name: name, farm: farm, historic: historic});
  
         // allotment.save();
 
@@ -74,7 +74,7 @@ const allotmentHttp = {
     deleteAllotmentById: async(req, res) => {
         await Allotment.findByIdAndDelete(req.params.id);
 
-        return res.status(204).json({msg: 'Pedido eiminado'});
+        return res.status(204).json({msg: 'lote eiminado'});
     },
 }
 

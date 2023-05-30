@@ -1,12 +1,10 @@
+// no usar
 import {Router} from 'express';
 import { costAdministrativeHttp } from '../controllers/costAdministrative.js';
 import { check } from 'express-validator';
-import * as authJwt from '../middlewares/validate-jwt.js';
-import * as verifySingup from "../middlewares/verifySignup.js";
+import { validate } from '../middlewares/validate-fields.js';
+import { validateToken } from '../middlewares/validate-jwt.js';
 
-
-// import { validate } from '../middlewares/validate-fields.js';
-// import { validateToken } from '../middlewares/validate-jwt.js';
 import { costAdministrativeValidate } from '../helpers/costAdministrative.js';
 
 const routerCost = Router();

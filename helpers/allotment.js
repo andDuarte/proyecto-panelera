@@ -1,6 +1,6 @@
 import Allotment from '../models/allotment.js';
 
-import People from '../models/people.js';
+// import People from '../models/people.js';
 
 const allotmentValidate = {
     allotmentId: async(id) => {
@@ -11,15 +11,15 @@ const allotmentValidate = {
         }
     },
 
-    allotmentOwner: async(owner) => {
-        if(owner) {
-            const people = await People.find({_id: id});
+    // allotmentOwner: async(owner) => {
+    //     if(owner) {
+    //         const people = await People.find({_id: id});
 
-            if(people.length == 0) {
-                throw new Error('id no valido');
-            }
-        }
-    }
+    //         if(people.length == 0) {
+    //             throw new Error('id no valido');
+    //         }
+    //     }
+    // }
 }
 
 export{

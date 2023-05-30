@@ -24,23 +24,23 @@ routerAllotment.get('/', [
 
 routerAllotment.post('/', [
     body('name', 'nombre lote es necesario').trim().notEmpty(),
-    body('owner', 'dueño lote es necesario').trim().notEmpty(),
-    body('owner').custom(peopleValidate.peopleId),
     body('size', 'tamaño lote es necesario').trim().notEmpty(),
     body('farm', 'granja es necesaria').trim().notEmpty(),
     body('farm').custom(farmValidate.farmId),
     header('token', 'token es necesario').trim().notEmpty(),
     header('token').custom(validateToken),
     validate
+    // body('owner', 'dueño lote es necesario').trim().notEmpty(),
+    // body('owner').custom(peopleValidate.peopleId),
 ], allotmentHttp.createAllotment );
 
 routerAllotment.put('/:id', [
     param('id', 'id no valido').isMongoId(),
     param('id').custom(allotmentValidate.allotmentId),
-    body('owner').custom(allotmentValidate.allotmentOwner),
     header('token', 'token es necesario').trim().notEmpty(),
     header('token').custom(validateToken),
     validate
+    // body('owner').custom(allotmentValidate.allotmentOwner),
 ], allotmentHttp.allotmentPut );
 
 routerAllotment.put('/activar/:id', [
@@ -59,18 +59,15 @@ routerAllotment.put('/desactivar/:id', [
     validate
 ], allotmentHttp.allotmentDesactivate );
 
-routerAllotment.delete(
-    '/:id',
-    [
-        // check('token', 'token es necesario').trim().notEmpty(),
-        // check('token').custom(validateToken),
-        // check('id', 'id no valido').isMongoId(),
-        // check('id').custom(orderValidate.orderId),
-        // validate
-        // authJwt.verifyToken,
-        // authJwt.isModerator
-    ],
-    allotmentHttp.deleteAllotmentById);
+routerAllotment.delete('/:id', [
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
+    // check('id', 'id no valido').isMongoId(),
+    // check('id').custom(orderValidate.orderId),
+    // validate
+    // authJwt.verifyToken,
+    // authJwt.isModerator
+], allotmentHttp.deleteAllotmentById );
 
 export{
     routerAllotment

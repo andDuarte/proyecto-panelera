@@ -1,4 +1,5 @@
 import Farm from '../models/farm.js';
+import People from '../models/people.js';
 
 const farmValidate = {
     farmId: async(id) => {
@@ -8,7 +9,17 @@ const farmValidate = {
             throw new Error('id no valido');
         }
     },
+
+    ownerFarm: async(ownerFarm) => {
+        const owner = await People.find({_id: ownerFarm});
+
+        if(owner.typePeople != "owner"){
+            throw new Error('tipo de persona no valido');
+        }
+    },
+    
 }
+
 
 export{
     farmValidate

@@ -18,6 +18,7 @@ routerOrder.post('/',
     [
         authJwt.verifyToken,
         authJwt.isAuthorised,
+        check("customer").custom()
     ],
     ordersHttp.createOrder);
 

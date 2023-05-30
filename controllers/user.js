@@ -3,9 +3,9 @@ import Role from '../models/Role.js'
 import { createToken } from '../middlewares/validate-jwt.js';
 
 // bcryptjs
-import bcryptjs from 'bcryptjs';
+// import bcryptjs from 'bcryptjs';
 import { isValidObjectId } from 'mongoose';
-const salt = bcryptjs.genSaltSync(10);
+// const salt = bcryptjs.genSaltSync(10);
 
 const userHttp = {
     userGet: async (req, res) => {

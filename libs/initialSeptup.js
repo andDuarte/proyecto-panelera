@@ -63,6 +63,7 @@ export const createCategory = async () => {
             new Category({ name: 'Maquinaria' }).save(),
             new Category({ name: 'Herramientas' }).save(),
             new Category({ name: 'Insumos' }).save(),
+            new Category({ name: 'Produccion' }).save()
         ]);
 
         // console.log(values);

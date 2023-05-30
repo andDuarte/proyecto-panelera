@@ -1,6 +1,6 @@
-import CostInventory from '../models/costInven.js';
+import CostInventory from '../models/costInventory.js';
 
-const costHttp = {
+const costInventoryHttp = {
     costGet: async (req, res) => {
         const cost = await CostInventory.find();
         if (cost.length == 0) {
@@ -84,5 +84,5 @@ const costHttp = {
     // }
 }
 export{
-    costHttp
+    costInventoryHttp
 }

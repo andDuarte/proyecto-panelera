@@ -2,7 +2,7 @@ import Farm from '../models/farm.js';
 
 const farmHttp = {
     farmGet: async(req, res) => {
-        const farm = await Farm.find();
+        const farm = await Farm.find().populate('ownerFarm');
 
         if(farm.length == 0) {
             return res.status(400).json({msg: 'no existe granjas'})

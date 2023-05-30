@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { costInventoryHttp } from '../controllers/costInven.js';
+import { costInventoryHttp } from '../controllers/inventory.js';
 import { check } from 'express-validator';
 import * as authJwt from '../middlewares/validate-jwt.js';
 import * as verifySingup from "../middlewares/verifySignup.js";
@@ -20,7 +20,7 @@ routerCost.get('/',
 [
     authJwt.verifyToken,   
 ],
- costHttp.getCost );
+ costInventoryHttp.getCost );
 
 routerCost.post('/',
 [
@@ -35,7 +35,7 @@ routerCost.post('/',
     authJwt.verifyToken,
     authJwt.isModerator
 ], 
-costHttp.createCost );
+costInventoryHttp.createCost );
 
 routerCost.put('/:id', 
 [
@@ -47,7 +47,7 @@ routerCost.put('/:id',
     verifySingup.checkExistedId,
     
 ], 
-costHttp.updateCostById);
+costInventoryHttp.updateCostById);
 
 routerCost.put('/activar/:id', 
 [
@@ -59,7 +59,7 @@ routerCost.put('/activar/:id',
     authJwt.verifyToken,
     authJwt.isModerator
 ], 
-costHttp.updateCostActivate);
+costInventoryHttp.updateCostActivate);
 
 routerCost.put('/desactivar/:id', 
 [
@@ -71,7 +71,7 @@ routerCost.put('/desactivar/:id',
     authJwt.verifyToken,
     authJwt.isModerator
 ], 
-costHttp.updateCostDesactivate);
+costInventoryHttp.updateCostDesactivate);
 
 routerCost.delete(
     '/:id',
@@ -84,7 +84,7 @@ routerCost.delete(
         authJwt.verifyToken,
         authJwt.isModerator
     ],
-    costHttp.deleteCostById);
+    costInventoryHttp.deleteCostById);
 
 export{
     routerCost

@@ -1,12 +1,11 @@
 import { Schema, model } from 'mongoose';
 
 const billingSchema = new Schema({
-    name: { type: String, required: true },
-    numberIdentification: { type: String, required: true },
-    numberPhone: { type: String, required: true },
-    birthDate: { type: Date },
-    residenceAddress: { type: String },
+    // name: { type: String, required: true },
+    order: {type: Schema.Types.ObjectId, ref: 'Order'},
+    totalWorth: {type: Number},
     state: { type: Number, default: 1 },
+    date
 });
 
 export default model('Billing', billingSchema);

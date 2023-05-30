@@ -1,3 +1,4 @@
+// no usar
 import { Schema, model } from 'mongoose';
 
 const costAdministrativeSchema = new Schema({
@@ -11,8 +12,5 @@ const costAdministrativeSchema = new Schema({
     timestamps: true,
     versionKey: false,
 });
-    // cost: [{
-    //     ref: 'cost',
-    //     type: Schema.type.objectId
-    // }],
+
 export default model('Cost', costAdministrativeSchema );

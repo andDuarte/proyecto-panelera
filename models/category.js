@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose'
 
-export const CATEGORY = ['Maquinaria', 'Herramientas', 'Insumos']
+export const CATEGORY = ['Maquinaria', 'Herramientas', 'Insumos', 'Produccion']
 
 const categorySchema = new Schema({
     name: String
