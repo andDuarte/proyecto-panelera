@@ -1,39 +1,34 @@
-import {Router} from 'express';
-import { costInventoryHttp } from '../controllers/inventory.js';
-import { check } from 'express-validator';
+import { Router } from 'express';
+
+import { costInventoryHttp } from '../controllers/costInventory.js';
+
 import * as authJwt from '../middlewares/validate-jwt.js';
+
 import * as verifySingup from "../middlewares/verifySignup.js";
 
-
-// import { validate } from '../middlewares/validate-fields.js';
 // import { validateToken } from '../middlewares/validate-jwt.js';
+
+import { check } from 'express-validator';
+
+import { validate } from '../middlewares/validate-fields.js';
+
 import { costInventoryValidate } from '../helpers/costInventory.js';
 
 const routerCost = Router();
 
-routerCost.get('/',
-// [
-//     check('token', 'token es necesario').trim().notEmpty(),
-//     check('token').custom(validateToken),
-//     validate 
-// ]
-[
-    authJwt.verifyToken,   
-],
- costInventoryHttp.getCost );
+routerCost.get('/', [
+        // authJwt.verifyToken,   
+    ],
+costInventoryHttp.costGet );
 
 routerCost.post('/',
 [
-    // check('name','nombre es necesario').trim().notEmpty(),
-    // check('code','codigo del cobro es necesario').trim().notEmpty(),
-    // check('quantity','cantidad es necesario').trim().notEmpty(),
-    // check('costs','costo es necesario').trim().notEmpty(),
-    // check('date','fecha es necesaria').trim().notEmpty(),
-    // check('detail','detalle es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
-    authJwt.verifyToken,
-    authJwt.isModerator
+    // authJwt.verifyToken,
+    // authJwt.isModerator,
+    check('phase', 'etapa es necesaria').trim().notEmpty(),
+    check('phase', 'id no valido').isMongoId(),
+    check('list').custom(costInventoryValidate.costList),
+    validate
 ], 
 costInventoryHttp.createCost );
 
@@ -44,7 +39,6 @@ routerCost.put('/:id',
     // check('token', 'token es necesario').trim().notEmpty(),
     // check('token').custom(validateToken),
     // validate
-    verifySingup.checkExistedId,
     
 ], 
 costInventoryHttp.updateCostById);

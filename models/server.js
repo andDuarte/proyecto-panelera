@@ -2,7 +2,7 @@ import express from 'express';
 import { connection } from '../database/connection.js';
 import { createRoles, createCategory } from '../libs/initialSeptup.js';
 import cors from 'cors';
-import morgan from 'morgan'
+import morgan from 'morgan';
 
 // routes
 import { routerAllotment } from '../routes/allotment.js';
@@ -15,6 +15,7 @@ import { routerPhase } from '../routes/phase.js';
 import { routerStore } from '../routes/store.js';
 import { routerUser } from '../routes/user.js';
 import { routerFarm } from '../routes/farm.js';
+import { routerCost } from '../routes/costInventory.js';
 // import { routerWork } from '../routes/work.js';
 
 class Server {
@@ -48,7 +49,7 @@ class Server {
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
         this.app.use('/granja', routerFarm );
-        // this.app.use('/costo', routerCost);
+        this.app.use('/costo', routerCost );
         // this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
             return res.status(200).send('hola mundo :)');

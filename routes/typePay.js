@@ -1,3 +1,4 @@
+// no usar
 import { Router } from 'express';
 
 import { typePayHttp } from '../controllers/typePay.js';
