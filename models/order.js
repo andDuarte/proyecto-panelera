@@ -8,17 +8,16 @@ const orderSchema = new Schema({
 
     products: [
         {
-            element: {  ref: 'Inventory', type: Schema.Types.ObjectId},
+            element: { ref: 'Inventory', type: Schema.Types.ObjectId },
             quantity: { type: Number, default: 1 },
             worth: { type: Number }
         }
     ],
 
-    
     orderStatus: { type: String, default: 'proceso' }, //->proceso ->entregado ->cancelado ->realizado
-   
+
     sendAddress: { type: String },
-    
+
     state: { type: Number, default: 1 },
 }, {
     timestamps: true,

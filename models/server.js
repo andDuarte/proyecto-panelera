@@ -7,6 +7,9 @@ import morgan from 'morgan';
 // routes
 import { routerAllotment } from '../routes/allotment.js';
 import { routerAuth } from '../routes/auth.js';
+import { routerBilling } from '../routes/billing.js';
+import { routerCost } from '../routes/costInventory.js';
+import { routerFarm } from '../routes/farm.js';
 import { routerInventory } from '../routes/inventory.js';
 import { routerMark } from '../routes/mark.js';
 import { routerOrder } from '../routes/orders.js';
@@ -14,8 +17,6 @@ import { routerPeople } from '../routes/people.js';
 import { routerPhase } from '../routes/phase.js';
 import { routerStore } from '../routes/store.js';
 import { routerUser } from '../routes/user.js';
-import { routerFarm } from '../routes/farm.js';
-import { routerCost } from '../routes/costInventory.js';
 // import { routerWork } from '../routes/work.js';
 
 class Server {
@@ -41,19 +42,20 @@ class Server {
     routes() {
         this.app.use('/auth', routerAuth );
         this.app.use('/bodega', routerStore );
+        this.app.use('/costo', routerCost );
         this.app.use('/etapa', routerPhase );
+        this.app.use('/granja', routerFarm );
         this.app.use('/inventario', routerInventory );
         this.app.use('/lote', routerAllotment );
         this.app.use('/marca', routerMark );
         this.app.use('/pedido', routerOrder );
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
-        this.app.use('/granja', routerFarm );
-        this.app.use('/costo', routerCost );
+        this.app.use('/facturacion', routerBilling );
         // this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
             return res.status(200).send('hola mundo :)');
-        })
+        });
     }
 
     listen() {
