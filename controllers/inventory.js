@@ -31,10 +31,12 @@ const inventoryHttp = {
         const categoryLast = []
 
         for(let position = 0; position < category.length; position++) {
-            const categoryTemp = await Category.find({name: category[position]});
+            const categoryTemp = await Category.find({name: category[position].name});
             
+            console.log(categoryTemp);
+
             if(categoryTemp.length > 0) {
-                categoryLast.push(categoryLast._id);
+                categoryLast.push(categoryTemp[0]._id);
             }
         }
 

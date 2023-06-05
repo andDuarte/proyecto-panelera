@@ -4,7 +4,7 @@ import { phaseModel } from '../models/phase.js';
 
 const costInventoryValidate = {
     costId: async(id) => {
-        const cost = await CostInventory.find({_id: id});
+        const cost = await CostInventory.find({_id: id}).populate('process');
 
         if (cost.length == 0) {
             throw new Error('id no existe'); 
@@ -15,12 +15,12 @@ const costInventoryValidate = {
             throw new Error('lista es necesaria');
         }
 
-        const phase = await phaseModel({_id: req.body.phase});
+        const phase = await phaseModel.find({_id: req.body.phase});
 
         if(phase.length == 0) {
             throw new Error('id no existe');
         }
-        console.log(phase)
+
         let dataProcess = [];
         
         for(let position = 0; position < list.length; position++) {
@@ -35,7 +35,7 @@ const costInventoryValidate = {
             }
 
             if(foundProcess == false) {
-                throw new Error('id no valido process');
+                throw new Error('id no valido');
             }
 
             if(list[position].elements.length == 0) {
@@ -44,23 +44,29 @@ const costInventoryValidate = {
 
             let foundElement = false;
 
+            console.log(list[position].elements.length, dataProcess)
+
             for(let index = 0; index < list[position].elements.length; index++) {
-                for(let i = 0; i > dataProcess.elements.length; i++) {
-                    if(list[position].elements[index].element == dataProcess.elements[i]._id) {
-                        foundElement = true;
-                        break;
-                    }
-                }
 
-                for(let j = 0; j < dataProcess.workers.length; j++) {
-                    if(list[position].elements[index].element == dataProcess.workers[j]._id) {
-                        foundElement = true;
-                        break;
+                for(let k = 0; k < dataProcess.length; k++){
+                    for(let i = 0; i < dataProcess[k].elements.length; i++) {
+                        if(list[position].elements[index].element == dataProcess[k].elements[i]) {
+                            foundElement = true;
+                            break;
+                        }
                     }
+    
+                    for(let j = 0; j < dataProcess[k].workers.length; j++) {
+                        if(list[position].elements[index].element == dataProcess[k].workers[j]) {
+                            foundElement = true;
+                            break;
+                        }
+                    }
+    
                 }
-
+                
                 if(foundElement == false) {
-                    throw new Error('id no valido element');
+                    throw new Error('id no valido');
                 }
 
                 foundElement = false

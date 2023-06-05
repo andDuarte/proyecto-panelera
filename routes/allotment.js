@@ -27,8 +27,8 @@ routerAllotment.post('/', [
     body('size', 'tamaño lote es necesario').trim().notEmpty(),
     body('farm', 'granja es necesaria').trim().notEmpty(),
     body('farm').custom(farmValidate.farmId),
-    header('token', 'token es necesario').trim().notEmpty(),
-    header('token').custom(validateToken),
+    // header('token', 'token es necesario').trim().notEmpty(),
+    // header('token').custom(validateToken),
     validate
     // body('owner', 'dueño lote es necesario').trim().notEmpty(),
     // body('owner').custom(peopleValidate.peopleId),

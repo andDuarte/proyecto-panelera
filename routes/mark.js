@@ -21,8 +21,8 @@ routerMark.get('/', [
 routerMark.post('/', [
     check('name', 'nombre es necesario').trim().notEmpty(),
     check('ownerCompany', 'empresa dueña es necesaria').trim().notEmpty(),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], markHttp.markPost );
 

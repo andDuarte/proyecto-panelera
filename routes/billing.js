@@ -1,37 +1,34 @@
 import { Router } from 'express';
 // import { check } from 'express-validator';
-import { ordersHttp } from '../controllers/order.js';
+import { billingsHttp } from '../controllers/billing.js';
 import * as authJwt from '../middlewares/validate-jwt.js';
 import * as validateId from "../middlewares/validateId.js";
-import { check, body, header, param, query } from 'express-validator';
-import { orderValidate } from '../helpers/order.js';
 
-const routerOrder = Router();
+const routerBilling = Router();
 
-routerOrder.get('/',
+routerBilling.get('/',
     [
-        // authJwt.verifyToken,
+        authJwt.verifyToken,
     ],
-    ordersHttp.getOrders);
+    billingsHttp.getBillings);
 
-routerOrder.post('/',
+routerBilling.post('/',
     [
-        // authJwt.verifyToken,
-        // authJwt.isAuthorised,
-        // check("customer").custom()
+        authJwt.verifyToken,
+        authJwt.isAuthorised,
     ],
-    ordersHttp.createOrder);
+    billingsHttp.createBilling);
 
-routerOrder.put(
+routerBilling.put(
     '/:id',
     [
         authJwt.verifyToken,
         authJwt.isAuthorised,
         validateId.checkId,
     ],
-    ordersHttp.updateOrderById);
+    billingsHttp.updateBillingById);
 
-routerOrder.put(
+routerBilling.put(
     '/activar/:id',
     [
         authJwt.verifyToken,
@@ -39,9 +36,9 @@ routerOrder.put(
         validateId.checkId,
         // authJwt.isModerator
     ],
-    ordersHttp.updateOrderActivate);
+    billingsHttp.updateBillingActivate);
 
-routerOrder.put(
+routerBilling.put(
     '/desactivar/:id',
     [
         authJwt.verifyToken,
@@ -49,17 +46,17 @@ routerOrder.put(
         validateId.checkId,
         // authJwt.isModerator
     ],
-    ordersHttp.updateOrderDesactivate);
+    billingsHttp.updateBillingDesactivate);
 
-routerOrder.delete(
+routerBilling.delete(
     '/:id',
     [
         authJwt.verifyToken,
         authJwt.isAuthorised,
         validateId.checkId,
     ],
-    ordersHttp.deleteOrderById);
+    billingsHttp.deleteBillingById);
 
 export {
-    routerOrder
+    routerBilling
 }

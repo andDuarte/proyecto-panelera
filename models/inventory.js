@@ -5,10 +5,7 @@ const inventorySchema = new Schema({
     quantity: { type: Number, default: 1 },
     store: { type: Schema.Types.ObjectId, ref: 'store' },
     mark: { type: Schema.Types.ObjectId, ref: 'mark' },
-    category: [{
-        ref: 'Category',
-        type: Schema.Types.ObjectId
-    }],
+    category: [{ name: String}],
     state: { type: Number, default: 1 },
 });
 

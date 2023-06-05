@@ -5,7 +5,7 @@ const ordersHttp = {
         const orders = await Order.find();
 
         if (orders.length == 0) {
-            return res.status(404).json({ msg: 'no existen pedidos en la base de datos' });
+            return res.status(404).json({ msg: 'no existen pedidos' });
         }
 
         return res.json(orders);

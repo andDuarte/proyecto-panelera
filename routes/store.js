@@ -22,8 +22,8 @@ routerStore.get('/', [
 
 routerStore.get('/search', [
     check('name', 'nombre es necesario').trim().notEmpty(),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], storeHttp.storeGetQuery );
 
@@ -32,8 +32,8 @@ routerStore.post('/', [
     check('farm', 'granja es necesaria').trim().notEmpty(),
     check('farm').custom(farmValidate.farmId),
     check('size', 'tamaño bodega es necesario').trim().notEmpty(),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], storeHttp.storePost );
 

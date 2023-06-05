@@ -37,8 +37,8 @@ routerInventory.post('/', [
     check('mark', 'marca es necesaria').trim().notEmpty(),
     check('mark', 'marca no valida').isMongoId(),
     check('mark').custom(markValidate.markId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], inventoryHttp.inventoryPost );
 
