@@ -8,7 +8,7 @@ import morgan from 'morgan';
 import { routerAllotment } from '../routes/allotment.js';
 
 import { routerAuth } from '../routes/auth.js';
-import { routerBilling } from '../routes/billing.js'
+import { routerBilling } from '../routes/billing.js';
 import { routerCost } from '../routes/costInventory.js';
 import { routerFarm } from '../routes/farm.js';
 import { routerInventory } from '../routes/inventory.js';

@@ -9,7 +9,8 @@ const phaseSchema = new mongoose.Schema({
             workers: [
                 {
                     ref: 'People',
-                    type: mongoose.Schema.Types.ObjectId   
+                    type: mongoose.Schema.Types.ObjectId, 
+                    
                 },
             ],
             elements: [
