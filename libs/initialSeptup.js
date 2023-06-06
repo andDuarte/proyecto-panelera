@@ -1,6 +1,5 @@
-import Role from '../models/Role.js'
+import Role from '../models/Role.js';
 import Category from '../models/category.js';
-import typeDocument from '../models/typeDocument.js';
 
 export const createRoles = async () => {
     try {
@@ -25,29 +24,6 @@ export const createRoles = async () => {
     }
 
 }
-
-// export const createTypeDcoument = async () => {
-//     try {
-//         // Busca si ya existen documentos
-//         const count = await typeDocument.estimatedDocumentCount()
-
-//         // Si el contador de roles es > 0 retorna
-//         if (count > 0) return;
-
-//         // Si el contador es == 0, crea los roles
-//         const values = await Promise.all([
-//             // Esto lo que hace es ejecutar todas las promesas al mismo tiempo, gana rendimiento en el server
-//             new Role({ name: 'CC' }).save(),
-//             new Role({ name: 'TI' }).save(),
-//         ]);
-
-//         console.log(values);
-
-//     } catch (error) {
-//         console.error(error);
-//     }
-
-// }
 
 export const createCategory = async () => {
     try {

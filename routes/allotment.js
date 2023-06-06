@@ -12,6 +12,7 @@ import { allotmentValidate } from '../helpers/allotment.js';
 
 import { farmValidate } from '../helpers/farm.js';
 
+// no usar
 // import { peopleValidate } from '../helpers/people.js';
 
 const routerAllotment = Router();
@@ -42,8 +43,6 @@ routerAllotment.put('/:id', [
     // header('token', 'token es necesario').trim().notEmpty(),
     // header('token').custom(validateToken),
     validate
-    // no usar
-    // body('owner').custom(allotmentValidate.allotmentOwner),
 ], allotmentHttp.allotmentPut );
 
 routerAllotment.put('/activar/:id', [

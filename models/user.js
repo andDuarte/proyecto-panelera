@@ -4,14 +4,14 @@ import bcrypt from 'bcryptjs';
 const userSchema = new Schema({
     // delete name
     // name: { type: String },
-    email: { type: String, unique: true, required: true /* [true, 'El nombre es necesario'],*/ },
+    email: { type: String, unique: true, required: true /* [true, 'El email es necesario'],*/ },
     password: { type: String, required: true },
     state: { type: Number, default: 1 },
     // typeUser: { type: String, default: 'usuario' },
     roles: [{
         ref: "Role",
         type: Schema.Types.ObjectId
-    }],
+    }], // - moderator - admin - user
 }, {
     timestamps: true,
     versionKey: false
@@ -25,7 +25,7 @@ userSchema.statics.encryptPassword = async (password) => {
 },
 
 userSchema.statics.comparePassword = async (password, receivedPassword) => {
-    return await bcrypt.compare(password, receivedPassword)
+    return await bcrypt.compare(password, receivedPassword);
 }
 
 export default model('User', userSchema);

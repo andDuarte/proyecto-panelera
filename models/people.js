@@ -5,7 +5,7 @@ const peopleSchema = new Schema({
     numberIdentification: { type: String, required: true },
     typeDocument : { type: String }, // CC - cedula ciudadania / TI - tarjeta identidad / PA - pasaporte
     numberPhone: { type: String, required: true },
-    birthDate: { type: String },
+    birthDate: { type: Date },
     residenceAddress: { type: String },
     state: { type: Number, default: 1 },
     medicalInsuranceCompany: { type: String },

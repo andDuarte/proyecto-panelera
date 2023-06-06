@@ -6,9 +6,7 @@ import morgan from 'morgan';
 import CONFIG from "../config.js";
 
 // routes
-
 import { routerAllotment } from '../routes/allotment.js';
-
 import { routerAuth } from '../routes/auth.js';
 import { routerBilling } from '../routes/billing.js';
 import { routerCost } from '../routes/cost.js';
@@ -20,7 +18,7 @@ import { routerPeople } from '../routes/people.js';
 import { routerPhase } from '../routes/phase.js';
 import { routerStore } from '../routes/store.js';
 import { routerUser } from '../routes/user.js';
-// import { routerWork } from '../routes/work.js';
+import { routerTypeOutlay } from '../routes/typeOutlay.js';
 
 class Server {
     constructor() {
@@ -33,7 +31,7 @@ class Server {
     async connect() {
         await connection();
         createRoles(); // verificar su lugar
-        createCategory()
+        createCategory();
     }
 
     middlewares() {
@@ -43,7 +41,6 @@ class Server {
     }
 
     routes() {
-        // this.app.use('/labor', routerWork );
         this.app.use('/auth', routerAuth );
         this.app.use('/bodega', routerStore );
         this.app.use('/costo', routerCost );
@@ -56,6 +53,7 @@ class Server {
         this.app.use('/pedido', routerOrder );
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
+        this.app.use('/tipogasto', routerTypeOutlay );
         this.app.use('/',(req, res)=>{
             return res.status(200).send('hola mundo :)');
         });

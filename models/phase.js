@@ -14,7 +14,10 @@ const phaseSchema = new mongoose.Schema({
                 },
             ],
             elements: [
-                {type: mongoose.Schema.Types.ObjectId, ref: 'Inventory'},
+                {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Inventory'
+                },
             ],
             state: {type: Number, default: 1},
         },

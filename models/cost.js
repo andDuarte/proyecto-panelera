@@ -5,7 +5,7 @@ const costSchema = new Schema({
     list: [
         {
             process: String,
-            typeOutlay: String,
+            typeOutlay: {type: Schema.Types.ObjectId, ref: 'TypeOutlay'},
             elements: [
                 {
                     element: String,
