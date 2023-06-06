@@ -2,7 +2,7 @@ import { storeModel } from '../models/store.js';
 
 const storeHttp = {
     storeGet: async(req, res) => {
-        const store = await storeModel.find();
+        const store = await storeModel.find().populate('farm');
 
         if(store.length == 0) {
             return res.status(400).json({msg: 'no existen bodegas'});

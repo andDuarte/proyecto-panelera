@@ -1,60 +1,60 @@
-// no usar
-import { workModel } from '../models/work.js';
+// // no usar
+// import { workModel } from '../models/work.js';
 
-const workHttp = {
-    workGet: async(req, res) => {
-        const work = await workModel.find();
+// const workHttp = {
+//     workGet: async(req, res) => {
+//         const work = await workModel.find();
 
-        if(work.length == 0) {
-            return res.json({msg: 'no existen labores'});
-        }
+//         if(work.length == 0) {
+//             return res.json({msg: 'no existen labores'});
+//         }
 
-        return res.json({labores: work});
-    },
+//         return res.json({labores: work});
+//     },
 
-    workPost: async(req, res) => {
-        const { name, process } = req.body;
+//     workPost: async(req, res) => {
+//         const { name, process } = req.body;
 
-        const work = new workModel({name: name, process: process});
+//         const work = new workModel({name: name, process: process});
 
-        await work.save();
+//         await work.save();
 
-        return res.json({msg: 'labor creada'});
-    },
+//         return res.json({msg: 'labor creada'});
+//     },
 
-    workPut: async(req, res) => {
-        const { id } = req.params;
+//     workPut: async(req, res) => {
+//         const { id } = req.params;
 
-        const { name, process } = req.body;
+//         const { name, process } = req.body;
 
-        const work = await workModel.findByIdAndUpdate(id, {name: name, process: process});
+//         const work = await workModel.findByIdAndUpdate(id, {name: name, process: process});
 
-        await work.save();
+//         await work.save();
 
-        return res.json({msg: 'labor actualizada'})
-    },
+//         return res.json({msg: 'labor actualizada'})
+//     },
 
-    workActivate: async(req, res) => {
-        const { id } = req.params;
+//     workActivate: async(req, res) => {
+//         const { id } = req.params;
 
-        const work = await workModel.findByIdAndUpdate(id, {state: 1});
+//         const work = await workModel.findByIdAndUpdate(id, {state: 1});
 
-        await work.save();
+//         await work.save();
 
-        return res.json({msg: 'labor activada'});
-    },
+//         return res.json({msg: 'labor activada'});
+//     },
 
-    workDesactivate: async(req, res) => {
-        const { id } = req.params;
+//     workDesactivate: async(req, res) => {
+//         const { id } = req.params;
 
-        const work = await workModel.findByIdAndUpdate(id, {state: 0});
+//         const work = await workModel.findByIdAndUpdate(id, {state: 0});
 
-        await work.save();
+//         await work.save();
 
-        return res.json({msg: 'labor desactivada'});
-    },
-}
+//         return res.json({msg: 'labor desactivada'});
+//     },
+// }
 
-export{
-    workHttp
-}
+// export{
+//     workHttp
+// }

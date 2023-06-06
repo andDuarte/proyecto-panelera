@@ -1,10 +1,10 @@
-import config from '../config.js'
+import CONFIG from '../config.js'
 import jwt from 'jsonwebtoken';
 import Role from '../models/Role.js';
 import User from '../models/user.js';
 
 async function createToken(payload) {
-    const token = jwt.sign(payload, config.SECRET, {
+    const token = jwt.sign(payload, CONFIG.SECRET, {
         expiresIn: '10h',
         algorithm: 'HS256'
     });
@@ -19,7 +19,7 @@ const verifyToken = async (req, res, next) => {
 
         if (!token) return res.status(403).json({ msg: "No token provided" })
 
-        const decoded = jwt.verify(token, config.SECRET, { algorithm: 'HS256' })
+        const decoded = jwt.verify(token, CONFIG.SECRET, { algorithm: 'HS256' })
         req.userId = decoded.id // saved id
         const user = await User.findById(req.userId, { password: 0 })
         // console.log(user);
@@ -74,7 +74,7 @@ const isAdmin = async (req, res, next) => {
 }
 
 const validateToken = async (token, { req }) => {
-    jwt.verify(token, config.SECRET, function (err, decode) {
+    jwt.verify(token, CONFIG.SECRET, function (err, decode) {
         if (err) {
             throw new Error('token no valido');
         }

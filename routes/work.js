@@ -1,20 +1,20 @@
-// no usar
-import { Router } from 'express';
+// // no usar
+// import { Router } from 'express';
 
-import { workHttp } from '../controllers/work.js';
+// import { workHttp } from '../controllers/work.js';
 
-const routerWork = Router();
+// const routerWork = Router();
 
-routerWork.get('/', [], workHttp.workGet );
+// routerWork.get('/', [], workHttp.workGet );
 
-routerWork.post('/', [], workHttp.workPost );
+// routerWork.post('/', [], workHttp.workPost );
 
-routerWork.put('/:id', [], workHttp.workPut );
+// routerWork.put('/:id', [], workHttp.workPut );
 
-routerWork.put('/activar/:id', [], workHttp.workActivate );
+// routerWork.put('/activar/:id', [], workHttp.workActivate );
 
-routerWork.put('/desactivar/:id', [], workHttp.workDesactivate );
+// routerWork.put('/desactivar/:id', [], workHttp.workDesactivate );
 
-export{
-    routerWork
-}
+// export{
+//     routerWork
+// }

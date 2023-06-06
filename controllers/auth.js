@@ -4,6 +4,7 @@ import { createToken } from '../middlewares/validate-jwt.js';
 
 const authHttp = {
     singUp: async (req, res) => {
+        // TODO: Eliminar espacios en los datos recibidos
         const { email, password, roles } = req.body;
 
         const newUser = new User({
@@ -15,11 +16,11 @@ const authHttp = {
         if (roles) {
             const foundRoles = await Role.find({ name: { $in: roles } });
             newUser.roles = foundRoles.map(role => role._id);
-            if (newUser.roles.length == 0) {
-                // Si no se especifica el rol por defecto es "user"
-                const role = await Role.findOne({ name: "user" });
-                editUser.roles = [role._id];
-            }
+            // if (newUser.roles.length == 0) {
+            //     // Si no se especifica el rol por defecto es "user"
+            //     const role = await Role.findOne({ name: "user" });
+            //     editUser.roles = [role._id];
+            // }
         } else {
             // Si no se especifica el rol por defecto es "user"
             const role = await Role.findOne({ name: "user" });

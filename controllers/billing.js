@@ -2,10 +2,10 @@ import Billing from '../models/billing.js';
 
 const billingsHttp = {
     getBillings: async (req, res) => {
-        const billings = await Billing.find();
+        const billings = await Billing.find().populate('order');
 
         if (billings.length == 0) {
-            return res.status(404).json({ msg: 'no existen facturacines en la base de datos' });
+            return res.status(404).json({ msg: 'No records found', msj: 'No se encontraron registros' });
         }
 
         return res.json(billings);
@@ -26,9 +26,9 @@ const billingsHttp = {
     },
 
     updateBillingActivate: async (req, res) => {
-        const isModified = await Billing.findByIdAndUpdate(req.params.id, { state: 1 });
+        const updatedBilling = await Billing.findByIdAndUpdate(req.params.id, { state: 1 });
 
-        if (isModified) {
+        if (updatedBilling) {
             return res.status(204).json({ msg: "Billing updated and actived", msj: 'Factura activada' });
         } else {
             return res.status(404).json({ msg: "Billing not update", msj: 'Factura no actualizada' });
@@ -36,9 +36,9 @@ const billingsHttp = {
     },
 
     updateBillingDesactivate: async (req, res) => {
-        const isModified = await Billing.findByIdAndUpdate(req.params.id, { state: 0 });
+        const updatedBilling = await Billing.findByIdAndUpdate(req.params.id, { state: 0 });
 
-        if (isModified) return res.status(204).json({ msg: "Billing updated and inactived", msj: 'Factura desactivada' });
+        if (updatedBilling) return res.status(204).json({ msg: "Billing updated and inactived", msj: 'Factura desactivada' });
 
         return res.status(404).json({ msg: "Billing not update", msj: 'Factura no actualizada' });
     },

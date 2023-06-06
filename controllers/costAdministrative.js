@@ -1,88 +1,88 @@
-// no usar
-import CostAdministrative from '../models/costAdministrative.js';
+// // no usar
+// import CostAdministrative from '../models/costAdministrative.js';
 
-const costHttp = {
-    costGet: async (req, res) => {
-        const cost = await CostAdministrative.find();
-        if (cost.length == 0) {
-            return res.status(404).json({ msg: 'no existe costo en la base de datos' });
-        }
-        return res.json({ costo: cost });
-    },
+// const costHttp = {
+//     costGet: async (req, res) => {
+//         const cost = await CostAdministrative.find();
+//         if (cost.length == 0) {
+//             return res.status(404).json({ msg: 'no existe costo en la base de datos' });
+//         }
+//         return res.json({ costo: cost });
+//     },
 
-    createCost: async (req, res) => {
-        const newCost = new CostAdministrative(req.body);
+//     createCost: async (req, res) => {
+//         const newCost = new CostAdministrative(req.body);
 
-        await newCost.save();
+//         await newCost.save();
 
-        return res.status(201).json({ msg: 'costo creado' })
-    },
+//         return res.status(201).json({ msg: 'costo creado' })
+//     },
 
-    updateCostById: async (req, res) => {
-        const updateCost = await CostAdministrative.findByIdAndUpdate(req.params.id, {
-            orderStatus: req.body.orderStatus
-        }, {
-            new: true
-        });
+//     updateCostById: async (req, res) => {
+//         const updateCost = await CostAdministrative.findByIdAndUpdate(req.params.id, {
+//             orderStatus: req.body.orderStatus
+//         }, {
+//             new: true
+//         });
 
-        return res.status(204).json({ msg: 'costo actualizado' });
-    },
+//         return res.status(204).json({ msg: 'costo actualizado' });
+//     },
 
-    updateCostActivate: async (req, res) => {
-        const cost = await CostAdministrative.findByIdAndUpdate(req.params.id, { state: 1 });
+//     updateCostActivate: async (req, res) => {
+//         const cost = await CostAdministrative.findByIdAndUpdate(req.params.id, { state: 1 });
 
-        // await cost.save();
+//         // await cost.save();
 
-        return res.json({ msg: 'costo activado' });
-    },
+//         return res.json({ msg: 'costo activado' });
+//     },
 
-    updateCostDesactivate: async (req, res) => {
-        const costs = await CostAdministrative.findByIdAndUpdate(req.params.id, { state: 0 });
+//     updateCostDesactivate: async (req, res) => {
+//         const costs = await CostAdministrative.findByIdAndUpdate(req.params.id, { state: 0 });
 
-        // await costs.save();
+//         // await costs.save();
 
-        return res.json({ msg: 'Costo desactivado' });
-    },
+//         return res.json({ msg: 'Costo desactivado' });
+//     },
 
-    deleteCostById: async (req, res) => {
-        await CostAdministrative.findByIdAndDelete(req.params.id)
-        return res.status(204).json({ msg: 'Costo eiminado' });
-    }
+//     deleteCostById: async (req, res) => {
+//         await CostAdministrative.findByIdAndDelete(req.params.id)
+//         return res.status(204).json({ msg: 'Costo eiminado' });
+//     }
 
-    // costGetQuery: async (req, res) => {
-    //     const { code } = req.query;
+//     // costGetQuery: async (req, res) => {
+//     //     const { code } = req.query;
 
-    //     const cost = await CostAdministrative.find({ code: new RegExp(code, 'i') });
+//     //     const cost = await CostAdministrative.find({ code: new RegExp(code, 'i') });
 
-    //     if (cost.length == 0) {
-    //         return res.json({ msg: 'no existe codigo en costo' });
-    //     }
+//     //     if (cost.length == 0) {
+//     //         return res.json({ msg: 'no existe codigo en costo' });
+//     //     }
 
-    //     return res.json({ costo: cost }); 
+//     //     return res.json({ costo: cost }); 
 
-    // },
+//     // },
 
-    // costPost: async (req, res) => {
-    //     const { name, code, quantity, costs, date, detail } = req.body;
+//     // costPost: async (req, res) => {
+//     //     const { name, code, quantity, costs, date, detail } = req.body;
 
-    //     const cost = new cost({ name: name, code: code, quantity: quantity, costs: costs, date: date, detail: detail });
+//     //     const cost = new cost({ name: name, code: code, quantity: quantity, costs: costs, date: date, detail: detail });
 
-    //     await cost.save();
+//     //     await cost.save();
 
-    //     return res.json({msg: 'elemento creado en costo'});
-    // },
+//     //     return res.json({msg: 'elemento creado en costo'});
+//     // },
 
-    // costPut: async(req, res) => {
-    //     const {id} = req.params;
-    //     const { name, code, quantity, costs, date, detail } = req. body;
+//     // costPut: async(req, res) => {
+//     //     const {id} = req.params;
+//     //     const { name, code, quantity, costs, date, detail } = req. body;
 
-    //     const cost = await CostAdministrative.findByIdAndUpdate(id, {name: name, code: code, quantity: quantity, costs: costs, date: date, detail: detail});
+//     //     const cost = await CostAdministrative.findByIdAndUpdate(id, {name: name, code: code, quantity: quantity, costs: costs, date: date, detail: detail});
 
-    //     await cost.save();
+//     //     await cost.save();
 
-    //     return res.json({msg: 'elemento actualizado en costos'});
-    // }
-}
-export{
-    costHttp
-}
+//     //     return res.json({msg: 'elemento actualizado en costos'});
+//     // }
+// }
+// export{
+//     costHttp
+// }

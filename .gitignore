@@ -5,11 +5,3 @@
 node_modules*
 
 postman*
-
-.dockerignore
-
-.gcloudignore
-
-app.yaml
-
-Dockerfile

@@ -1,22 +1,21 @@
 import User from '../models/user.js';
 import Role from '../models/Role.js'
-import { createToken } from '../middlewares/validate-jwt.js';
+// import { createToken } from '../middlewares/validate-jwt.js';
+// import { isValidObjectId } from 'mongoose';
 
 // bcryptjs
 // import bcryptjs from 'bcryptjs';
-import { isValidObjectId } from 'mongoose';
 // const salt = bcryptjs.genSaltSync(10);
 
 const userHttp = {
     userGet: async (req, res) => {
-        const user = await User.find().populate('roles');
-        // console.log(user[0]);
+        const user = await User.find().select('-password').populate('roles');
 
         if (user.length == 0) {
-            return res.status(404).json({ msg: 'no existen usuarios' });
+            return res.status(404).json({ msg: "No records found", msj: 'No se encontraron registros' });
         }
 
-        return res.json({ usuarios: user });
+        return res.json(user);
 
     },
 
@@ -39,11 +38,11 @@ const userHttp = {
     //     return res.status(200).json({msg:'usuario creado'});
     // },
 
-    userPut: async (req, res) => {
-        const { email, roles } = req.body
+    updateUserById: async (req, res) => {
+        const { name, email, roles } = req.body
 
-        const editUser = {
-            // name,
+        let editUser = {
+            name,
             email,
             // password: await User.encryptPassword(password),
         }
@@ -51,43 +50,36 @@ const userHttp = {
         if (roles) {
             const foundRoles = await Role.find({ name: { $in: roles } })
             editUser.roles = foundRoles.map(role => role._id);
-            if (editUser.roles.length == 0) {
-                // Si no se especifica el rol por defecto es "user"
-                const role = await Role.findOne({ name: "user" })
-                editUser.roles = [role._id];
-            }
+            
         } else {
             // Si no se especifica el rol por defecto es "user"
             const role = await Role.findOne({ name: "user" })
             editUser.roles = [role._id];
         }
-        
-        await User.findByIdAndUpdate(req.params.id, editUser);
 
-        // if (userEdited) {
-        return res.status(201).json({ msg: "User update", msj: 'usuario actualizado correctamente' });
-        // }
-        // return res.status(400).json({ msg: "User not update", msj: 'usuario no actualizado' });
+        const userEdited = await User.findByIdAndUpdate(req.params.id, editUser);
+
+        if (userEdited) {
+            return res.status(201).json({ msg: "User updated", msj: 'Usuario actualizado correctamente' });
+        }
+        return res.status(200).json({ msg: "User not update", msj: 'usuario no actualizado ' });
     },
 
-    userActivate: async (req, res) => {
-        const { id } = req.params;
-
-        const user = await User.findByIdAndUpdate(id, { state: 1 });
-
-        // await user.save();
+    updateUserActivate: async (req, res) => {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, { state: 1 });
 
         return res.status(201).json({ msg: 'usuario activado' });
     },
 
-    userDeactivate: async (req, res) => {
-        const { id } = req.params;
+    updateUserDesactivate: async (req, res) => {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, { state: 0 });
 
-        const user = await User.findByIdAndUpdate(id, { state: 0 });
+        if (updatedUser) {
+            return res.status(201).json({ msg: "User updated and inactived", msj: 'Usuario desactivado' });
+        } else {
+            return res.status(404).json({ msg: "User not update", msj: 'Usuario no actualizado' });
+        }
 
-        // await user.save();
-
-        return res.status(201).json({ msg: 'usuario desactivado' });
     },
 
     // userLogin: async (req, res) => {
@@ -125,10 +117,10 @@ const userHttp = {
 
     //     return res.status(404).json({ errors: 'contraseña incorrecta' });
     // },
-    // deleteUserById: async (req, res) => {
-    //     await User.findByIdAndDelete(req.params.id)
-    //     return res.status(204).json({ msg: 'Usuario eliminado' });
-    // }
+    deleteUserById: async (req, res) => {
+        await User.findByIdAndDelete(req.params.id)
+        return res.status(204).json({ msg: 'Usuario eliminado' });
+    }
 }
 
 

@@ -7,5 +7,4 @@ dotenv.config();
 
 const server = new Server();
 
-server.listen();
-// 'http://localhost:3000'
+server.listen(); // 'http://localhost:3000'

@@ -1,24 +1,28 @@
 import { Router } from 'express';
 // import { check } from 'express-validator';
 import { ordersHttp } from '../controllers/order.js';
-import * as authJwt from '../middlewares/validate-jwt.js';
-import * as validateId from "../middlewares/validateId.js";
+import { authJwt, validateId } from "../middlewares/index.js";
+// import * as authJwt from '../middlewares/validate-jwt.js';
+// import * as validateId from "../middlewares/validateId.js";
 import { check, body, header, param, query } from 'express-validator';
 import { orderValidate } from '../helpers/order.js';
+import { validate } from '../middlewares/validate-fields.js'
 
 const routerOrder = Router();
 
 routerOrder.get('/',
     [
-        // authJwt.verifyToken,
+        authJwt.verifyToken,
     ],
     ordersHttp.getOrders);
 
 routerOrder.post('/',
     [
-        // authJwt.verifyToken,
-        // authJwt.isAuthorised,
-        // check("customer").custom()
+        authJwt.verifyToken,
+        authJwt.isAuthorised,
+        body('customer').notEmpty(),
+        body('customer').isMongoId(),
+        validate
     ],
     ordersHttp.createOrder);
 
@@ -27,7 +31,8 @@ routerOrder.put(
     [
         authJwt.verifyToken,
         authJwt.isAuthorised,
-        validateId.checkId,
+        // validateId.checkId,
+        header()
     ],
     ordersHttp.updateOrderById);
 

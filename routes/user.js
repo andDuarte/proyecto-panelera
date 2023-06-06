@@ -3,8 +3,11 @@ import { userHttp } from "../controllers/user.js";
 import { check } from 'express-validator';
 import { validate } from '../middlewares/validate-fields.js';
 import { userValidate } from '../helpers/user.js';
-import * as authJwt from '../middlewares/validate-jwt.js';
-import * as validateId from "../middlewares/validateId.js";
+// import * as authJwt from '../middlewares/validate-jwt.js';
+// import * as validateId from "../middlewares/validateId.js";
+
+import { authJwt, validateId, verifySingup } from "../middlewares/index.js";
+
 
 const routerUser = Router();
 
@@ -35,22 +38,25 @@ routerUser.put('/:id', [
     // check('id', ' id no valido').isMongoId(),
     // check('id').custom(userValidate.userId),
     // validate,
-    // authJwt.verifyToken,
-    // authJwt.isAuthorised,
+    authJwt.verifyToken,
+    authJwt.isAuthorised,
     validateId.checkId,
-], userHttp.userPut );
+    verifySingup.checkChangeDuplicateEmail,
+    verifySingup.checkDuplicateEmail,
+    verifySingup.checkRolesExisted,
+], userHttp.updateUserById );
 
 routerUser.put('/activar/:id', [
-    // authJwt.verifyToken,
-    // authJwt.isAuthorised,
+    authJwt.verifyToken,
+    authJwt.isAuthorised,
     validateId.checkId,
-], userHttp.userActivate );
+], userHttp.updateUserActivate );
 
 routerUser.put('/desactivar/:id', [
-    // authJwt.verifyToken,
-    // authJwt.isAuthorised,
+    authJwt.verifyToken,
+    authJwt.isAuthorised,
     validateId.checkId,
-], userHttp.userDeactivate );
+], userHttp.updateUserDesactivate );
 
 // routerUser.post('/login', [
 //     check('email', 'email es necesario').trim().notEmpty(),

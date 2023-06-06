@@ -4,13 +4,13 @@ import Category from '../models/category.js';
 
 const inventoryHttp = {
     inventoryGet: async(req, res) => {
-        const inventory = await Inventory.find();
+        const inventory = await Inventory.find().populate('store').populate('mark');
 
         if(inventory.length == 0) {
             return res.status(400).json({msg: 'no existe inventario'});
         }
 
-        return res.status(200).json({inventario: inventory});
+        return res.status(200).json(inventory);
     },
 
     inventoryGetQuery: async(req, res) => {

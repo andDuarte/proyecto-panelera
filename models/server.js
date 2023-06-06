@@ -3,6 +3,8 @@ import { connection } from '../database/connection.js';
 import { createRoles, createCategory } from '../libs/initialSeptup.js';
 import cors from 'cors';
 import morgan from 'morgan';
+import CONFIG from "../config.js";
+
 // routes
 
 import { routerAllotment } from '../routes/allotment.js';
@@ -41,10 +43,12 @@ class Server {
     }
 
     routes() {
+        // this.app.use('/labor', routerWork );
         this.app.use('/auth', routerAuth );
         this.app.use('/bodega', routerStore );
         this.app.use('/costo', routerCost );
         this.app.use('/etapa', routerPhase );
+        this.app.use('/facturacion', routerBilling );
         this.app.use('/granja', routerFarm );
         this.app.use('/inventario', routerInventory );
         this.app.use('/lote', routerAllotment );
@@ -52,16 +56,13 @@ class Server {
         this.app.use('/pedido', routerOrder );
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
-        this.app.use('/facturacion', routerBilling );
-        // this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
             return res.status(200).send('hola mundo :)');
         });
     }
 
     listen() {
-        // process.env.PORT
-        this.app.listen(3000, () => { console.log('Server Online: ', 3000); });
+        this.app.listen(CONFIG.PORT, () => { console.log('Server Online: ', CONFIG.PORT); });
     }
 }
 

@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import { authHttp } from '../controllers/auth.js';
-import * as verifySingup from "../middlewares/verifySignup.js";
+import { verifySingup } from "../middlewares/index.js";
 
 const routerAuth = Router();
 
 routerAuth.post(
     '/singup',
     [
+        verifySingup.checkDuplicateEmail,
         verifySingup.checkRolesExisted
     ],
     authHttp.singUp);
