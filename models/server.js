@@ -9,7 +9,7 @@ import { routerAllotment } from '../routes/allotment.js';
 
 import { routerAuth } from '../routes/auth.js';
 import { routerBilling } from '../routes/billing.js';
-import { routerCost } from '../routes/costInventory.js';
+import { routerCost } from '../routes/cost.js';
 import { routerFarm } from '../routes/farm.js';
 import { routerInventory } from '../routes/inventory.js';
 import { routerMark } from '../routes/mark.js';

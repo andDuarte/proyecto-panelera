@@ -33,8 +33,8 @@ routerPhase.post('/', [
 routerPhase.put('/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(phaseValidate.phaseId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], phaseHttp.phasePut );
 
@@ -51,16 +51,16 @@ routerPhase.post('/actividad/:id', [
 routerPhase.put('/activar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(phaseValidate.phaseId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], phaseHttp.phaseActivate );
 
 routerPhase.put('/desactivar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(phaseValidate.phaseId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], phaseHttp.phaseDesactivate );
 

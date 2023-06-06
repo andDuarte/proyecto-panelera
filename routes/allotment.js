@@ -12,7 +12,7 @@ import { allotmentValidate } from '../helpers/allotment.js';
 
 import { farmValidate } from '../helpers/farm.js';
 
-import { peopleValidate } from '../helpers/people.js';
+// import { peopleValidate } from '../helpers/people.js';
 
 const routerAllotment = Router();
 
@@ -26,10 +26,12 @@ routerAllotment.post('/', [
     body('name', 'nombre lote es necesario').trim().notEmpty(),
     body('size', 'tamaño lote es necesario').trim().notEmpty(),
     body('farm', 'granja es necesaria').trim().notEmpty(),
+    body('farm', 'id no valido').isMongoId(),
     body('farm').custom(farmValidate.farmId),
     // header('token', 'token es necesario').trim().notEmpty(),
     // header('token').custom(validateToken),
     validate
+    // no usar
     // body('owner', 'dueño lote es necesario').trim().notEmpty(),
     // body('owner').custom(peopleValidate.peopleId),
 ], allotmentHttp.createAllotment );
@@ -37,29 +39,30 @@ routerAllotment.post('/', [
 routerAllotment.put('/:id', [
     param('id', 'id no valido').isMongoId(),
     param('id').custom(allotmentValidate.allotmentId),
-    header('token', 'token es necesario').trim().notEmpty(),
-    header('token').custom(validateToken),
+    // header('token', 'token es necesario').trim().notEmpty(),
+    // header('token').custom(validateToken),
     validate
+    // no usar
     // body('owner').custom(allotmentValidate.allotmentOwner),
 ], allotmentHttp.allotmentPut );
 
 routerAllotment.put('/activar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(allotmentValidate.allotmentId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentActivate );
 
 routerAllotment.put('/desactivar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(allotmentValidate.allotmentId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentDesactivate );
 
-routerAllotment.delete('/:id', [
+// routerAllotment.delete('/:id', [
     // check('token', 'token es necesario').trim().notEmpty(),
     // check('token').custom(validateToken),
     // check('id', 'id no valido').isMongoId(),
@@ -67,7 +70,7 @@ routerAllotment.delete('/:id', [
     // validate
     // authJwt.verifyToken,
     // authJwt.isModerator
-], allotmentHttp.deleteAllotmentById );
+// ], allotmentHttp.deleteAllotmentById );
 
 export{
     routerAllotment

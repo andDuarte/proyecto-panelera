@@ -36,7 +36,7 @@ const inventoryHttp = {
             console.log(categoryTemp);
 
             if(categoryTemp.length > 0) {
-                categoryLast.push(categoryTemp[0]._id);
+                categoryLast.push({name: categoryTemp[0]._id});
             }
         }
 
@@ -56,19 +56,29 @@ const inventoryHttp = {
 
         const categoryTemp = await Inventory.find({_id: id});
 
-        let categoryLast = categoryTemp.category;
+        let categoryLast = categoryTemp[0].category;
+
+        let foundCategory = false;
 
         for(let position = 0; position < category.length; position++) {
-            let temp = await category.find({name: category[position]});
+            let temp = await Category.find({name: category[position].name});
 
             if(temp.length > 0) {
-                if(!categoryLast.includes(temp[0]._id)) {
-                    categoryLast.push(temp[0]._id);
+                for(let index = 0; index < categoryLast.length; index++) {
+                    if (categoryLast[index].name == temp[0]._id) {
+                        foundCategory = true;
+                    }
+                }
+
+                if(foundCategory == false) {
+                    categoryLast.push({name: temp[0]._id});
                 }
             }
+
+            foundCategory = false;
         }
 
-        console.log(categoryLast);
+        // console.log(categoryLast);
 
         const inventory = await Inventory.findByIdAndUpdate(id, {name: name, category: categoryLast, quantity: quantity, store: store, mark: mark});
         

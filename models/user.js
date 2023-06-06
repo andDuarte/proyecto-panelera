@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema({
     // delete name
-    name: { type: String },
+    // name: { type: String },
     email: { type: String, unique: true, required: true },
     password: { type: String, required: true },
     state: { type: Number, default: 1 },

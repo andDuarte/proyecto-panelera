@@ -6,11 +6,12 @@ const billingSchema = new Schema({
     totalWorth: { type: Number },
     state: { type: Number, default: 1 },
     // date
+    // payment: {type: String} // efectivo - transferencia bancaria
 }, {
     timestamps: true,
     versionKey: false
 });
 
 export default model('Billing', billingSchema);
-
+// eliminar
 // https://quasar.dev/vue-components/inner-loading#usage

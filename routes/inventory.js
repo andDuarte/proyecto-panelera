@@ -43,8 +43,8 @@ routerInventory.post('/', [
 ], inventoryHttp.inventoryPost );
 
 routerInventory.put('/:id', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     // check('store', 'bodega es necesaria').trim().notEmpty(),
     check('store', 'bodega no valida').isMongoId(),
     check('store').custom(storeValidate.storeId),
@@ -57,16 +57,16 @@ routerInventory.put('/:id', [
 ], inventoryHttp.inventoryPut );
 
 routerInventory.put('/activar/:id', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     check('id', 'id no valido').isMongoId(),
     check('id').custom(inventoryValidate.inventoryId),
     validate
 ], inventoryHttp.inventoryActivate );
 
 routerInventory.put('/desactivar/:id', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     check('id', 'id no valido').isMongoId(),
     check('id').custom(inventoryValidate.inventoryId),
     validate

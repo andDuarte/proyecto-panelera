@@ -36,24 +36,24 @@ routerPeople.post('/', [
 routerPeople.put('/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], peopleHttp.peoplePut );
 
 routerPeople.put('/activar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'el token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'el token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], peopleHttp.peopleActivate );
 
 routerPeople.put('/desactivar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(peopleValidate.peopleId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], peopleHttp.peopleDesactivate );
 

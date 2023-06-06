@@ -44,7 +44,7 @@ const allotmentHttp = {
 
         historic.push({name: allotmentId[0].name, size: allotmentId[0].size, farm: allotmentId[0].farm});
 
-        const allotment = await Allotment.findByIdAndUpdate(id, {size: size, owner: owner,name: name, farm: farm, historic: historic});
+        const allotment = await Allotment.findByIdAndUpdate(id, {size: size,name: name, farm: farm, historic: historic});
  
         // allotment.save();
 
@@ -71,11 +71,11 @@ const allotmentHttp = {
         return res.status(201).json({msg: 'lote desactivado'});
     },
     
-    deleteAllotmentById: async(req, res) => {
-        await Allotment.findByIdAndDelete(req.params.id);
+    // deleteAllotmentById: async(req, res) => {
+    //     await Allotment.findByIdAndDelete(req.params.id);
 
-        return res.status(204).json({msg: 'lote eiminado'});
-    },
+    //     return res.status(204).json({msg: 'lote eiminado'});
+    // },
 }
 
 export{

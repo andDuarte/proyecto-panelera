@@ -38,24 +38,24 @@ routerStore.post('/', [
 ], storeHttp.storePost );
 
 routerStore.put('/:id', [
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     check('id', 'id no es valido').isMongoId(),
     check('id').custom(storeValidate.storeId),
     validate
 ], storeHttp.storePut );
 
 routerStore.put('/activar/:id', [
-    check('token', 'el token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'el token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     check('id', 'el id no es valido').isMongoId(),
     check('id').custom(storeValidate.storeId),
     validate
 ], storeHttp.storeActivate );
 
 routerStore.put('/desactivar/:id', [
-    check('token', 'el token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'el token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     check('id', 'el id no es valido').isMongoId(),
     check('id').custom(storeValidate.storeId),
     validate

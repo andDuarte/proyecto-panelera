@@ -29,24 +29,24 @@ routerMark.post('/', [
 routerMark.put('/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(markValidate.markId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], markHttp.markPut );
 
 routerMark.put('/activar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(markValidate.markId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], markHttp.markActivate );
 
 routerMark.put('/desactivar/:id', [
     check('id', 'id no valido').isMongoId(),
     check('id').custom(markValidate.markId),
-    check('token', 'token es necesario').trim().notEmpty(),
-    check('token').custom(validateToken),
+    // check('token', 'token es necesario').trim().notEmpty(),
+    // check('token').custom(validateToken),
     validate
 ], markHttp.markDesactivate );
 

@@ -7,8 +7,9 @@ const allotmentSchema = new Schema({
     state: {type: Number, default: 1},
     historic: [
         {
-            farm: {type: String},
+            farm: {type: Schema.Types.ObjectId, ref: 'Farm'},
             size: {type: String},
+            name: String,
             // owner: {type: String},
         },
     ],

@@ -38,7 +38,7 @@ const markHttp = {
 
         const mark = await markModel.findByIdAndUpdate(id, {state: 1});
 
-        await mark.save();
+        // await mark.save();
 
         return res.status(201).json({msg: 'marca activada'});
     },

@@ -13,7 +13,6 @@ routerUser.get('/', [
     // check('token').custom(validateToken),
     // validate,
     // authJwt.verifyToken,
-
 ], userHttp.userGet );
 
 // routerUser.get('/:id', [], userHttp );
@@ -36,20 +35,20 @@ routerUser.put('/:id', [
     // check('id', ' id no valido').isMongoId(),
     // check('id').custom(userValidate.userId),
     // validate,
-    authJwt.verifyToken,
-    authJwt.isAuthorised,
+    // authJwt.verifyToken,
+    // authJwt.isAuthorised,
     validateId.checkId,
 ], userHttp.userPut );
 
 routerUser.put('/activar/:id', [
-    authJwt.verifyToken,
-    authJwt.isAuthorised,
+    // authJwt.verifyToken,
+    // authJwt.isAuthorised,
     validateId.checkId,
 ], userHttp.userActivate );
 
 routerUser.put('/desactivar/:id', [
-    authJwt.verifyToken,
-    authJwt.isAuthorised,
+    // authJwt.verifyToken,
+    // authJwt.isAuthorised,
     validateId.checkId,
 ], userHttp.userDeactivate );
 

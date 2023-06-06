@@ -10,7 +10,7 @@ import { isValidObjectId } from 'mongoose';
 const userHttp = {
     userGet: async (req, res) => {
         const user = await User.find().populate('roles');
-        // console.log(user[4]);
+        // console.log(user[0]);
 
         if (user.length == 0) {
             return res.status(404).json({ msg: 'no existen usuarios' });
@@ -40,10 +40,10 @@ const userHttp = {
     // },
 
     userPut: async (req, res) => {
-        const { name, email, roles } = req.body
+        const { email, roles } = req.body
 
         const editUser = {
-            name,
+            // name,
             email,
             // password: await User.encryptPassword(password),
         }
@@ -61,13 +61,13 @@ const userHttp = {
             const role = await Role.findOne({ name: "user" })
             editUser.roles = [role._id];
         }
+        
+        await User.findByIdAndUpdate(req.params.id, editUser);
 
-        const userEdited = await User.findByIdAndUpdate(req.params.id, editUser);
-
-        if (userEdited) {
-            return res.status(204).json({ msg: "User update", msj: 'usuario actualizado correctamente' });
-        }
-        return res.status(200).json({ msg: "User not update", msj: 'usuario no actualizado ' });
+        // if (userEdited) {
+        return res.status(201).json({ msg: "User update", msj: 'usuario actualizado correctamente' });
+        // }
+        // return res.status(400).json({ msg: "User not update", msj: 'usuario no actualizado' });
     },
 
     userActivate: async (req, res) => {
@@ -75,7 +75,7 @@ const userHttp = {
 
         const user = await User.findByIdAndUpdate(id, { state: 1 });
 
-        await user.save();
+        // await user.save();
 
         return res.status(201).json({ msg: 'usuario activado' });
     },
@@ -85,19 +85,19 @@ const userHttp = {
 
         const user = await User.findByIdAndUpdate(id, { state: 0 });
 
-        await user.save();
+        // await user.save();
 
         return res.status(201).json({ msg: 'usuario desactivado' });
     },
 
-    userLogin: async (req, res) => {
-        const { email, password } = req.body;
+    // userLogin: async (req, res) => {
+    //     const { email, password } = req.body;
 
-        const user = await User.find({ email: email });
+    //     const user = await User.find({ email: email });
 
-        if (!user) {
-            return res.status(404).json({ errors: 'email no existe' });
-        }
+    //     if (!user) {
+    //         return res.status(404).json({ errors: 'email no existe' });
+    //     }
 
         // bcryptjs.compare(password, user.password, function(err, response){
         //     if(response == true) {
@@ -112,19 +112,19 @@ const userHttp = {
         //     return res.json({msj: 'password invalida'});
         // });
 
-        const validatePassword = bcryptjs.compareSync(password, user[0].password);
+    //     const validatePassword = bcryptjs.compareSync(password, user[0].password);
 
-        if (validatePassword == true) {
-            const { token } = await createToken({
-                _id: user[0]._id,
-                typeUser: user[0].typeUser,
-            });
+    //     if (validatePassword == true) {
+    //         const { token } = await createToken({
+    //             _id: user[0]._id,
+    //             typeUser: user[0].typeUser,
+    //         });
 
-            return res.json({ token: token });
-        }
+    //         return res.json({ token: token });
+    //     }
 
-        return res.status(404).json({ errors: 'contraseña incorrecta' });
-    },
+    //     return res.status(404).json({ errors: 'contraseña incorrecta' });
+    // },
     // deleteUserById: async (req, res) => {
     //     await User.findByIdAndDelete(req.params.id)
     //     return res.status(204).json({ msg: 'Usuario eliminado' });
