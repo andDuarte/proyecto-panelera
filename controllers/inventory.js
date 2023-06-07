@@ -36,7 +36,7 @@ const inventoryHttp = {
             console.log(categoryTemp);
 
             if(categoryTemp.length > 0) {
-                categoryLast.push({name: categoryTemp[0]._id});
+                categoryLast.push({name: categoryTemp[0].name});
             }
         }
 

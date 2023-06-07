@@ -4,7 +4,7 @@ import { phaseModel } from '../models/phase.js';
 
 const phaseHttp = {
     phaseGet: async(req, res) => {
-        const phase = await phaseModel.find().populate('process.elements');
+        const phase = await phaseModel.find().populate('process.elements').populate('process.workers');
 
         if(phase.length == 0) {
             return res.status(404).json({msg: 'no existen etapas'});

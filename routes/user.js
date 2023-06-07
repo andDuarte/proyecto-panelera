@@ -12,10 +12,10 @@ import { authJwt, validateId, verifySingup } from "../middlewares/index.js";
 const routerUser = Router();
 
 routerUser.get('/', [
-    // check('token', 'el token es necesario').trim().notEmpty(),
+    check('token', 'el token es necesario').notEmpty(),
     // check('token').custom(validateToken),
-    // validate,
-    // authJwt.verifyToken,
+    validate,
+    authJwt.verifyToken,
 ], userHttp.userGet );
 
 // routerUser.get('/:id', [], userHttp );
