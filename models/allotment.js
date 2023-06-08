@@ -10,11 +10,8 @@ const allotmentSchema = new Schema({
             farm: {type: Schema.Types.ObjectId, ref: 'Farm'},
             size: {type: String},
             name: String,
-            // owner: {type: String},
         },
     ],
-    // owner: {type: Schema.Types.ObjectId, ref: 'People'},
-    // createdAt: {type: Date, default: Date.now},
 }, {
     timestamps: true,
     versionKey: false

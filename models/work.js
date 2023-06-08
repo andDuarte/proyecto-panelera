@@ -1,8 +1,9 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
-const phaseSchema = new mongoose.Schema({
-    name: {type: String, required: true},
-    process: [
+const workSchema = new Schema({
+    phase: { type: Schema.Types.ObjectId, ref: 'Phase' },
+
+    activities: [
         {
             activity: {type: String},
             stateActivity: {type: String, default: 'por hacer'}, //realizada, por hacer, en proceso
@@ -14,19 +15,14 @@ const phaseSchema = new mongoose.Schema({
             ],
             elements: [
                 {
+                    ref: 'Inventory',
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Inventory'
                 },
             ],
-            state: {type: Number, default: 1},
         },
     ],
-    allotment: {type: mongoose.Schema.Types.ObjectId, ref: 'Allotment'},
-    state: {type: Number, default: 1},
+
+    state: { type: Number, default: 1 },
 });
 
-const phaseModel = mongoose.model('Phase', phaseSchema );
-
-export{
-    phaseModel
-}
+export default model( 'Work', workSchema );

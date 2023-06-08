@@ -10,7 +10,7 @@ const peopleSchema = new Schema({
     state: { type: Number, default: 1 },
     medicalInsuranceCompany: { type: String },
     typePeople: [
-        {type: String}, // customer - owner - worker
+        { type: String }, // customer - owner - worker
     ],
 }, {
     timestamps: true,

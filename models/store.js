@@ -7,7 +7,7 @@ const storeSchema = new mongoose.Schema({
     state: {type: Number, default: 1},
 });
 
-const storeModel = mongoose.model('store', storeSchema );
+const storeModel = mongoose.model('Store', storeSchema );
 
 export{
     storeModel

@@ -1,4 +1,4 @@
-import CONFIG from '../config.js'
+import CONFIG from '../config.js';
 import jwt from 'jsonwebtoken';
 import Role from '../models/Role.js';
 import User from '../models/user.js';

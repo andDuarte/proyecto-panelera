@@ -7,7 +7,7 @@ const markSchema = new mongoose.Schema({
     createdAt: {type: Date, default: Date.now},
 });
 
-const markModel = mongoose.model('mark', markSchema );
+const markModel = mongoose.model('Mark', markSchema );
 
 export{
     markModel

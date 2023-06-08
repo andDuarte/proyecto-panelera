@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const costSchema = new Schema({
-    phase: {type: Schema.Types.ObjectId, ref: 'phase'},
+    phase: {type: Schema.Types.ObjectId, ref: 'Phase'},
     list: [
         {
             process: String,

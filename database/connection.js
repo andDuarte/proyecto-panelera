@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import CONFIG from '../config.js'
+import CONFIG from '../config.js';
 
 async function connection() {
     await mongoose.connect(CONFIG.MONGODB_LINK)

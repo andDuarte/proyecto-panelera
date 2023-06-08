@@ -1,5 +1,4 @@
 import Allotment from '../models/allotment.js';
-// import { Allotment } from '../models/allotment.js';
 
 const allotmentHttp = {
     allotmentGet: async(req, res) => {
@@ -9,7 +8,7 @@ const allotmentHttp = {
             return res.status(400).json({msg: 'no existen lotes'});
         }
 
-        return res.status(200).json({lotes: allotment});
+        return res.status(200).json(allotment);
     },
 
     createAllotment: async (req, res) =>{
@@ -22,51 +21,30 @@ const allotmentHttp = {
 
     },
 
-    // allotmentPost: async(req, res) => {
-    //     // const { owner, name } = req.body;
-    //     console.log(req.body);
-
-    //     // const allotment = new Allotment(req.body);
-
-    //     // await allotment.save();
-
-    //     return res.json({msg: 'lote creado'});
-    // },
-
     allotmentPut: async(req, res) => {
         const { id } = req.params;
  
         const { size, name, farm } = req.body;
 
-        const allotmentId = await Allotment.find({_id: id});
+        const allotmentId = await Allotment.findOne({_id: id});
 
-        const historic = allotmentId[0].historic;
+        const historic = allotmentId.historic;
 
-        historic.push({name: allotmentId[0].name, size: allotmentId[0].size, farm: allotmentId[0].farm});
+        historic.push({name: allotmentId.name, size: allotmentId.size, farm: allotmentId.farm});
 
         const allotment = await Allotment.findByIdAndUpdate(id, {size: size,name: name, farm: farm, historic: historic});
- 
-        // allotment.save();
 
         return res.status(201).json({msg: 'lote actualizado'});
     },
 
     allotmentActivate: async(req, res) => {
-        const { id } = req.params;
-
-        const allotment = await Allotment.findByIdAndUpdate(id, {state: 1});
-
-        // await allotment.save();
+        const allotment = await Allotment.findByIdAndUpdate(req.params.id, {state: 1});
 
         return res.status(201).json({msg: 'lote activado'});
     },
 
     allotmentDesactivate: async(req, res) => {
-        const { id } = req.params;
-
-        const allotment = await Allotment.findByIdAndUpdate(id, {state: 0});
-
-        // await allotment.save();
+        const allotment = await Allotment.findByIdAndUpdate(req.params.id, {state: 0});
 
         return res.status(201).json({msg: 'lote desactivado'});
     },

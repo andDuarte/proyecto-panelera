@@ -1,0 +1,45 @@
+import Work from '../models/work.js';
+
+const workHttp = {
+    workGet: async (req, res) => {
+        const work = await Work.find();
+
+        if(work.length == 0) {
+            return res.status(404).json({msg: 'no existen labores'});
+        }
+
+        return res.status(200).json(work);
+    },
+
+    workPost: async (req, res) => {
+        const work = new Work(req.body);
+
+        await work.save();
+
+        return res.status(200).json({msg: 'labor creada'});
+    },
+
+    workPut: async (req, res) => {
+        const { phase, activities } = req.body;
+
+        const work = await Work.findByIdAndUpdate(req.params.id, {phase: phase, activities: activities});
+
+        return res.status(201).json({msg: 'labor actualizada'});
+    },
+
+    workActivate: async (req, res) => {
+        const work = await Work.findByIdAndUpdate(req.params.id, {state: 1});
+
+        return res.status(201).json({msg: 'labor activada'});
+    },
+
+    workDesactivate: async (req, res) => {
+        const work = await work.findByIdAndUpdate(req.params.id, {state: 0});
+
+        return res.status(201).json({msg: 'labor desactivada'});
+    }
+}
+
+export{
+    workHttp
+}

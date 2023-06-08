@@ -8,7 +8,6 @@ const authHttp = {
         const { email, password, roles } = req.body;
 
         const newUser = new User({
-            // name,
             email,
             password: await User.encryptPassword(password),
         });

@@ -5,6 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import CONFIG from "../config.js";
 
+// TODO: revision de peticiones put con arrays en su estructura body. !! estructure de forma no correcta los datos
 // routes
 import { routerAllotment } from '../routes/allotment.js';
 import { routerAuth } from '../routes/auth.js';
@@ -19,6 +20,7 @@ import { routerPhase } from '../routes/phase.js';
 import { routerStore } from '../routes/store.js';
 import { routerUser } from '../routes/user.js';
 import { routerTypeOutlay } from '../routes/typeOutlay.js';
+import { routerWork } from '../routes/work.js';
 
 class Server {
     constructor() {
@@ -54,6 +56,7 @@ class Server {
         this.app.use('/persona', routerPeople );
         this.app.use('/usuario', routerUser );
         this.app.use('/tipogasto', routerTypeOutlay );
+        this.app.use('/labor', routerWork );
         this.app.use('/',(req, res)=>{
             return res.status(200).send('hola mundo :)');
         });
