@@ -13,7 +13,9 @@ import { typeOutlayValidate } from '../helpers/typeOutlay.js';
 const routerTypeOutlay = Router();
 
 routerTypeOutlay.get('/', [
-
+    header('token', 'token es necesario').notEmpty(),
+    header('token').custom(validateToken),
+    validate
 ], typeOutlayHttp.typeOutlayGet );
 
 routerTypeOutlay.post('/', [
@@ -28,7 +30,7 @@ routerTypeOutlay.put('/:id', [
     param('id').custom(typeOutlayValidate.typeOutlayId),
     header('token', 'token es necesario').notEmpty(),
     header('token').custom(validateToken),
-
+    validate
 ], typeOutlayHttp.updateTypeOutlay );
 
 routerTypeOutlay.put('/activar/:id', [
@@ -36,6 +38,7 @@ routerTypeOutlay.put('/activar/:id', [
     param('id').custom(typeOutlayValidate.typeOutlayId),
     header('token', 'token es necesario').notEmpty(),
     header('token').custom(validateToken),
+    validate
 ], typeOutlayHttp.activateTypeOutlay );
 
 routerTypeOutlay.put('/desactivar/:id', [
@@ -43,6 +46,7 @@ routerTypeOutlay.put('/desactivar/:id', [
     param('id').custom(typeOutlayValidate.typeOutlayId),
     header('token', 'token es necesario').notEmpty(),
     header('token').custom(validateToken),
+    validate
 ], typeOutlayHttp.desactivateTypeOutlay );
 
 export{

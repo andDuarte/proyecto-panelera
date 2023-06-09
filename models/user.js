@@ -18,7 +18,7 @@ userSchema.statics.encryptPassword = async (password) => {
     // Se recomienda usar async para que no se bloque el proceso
     const salt = await bcrypt.genSalt(10);
     return await bcrypt.hash(password, salt);
-},
+};
 
 userSchema.statics.comparePassword = async (password, receivedPassword) => {
     return await bcrypt.compare(password, receivedPassword);

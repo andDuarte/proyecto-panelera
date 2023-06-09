@@ -4,9 +4,9 @@ const typeOutlayHttp = {
     typeOutlayGet: async (req, res) => {
         const outlay = await TypeOutlay.find();
 
-        if(outlay.length == 0) {
-            return res.status(400).json({msg: 'no existen tipo gastos'});
-        }
+        // if(outlay.length == 0) {
+        //     return res.status(400).json({msg: 'no existen tipo gastos'});
+        // }
         
         return res.status(200).json(outlay);
     },

@@ -2,11 +2,11 @@ import Work from '../models/work.js';
 
 const workHttp = {
     workGet: async (req, res) => {
-        const work = await Work.find();
+        const work = await Work.find().populate('phase');
 
-        if(work.length == 0) {
-            return res.status(404).json({msg: 'no existen labores'});
-        }
+        // if(work.length == 0) {
+        //     return res.status(404).json({msg: 'no existen labores'});
+        // }
 
         return res.status(200).json(work);
     },
@@ -20,9 +20,7 @@ const workHttp = {
     },
 
     workPut: async (req, res) => {
-        const { phase, activities } = req.body;
-
-        const work = await Work.findByIdAndUpdate(req.params.id, {phase: phase, activities: activities});
+        const work = await Work.findByIdAndUpdate(req.params.id, req.body);
 
         return res.status(201).json({msg: 'labor actualizada'});
     },

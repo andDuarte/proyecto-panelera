@@ -10,7 +10,7 @@ const farmValidate = {
         }
     },
 
-    ownerFarm: async(ownerFarm) => {
+    farmOwner: async(ownerFarm) => {
         const owner = await People.find({_id: ownerFarm});
 
         if(owner.typePeople != "owner"){

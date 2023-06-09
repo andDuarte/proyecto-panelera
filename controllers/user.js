@@ -5,9 +5,9 @@ const userHttp = {
     userGet: async (req, res) => {
         const user = await User.find().select('-password').populate('roles');
 
-        if (user.length == 0) {
-            return res.status(404).json({ msg: "No records found", msj: 'No se encontraron registros' });
-        }
+        // if (user.length == 0) {
+        //     return res.status(404).json({ msg: "No records found", msj: 'No se encontraron registros' });
+        // }
 
         return res.json(user);
     },

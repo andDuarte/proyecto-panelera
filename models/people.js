@@ -17,4 +17,4 @@ const peopleSchema = new Schema({
     versionKey: false,
 });
 
-export default model('People', peopleSchema);
+export default model( 'People', peopleSchema );

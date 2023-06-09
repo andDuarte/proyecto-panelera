@@ -17,17 +17,10 @@ import { markValidate } from '../helpers/mark.js';
 const routerInventory = Router();
 
 routerInventory.get('/', [
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
-], inventoryHttp.inventoryGet );
-
-routerInventory.get('/search', [
-    check('category', 'categoria es necesaria').trim().notEmpty(),
-    check('token', 'token es necesario').trim().notEmpty(),
+    check('token', 'token es necesario').notEmpty(),
     check('token').custom(validateToken),
     validate
-], inventoryHttp.inventoryGetQuery );
+], inventoryHttp.inventoryGet );
 
 routerInventory.post('/', [
     check('name', 'nombre del elemento es necesario').trim().notEmpty(),
@@ -37,36 +30,30 @@ routerInventory.post('/', [
     check('mark', 'marca es necesaria').trim().notEmpty(),
     check('mark', 'marca no valida').isMongoId(),
     check('mark').custom(markValidate.markId),
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
+    check('token', 'token es necesario').notEmpty(),
+    check('token').custom(validateToken),
     validate
 ], inventoryHttp.inventoryPost );
 
 routerInventory.put('/:id', [
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // check('store', 'bodega es necesaria').trim().notEmpty(),
-    check('store', 'bodega no valida').isMongoId(),
-    check('store').custom(storeValidate.storeId),
-    // check('mark', 'marca es necesaria').trim().notEmpty(),
-    check('mark', 'marca no valida').isMongoId(),
-    check('mark').custom(markValidate.markId),
+    check('token', 'token es necesario').notEmpty(),
+    check('token').custom(validateToken),
     check('id', 'id no valido').isMongoId(),
     check('id').custom(inventoryValidate.inventoryId),
     validate
 ], inventoryHttp.inventoryPut );
 
 routerInventory.put('/activar/:id', [
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
+    check('token', 'token es necesario').notEmpty(),
+    check('token').custom(validateToken),
     check('id', 'id no valido').isMongoId(),
     check('id').custom(inventoryValidate.inventoryId),
     validate
 ], inventoryHttp.inventoryActivate );
 
 routerInventory.put('/desactivar/:id', [
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
+    check('token', 'token es necesario').notEmpty(),
+    check('token').custom(validateToken),
     check('id', 'id no valido').isMongoId(),
     check('id').custom(inventoryValidate.inventoryId),
     validate

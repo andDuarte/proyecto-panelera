@@ -4,11 +4,11 @@ const farmHttp = {
     farmGet: async(req, res) => {
         const farm = await Farm.find().populate('ownerFarm');
 
-        if(farm.length == 0) {
-            return res.status(400).json({msg: 'no existe granjas'})
-        }
+        // if(farm.length == 0) {
+        //     return res.status(400).json({msg: 'no existe granjas'})
+        // }
 
-        return res.status(200).json({granjas: farm});
+        return res.status(200).json(farm);
     },
 
     farmPost: async(req, res) => {
@@ -20,9 +20,7 @@ const farmHttp = {
     },
 
     farmPut: async(req, res) => {
-        const { name } = req.body;
-
-        const farm = await Farm.findByIdAndUpdate(req.params.id, {name: name});
+        const farm = await Farm.findByIdAndUpdate(req.params.id, req.body);
 
         return res.status(201).json({msg: 'granja actualizada'});
     },

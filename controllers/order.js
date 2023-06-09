@@ -4,9 +4,9 @@ const ordersHttp = {
     getOrders: async (req, res) => {
         const orders = await Order.find().populate('customer').populate('products.element');
 
-        if (orders.length == 0) {
-            return res.status(404).json({ msg: 'No records found', msj: 'No se encontraron registros' });
-        }
+        // if (orders.length == 0) {
+        //     return res.status(404).json({ msg: 'No records found', msj: 'No se encontraron registros' });
+        // }
 
         return res.json(orders);
     },
@@ -44,7 +44,7 @@ const ordersHttp = {
     },
 
     deleteOrderById: async (req, res) => {
-        await Order.findByIdAndDelete(req.params.id)
+        await Order.findByIdAndDelete(req.params.id);
         return res.status(201).json({ msg: 'Order update and deleted', msj: 'Pedido eliminado' });
     }
 }

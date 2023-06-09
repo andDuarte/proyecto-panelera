@@ -1,20 +1,18 @@
-import { markModel } from '../models/mark.js';
+import Mark from '../models/mark.js';
 
 const markHttp = {
     markGet: async(req, res) => {
-        const mark = await markModel.find();
+        const mark = await Mark.find();
 
-        if(mark.length == 0) {
-            return res.status(400).json({msg: 'no existen marcas'});
-        }
+        // if(mark.length == 0) {
+        //     return res.status(400).json({msg: 'no existen marcas'});
+        // }
 
-        return res.status(200).json({marcas: mark});
+        return res.status(200).json(mark);
     },
     
     markPost: async(req, res) => {
-        const { name, ownerCompany } = req.body;
-
-        const mark = new markModel({name: name, ownerCompany: ownerCompany});
+        const mark = new Mark(req.body);
 
         await mark.save();
 
@@ -22,34 +20,20 @@ const markHttp = {
     },
 
     markPut: async(req, res) => {
-        const { id } = req.params;
-
-        const { name, ownerCompany } = req.body;
-
-        const mark = await markModel.findByIdAndUpdate(id, {name: name, ownerCompany: ownerCompany});
-
-        // await mark.save();
+        const mark = await Mark.findByIdAndUpdate(req.params.id, req.body);
 
         return res.status(201).json({msg: 'marca actualizada'});
     },
 
     markActivate: async(req, res) => {
-        const { id } = req.params;
-
-        const mark = await markModel.findByIdAndUpdate(id, {state: 1});
-
-        // await mark.save();
+        const mark = await Mark.findByIdAndUpdate(req.params.id, {state: 1});
 
         return res.status(201).json({msg: 'marca activada'});
     },
 
     markDesactivate: async(req, res) => {
-        const { id } = req.params;
-
-        const mark = await markModel.findByIdAndUpdate(id, {state: 0});
-
-        // await mark.save();
-
+        const mark = await markModel.findByIdAndUpdate(req.params.id, {state: 0});
+        
         return res.status(201).json({msg: 'marca desactivada'});
     },
 }

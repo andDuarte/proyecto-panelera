@@ -34,7 +34,7 @@ routerAllotment.post('/', [
 routerAllotment.put('/:id', [
     param('id', 'id no valido').isMongoId(),
     param('id').custom(allotmentValidate.allotmentId),
-    header('token', 'token es necesario').trim().notEmpty(),
+    header('token', 'token es necesario').notEmpty(),
     header('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentPut );
@@ -54,16 +54,6 @@ routerAllotment.put('/desactivar/:id', [
     header('token').custom(validateToken),
     validate
 ], allotmentHttp.allotmentDesactivate );
-
-// routerAllotment.delete('/:id', [
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // check('id', 'id no valido').isMongoId(),
-    // check('id').custom(orderValidate.orderId),
-    // validate
-    // authJwt.verifyToken,
-    // authJwt.isModerator
-// ], allotmentHttp.deleteAllotmentById );
 
 export{
     routerAllotment

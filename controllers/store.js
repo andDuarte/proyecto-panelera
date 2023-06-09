@@ -1,32 +1,18 @@
-import { storeModel } from '../models/store.js';
+import Store from '../models/store.js';
 
 const storeHttp = {
     storeGet: async(req, res) => {
-        const store = await storeModel.find().populate('farm');
+        const store = await Store.find().populate('farm');
 
-        if(store.length == 0) {
-            return res.status(400).json({msg: 'no existen bodegas'});
-        }
+        // if(store.length == 0) {
+        //     return res.status(400).json({msg: 'no existen bodegas'});
+        // }
 
-        return res.status(200).json({bodegas: store});
-    },
-    
-    storeGetQuery: async(req, res) => {
-        const { name } = req.query;
-
-        const store = await storeModel.find({name: new RegExp(name, 'i')});
-
-        if(store.length == 0) {
-            return res.status(400).json({msg: 'no existe bodega'});
-        }
-
-        return res.status(200).json({bodega: store});
+        return res.status(200).json(store);
     },
     
     storePost: async(req, res) => {
-        const { name, farm, size } = req.body;
-
-        const store = new storeModel({name: name, farm: farm, size: size});
+        const store = new Store(req.body);
 
         await store.save();
 
@@ -34,32 +20,19 @@ const storeHttp = {
     },
 
     storePut: async(req, res) => {
-        const { id } = req.params;
-        const { name, size } = req.body;
-
-        const store = await storeModel.findByIdAndUpdate(id, {name: name, size: size});
-
-        // await store.save();
+        const store = await Store.findByIdAndUpdate(req.params.id, req.body);
 
         return res.status(201).json({msg: 'bodega actualizada'});
     },
 
     storeActivate: async(req, res) => {
-        const { id } = req.params;
-
-        const store = await storeModel.findByIdAndUpdate(id, {state: 1});
-
-        // await store.save();
+        const store = await Store.findByIdAndUpdate(req.params.id, {state: 1});
 
         return res.status(201).json({msg: 'bodega activada'});
     },
 
     storeDesactivate: async(req, res) => {
-        const { id } = req.params;
-
-        const store = await storeModel.findByIdAndUpdate(id, {state: 0});
-
-        // await store.save();
+        const store = await storeModel.findByIdAndUpdate(req.params.id, {state: 0});
 
         return res.status(201).json({msg: 'bodega desactivada'});
     },

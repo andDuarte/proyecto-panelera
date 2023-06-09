@@ -1,4 +1,3 @@
-// import { orderModel } from '../models/orders.js';
 import Order from '../models/order.js';
 
 
@@ -10,7 +9,6 @@ const orderValidate = {
 //             throw new Error('id no existe en la base de datos');
 //         }
 //     },
-
 }
 
 export{

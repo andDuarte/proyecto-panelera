@@ -1,5 +1,4 @@
 import { Router } from 'express';
-// import { check } from 'express-validator';
 import { ordersHttp } from '../controllers/order.js';
 import { authJwt, validateId } from "../middlewares/index.js";
 // import * as authJwt from '../middlewares/validate-jwt.js';
@@ -20,7 +19,7 @@ routerOrder.post('/',
     [
         authJwt.verifyToken,
         authJwt.isAuthorised,
-        body('customer').notEmpty(),
+        body('customer').trim().notEmpty(),
         body('customer').isMongoId(),
         validate
     ],
@@ -32,7 +31,6 @@ routerOrder.put(
         authJwt.verifyToken,
         authJwt.isAuthorised,
         // validateId.checkId,
-        header()
     ],
     ordersHttp.updateOrderById);
 

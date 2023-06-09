@@ -6,9 +6,7 @@ import * as authJwt from '../middlewares/validate-jwt.js';
 
 import * as verifySingup from "../middlewares/verifySignup.js";
 
-// import { validateToken } from '../middlewares/validate-jwt.js';
-
-import { check } from 'express-validator';
+import { check, body, param, header, query } from 'express-validator';
 
 import { validate } from '../middlewares/validate-fields.js';
 
@@ -17,68 +15,47 @@ import { costValidate } from '../helpers/cost.js';
 const routerCost = Router();
 
 routerCost.get('/', [
-        // authJwt.verifyToken,   
+        authJwt.verifyToken,   
     ],
 costHttp.costGet );
 
 routerCost.post('/',
 [
-    // authJwt.verifyToken,
-    // authJwt.isModerator,
-    check('phase', 'etapa es necesaria').trim().notEmpty(),
-    check('phase', 'id no valido').isMongoId(),
-    check('list').custom(costValidate.costList),
+    authJwt.verifyToken,
+    body('process', 'labor es necesaria').trim().notEmpty(),
+    body('process', 'id no valido').isMongoId(),
+    body('typeOutlay', 'tipo gasto es necesario').trim().notEmpty(),
+    body('typeOutlay', "id no valido").isMongoId(),
     validate
 ], 
 costHttp.createCost );
 
 routerCost.put('/:id', 
 [
-    check('id', 'id no valido').isMongoId(),
-    check('id').custom(costValidate.costId),
-    check('list').custom(costValidate.costList),
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
+    authJwt.verifyToken,
+    // check('id', 'id no valido').isMongoId(),
+    param('id').custom(costValidate.costId),
     validate
 ], 
 costHttp.updateCostById);
 
 routerCost.put('/activar/:id', 
 [
-    // check('id', 'id no valido').isMongoId(),
-    // check('id').custom(costValidate.costId),
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
-    // authJwt.verifyToken,
-    // authJwt.isModerator
+    authJwt.verifyToken,
+    param('id', 'id no valido').isMongoId(),
+    param('id').custom(costValidate.costId),
+    validate
 ], 
 costHttp.updateCostActivate);
 
 routerCost.put('/desactivar/:id', 
 [
-    // check('id', 'id no valido').isMongoId(),
-    // check('id').custom(costValidate.costId),
-    // check('token', 'token es necesario').trim().notEmpty(),
-    // check('token').custom(validateToken),
-    // validate
-    // authJwt.verifyToken,
-    // authJwt.isModerator
+    authJwt.verifyToken,
+    param('id', 'id no valido').isMongoId(),
+    param('id').custom(costValidate.costId),
+    validate
 ], 
 costHttp.updateCostDesactivate);
-
-routerCost.delete(
-    '/:id',
-    [
-        // check('id', 'id no valido').isMongoId(),
-        // check('id').custom(costValidate.costId),
-        // check('token', 'token es necesario').trim().notEmpty(),
-        // check('token').custom(validateToken),
-        // validate
-        authJwt.verifyToken,
-        authJwt.isModerator
-    ],
-costHttp.deleteCostById);
 
 export{
     routerCost
