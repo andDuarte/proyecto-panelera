@@ -2,13 +2,13 @@ import { Schema, model } from 'mongoose';
 import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema({
-    email: { type: String, unique: true, required: true /* [true, 'El email es necesario'],*/ },
+    email: { type: String, unique: true, required: true /* [true, 'El email es necesario'], */ },
     password: { type: String, required: true },
     state: { type: Number, default: 1 },
     roles: [{
         ref: "Role",
         type: Schema.Types.ObjectId
-    }], // - moderator - admin - user
+    }], // - admin - moderator - user -
 }, {
     timestamps: true,
     versionKey: false

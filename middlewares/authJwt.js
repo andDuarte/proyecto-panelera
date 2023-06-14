@@ -7,7 +7,7 @@ export const verifyToken = async (req, res, next) => {
     try {
         const token = req.headers["token"]
         // const token = req.headers["x-access-token"]
-
+        // console.log(token);
         if (!token) return res.status(403).json({ msg: "No token provided" })
 
         const decoded = jwt.verify(token, CONFIG.SECRET, { algorithm: 'HS256' })

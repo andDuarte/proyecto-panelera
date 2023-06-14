@@ -4,14 +4,14 @@ import User from "../models/user.js";
 export const checkChangeDuplicateEmail = async (req, res, next) => {
     const _user = await User.findById(req.params.id);
     if (_user && _user.email == req.body.email) {
-        delete req.body.email
+        delete req.body.email //Borro la propiedad email
     }
 
     next();
 }
 
 export const checkDuplicateEmail = async (req, res, next) => {
-    // TODO: Verfcar mejor esta parte!
+    // TODO: Verficar mejor esta parte!
     const email = await User.findOne({ email: req.body.email })
     if (email) return res.status(404).json({ msg: "The email already exists" })
 

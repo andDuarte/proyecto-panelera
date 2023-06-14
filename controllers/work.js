@@ -2,7 +2,7 @@ import Work from '../models/work.js';
 
 const workHttp = {
     workGet: async (req, res) => {
-        const work = await Work.find().populate('phase');
+        const work = await Work.find().populate('phase').populate('elements').populate('workers');
 
         // if(work.length == 0) {
         //     return res.status(404).json({msg: 'no existen labores'});

@@ -1,7 +1,7 @@
-import express from 'express';
 import { connection } from '../database/connection.js';
 import { createRoles, createCategory } from '../libs/initialSeptup.js';
 import cors from 'cors';
+import express from 'express';
 import morgan from 'morgan';
 import CONFIG from "../config.js";
 

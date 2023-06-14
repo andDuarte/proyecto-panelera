@@ -13,10 +13,10 @@ const userHttp = {
     },
 
     updateUserById: async (req, res) => {
-        const { name, email, roles } = req.body;
+        const { email, roles } = req.body;
 
         let editUser = {
-            name,
+            // name,
             email,
         }
 
