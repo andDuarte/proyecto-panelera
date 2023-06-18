@@ -24,8 +24,8 @@ routerCost.post('/',
     authJwt.verifyToken,
     body('process', 'labor es necesaria').trim().notEmpty(),
     body('process', 'id no valido').isMongoId(),
-    body('typeOutlay', 'tipo gasto es necesario').trim().notEmpty(),
-    body('typeOutlay', "id no valido").isMongoId(),
+    // body('typeOutlay', 'tipo gasto es necesario').trim().notEmpty(),
+    // body('typeOutlay', "id no valido").isMongoId(),
     validate
 ], 
 costHttp.createCost );
@@ -33,7 +33,7 @@ costHttp.createCost );
 routerCost.put('/:id', 
 [
     authJwt.verifyToken,
-    // check('id', 'id no valido').isMongoId(),
+    param('id', 'id no valido').isMongoId(),
     param('id').custom(costValidate.costId),
     validate
 ], 

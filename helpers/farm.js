@@ -11,9 +11,17 @@ const farmValidate = {
     },
 
     farmOwner: async(ownerFarm) => {
-        const owner = await People.find({_id: ownerFarm});
+        const owner = await People.findOne({_id: ownerFarm});
 
-        if(owner.typePeople != "owner"){
+        let foundTypeOwner = false;
+
+        for (let position = 0; position < owner.typePeople.length; position++) {
+            if (owner.typePeople[position] == 'owner') {
+                foundTypeOwner = true;
+            }
+        }
+
+        if(foundTypeOwner == false){
             throw new Error('tipo de persona no valido');
         }
     },

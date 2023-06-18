@@ -32,7 +32,7 @@ const workHttp = {
     },
 
     workDesactivate: async (req, res) => {
-        const work = await work.findByIdAndUpdate(req.params.id, {state: 0});
+        const work = await Work.findByIdAndUpdate(req.params.id, {state: 0});
 
         return res.status(201).json({msg: 'labor desactivada'});
     }

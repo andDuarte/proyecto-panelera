@@ -32,7 +32,7 @@ const storeHttp = {
     },
 
     storeDesactivate: async(req, res) => {
-        const store = await storeModel.findByIdAndUpdate(req.params.id, {state: 0});
+        const store = await Store.findByIdAndUpdate(req.params.id, {state: 0});
 
         return res.status(201).json({msg: 'bodega desactivada'});
     },

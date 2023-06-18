@@ -32,7 +32,7 @@ const markHttp = {
     },
 
     markDesactivate: async(req, res) => {
-        const mark = await markModel.findByIdAndUpdate(req.params.id, {state: 0});
+        const mark = await Mark.findByIdAndUpdate(req.params.id, {state: 0});
         
         return res.status(201).json({msg: 'marca desactivada'});
     },

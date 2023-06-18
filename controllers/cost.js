@@ -2,7 +2,7 @@ import Cost from '../models/cost.js';
 
 const costHttp = {
     costGet: async (req, res) => {
-        const cost = await Cost.find().populate('process').populate('typeOutlay');
+        const cost = await Cost.find().populate('process');
 
         // if (cost.length == 0) {
         //     return res.status(404).json({ msg: 'no existe costos' });
@@ -13,7 +13,15 @@ const costHttp = {
 
     
     createCost: async (req, res) => {
-        const newCost = new Cost(req.body);
+        const { process, list } = req.body;
+
+        let totalWorth = 0
+
+        for (let position = 0; position < list.length; position++) {
+            totalWorth = totalWorth + parseInt(list[position].worth);
+        }
+
+        const newCost = new Cost({process: process, list: list, totalWorth: totalWorth});
 
         await newCost.save();
 
@@ -21,7 +29,15 @@ const costHttp = {
     },
 
     updateCostById: async (req, res) => {
-        const updateCost = await Cost.findByIdAndUpdate(req.params.id, req.body);
+        const { process, list } = req.body;
+
+        let totalWorth = 0
+
+        for (let position = 0; position < list.length; position++) {
+            totalWorth = totalWorth + parseInt(list[position].worth);
+        }
+
+        const updateCost = await Cost.findByIdAndUpdate(req.params.id, {process: process, list: list, totalWorth: totalWorth});
 
         return res.status(201).json({ msg: 'costo actualizado' });
     },
