@@ -2,7 +2,7 @@ import Cost from '../models/cost.js';
 
 const costHttp = {
     costGet: async (req, res) => {
-        const cost = await Cost.find().populate('process');
+        const cost = await Cost.find().populate('process').populate('list.element').populate('list.people');
 
         // if (cost.length == 0) {
         //     return res.status(404).json({ msg: 'no existe costos' });

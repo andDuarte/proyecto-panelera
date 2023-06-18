@@ -4,8 +4,8 @@ const costSchema = new Schema({
     process: { ref: 'Work', type: Schema.Types.ObjectId },
     list: [
         {
-            element: { type: String },
-            people: { type: String },
+            element: { ref: 'Inventory', type: String },
+            people: { ref: 'People', type: String },
             typeOutlay: { ref: 'TypeOutlay', type: Schema.Types.ObjectId },
             worth: { type: Number },
 

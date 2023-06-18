@@ -21,6 +21,7 @@ import { routerStore } from '../routes/store.js';
 import { routerUser } from '../routes/user.js';
 import { routerTypeOutlay } from '../routes/typeOutlay.js';
 import { routerWork } from '../routes/work.js';
+import { routerTransformation } from '../routes/transformation.js';
 
 class Server {
     constructor() {
@@ -57,6 +58,7 @@ class Server {
         this.app.use('/usuario', routerUser );
         this.app.use('/tipogasto', routerTypeOutlay );
         this.app.use('/labor', routerWork );
+        this.app.use('/transformation', routerTransformation );
         this.app.use('/',(req, res)=>{
             return res.status(200).send('hola mundo :)');
         });

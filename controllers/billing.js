@@ -1,5 +1,7 @@
 import Billing from '../models/billing.js';
 
+import Pedido from '../models/order.js';
+
 const billingsHttp = {
     getBillings: async (req, res) => {
         const billings = await Billing.find().populate('order');
@@ -12,7 +14,19 @@ const billingsHttp = {
     },
 
     createBilling: async (req, res) => {
-        const newBilling = new Billing(req.body);
+        const { order, payment } = req.body;
+
+        const orderTemp = await Pedido.findOne({_id: order});
+        
+        let totalWorth = 0;
+
+        for (let position = 0; position < orderTemp.products.length; position++) {
+            totalWorth = totalWorth + (orderTemp.products[position].quantity * orderTemp.products[position].worth);
+        }
+
+        await Pedido.findByIdAndUpdate(order, {orderStatus: 'entregado'});
+
+        const newBilling = new Billing({order: order, payment: payment, totalWorth: totalWorth});
 
         await newBilling.save();
 
@@ -20,7 +34,17 @@ const billingsHttp = {
     },
 
     updateBillingById: async (req, res) => {
-        const updateBilling = await Billing.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const { order, payment } = req.body;
+
+        const orderTemp = await Pedido.findOne({_id: order});
+        
+        let totalWorth = 0;
+
+        for (let position = 0; position < orderTemp.products.length; position++) {
+            totalWorth = totalWorth + (orderTemp.products[position].quantity * orderTemp.products[position].worth);
+        }
+
+        const updateBilling = await Billing.findByIdAndUpdate(req.params.id, {order: order, payment: payment, totalWorth: totalWorth}, { new: true });
 
         return res.status(201).json({ msg: "Billing updated", msj: 'Factura actualizado' });
     },
@@ -38,7 +62,7 @@ const billingsHttp = {
     updateBillingDesactivate: async (req, res) => {
         const updatedBilling = await Billing.findByIdAndUpdate(req.params.id, { state: 0 });
 
-        if (updatedBilling) return res.status(204).json({ msg: "Billing updated and inactived", msj: 'Factura desactivada' });
+        if (updatedBilling) return res.status(201).json({ msg: "Billing updated and inactived", msj: 'Factura desactivada' });
 
         return res.status(404).json({ msg: "Billing not update", msj: 'Factura no actualizada' });
     },
@@ -46,7 +70,7 @@ const billingsHttp = {
     deleteBillingById: async (req, res) => {
         await Billing.findByIdAndDelete(req.params.id);
         
-        return res.status(204).json({ msg: "Billing updated and deleted", msj: 'Factura eliminada' });
+        return res.status(201).json({ msg: "Billing updated and deleted", msj: 'Factura eliminada' });
     }
 }
 

@@ -1,11 +1,12 @@
 import { Schema, model } from 'mongoose';
 
 const transformationSchema = new Schema({
-    amountOfCaneCut: { type: Schema.Types.ObjectId, ref: 'Inventory' },
-    quantityOfPanelaElaborated: {
-        type: Number, default: 0
+    amountCane: {
+        cane: { ref: 'Inventory', type: Schema.Types.ObjectId },
+        amount: { type: Number }
     },
-    // moldOfPanela: {type: Schema.Types.ObjectId, ref: ''},
+    amountPanela: { type: Number },
+    presentationPanela: { type: String }, //panela en bloque, panela pulverizada
 }, {
     timestamps: true,
     versionKey: false
